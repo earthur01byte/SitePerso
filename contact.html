@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Contact — écrire à Arthur de Lassus." />
+    <title>Arthur de Lassus — Contact</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <button class="nav-toggle" type="button" aria-controls="navigation" aria-expanded="false" data-nav-toggle>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M4 7h16v2H4V7zm0 8h16v2H4v-2zm0-4h16v2H4v-2z" />
+          </svg>
+          <span>Menu</span>
+        </button>
+
+        <nav id="navigation" class="site-nav" data-nav data-open="false" aria-label="Navigation principale">
+          <div class="container">
+            <div class="nav-links">
+              <a href="index.html">Accueil <small>🏠</small></a>
+              <a href="agriculture.html">Agriculture <small>🌱</small></a>
+              <a href="services.html">Services <small>🎤</small></a>
+              <a href="productions.html">Productions <small>📚</small></a>
+              <a href="manifeste.html">Manifeste <small>&amp;</small></a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenu">
+      <div class="container">
+        <section class="hero" aria-label="Contact">
+          <div>
+            <h1>📬 Contact</h1>
+            <p class="lede">
+              Le plus simple : un message avec votre contexte, le format souhaité (atelier, conférence, projet) et vos
+              contraintes de calendrier.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#formulaire">Écrire un message</a>
+              <a class="btn btn-ghost" href="services.html">Voir les services</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Coordonnées</h3>
+            <p style="margin:0; color: var(--muted);">
+              Email :
+              <a href="mailto:e.arthur01@gmail.com" data-email-text>e.arthur01@gmail.com</a>
+            </p>
+            <div class="hero-actions" style="margin-top:12px;">
+              <button class="btn btn-ghost" type="button" data-copy-email data-email="e.arthur01@gmail.com">
+                Copier l’email
+              </button>
+              <a class="btn btn-ghost" href="https://www.linkedin.com/in/arthur-de-lassus/" rel="noopener">LinkedIn</a>
+            </div>
+            <p class="help">Vous pouvez aussi me joindre via LinkedIn.</p>
+          </div>
+        </section>
+
+        <section class="section" id="formulaire" aria-label="Formulaire de contact">
+          <h2>Formulaire</h2>
+          <p class="lede">Ce formulaire ouvre votre client mail (pas de stockage sur le site).</p>
+
+          <form class="form" id="contactForm">
+            <div>
+              <label for="name">Nom</label>
+              <input id="name" name="name" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="subject">Sujet</label>
+              <input id="subject" name="subject" required />
+            </div>
+            <div>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+              <p class="help">Indiquez le format, le public, la date souhaitée, et toute contrainte utile.</p>
+            </div>
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="submit">Envoyer l’email</button>
+              <a class="btn btn-ghost" href="productions.html#articles">Lire le blog</a>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" aria-label="Pied de page">
+      <div class="container footer-inner">
+        <div>© <span id="year">2026</span> Arthur de Lassus</div>
+        <div class="footer-links">
+          <a href="productions.html#articles">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+
+      const form = document.getElementById("contactForm");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const name = String(data.get("name") || "");
+        const from = String(data.get("email") || "");
+        const subject = String(data.get("subject") || "");
+        const message = String(data.get("message") || "");
+
+        const to = "e.arthur01@gmail.com";
+        const body =
+          `Nom: ${name}\n` +
+          `Email: ${from}\n\n` +
+          message +
+          `\n\n—\nEnvoyé depuis arthurdelassus.fr`;
+
+        const href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = href;
+      });
+    </script>
+  </body>
+</html>

@@ -1,10 +1,121 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Mon Site</title>
-</head>
-<body>
-    <h1>Bonjour le monde !</h1>
-    <p>Mon premier site web !</p>
-</body>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Arthur de Lassus — agriculture, services (facilitation/ateliers), productions intellectuelles." />
+    <title>Arthur de Lassus — Accueil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script defer src="assets/js/main.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <button class="nav-toggle" type="button" aria-controls="navigation" aria-expanded="false" data-nav-toggle>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M4 7h16v2H4V7zm0 8h16v2H4v-2zm0-4h16v2H4v-2z" />
+          </svg>
+          <span>Menu</span>
+        </button>
+
+        <nav id="navigation" class="site-nav" data-nav data-open="false" aria-label="Navigation principale">
+          <div class="container">
+            <div class="nav-links">
+              <a href="index.html" aria-current="page">Accueil <small>🏠</small></a>
+              <a href="manifeste.html">Manifeste <small>&amp;</small></a>
+              <a href="agriculture.html">Agriculture <small>🌱</small></a>
+              <a href="productions.html">Productions <small>📚</small></a>
+              <a href="services.html">Services <small>🎤</small></a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenu">
+      <div class="container">
+        <section class="hero" aria-label="Présentation">
+          <div>
+            <div class="hero-name">Arthur de Lassus</div>
+            <h1 class="hero-title">La transition écologique par la tête et le corps.</h1>
+            <p class="lede lede-strong">
+              Expert énergie-climat et maraîcher, je lie la réflexion théorique à l’action concrète pour bâtir un futur
+              vraiment durable.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-blue" href="productions.html#articles">Découvrir mes analyses</a>
+              <a class="btn btn-ochre" href="agriculture.html">Découvrir la ferme</a>
+            </div>
+          </div>
+
+          <div class="hero-portrait" aria-hidden="true">
+            <img src="assets/img/arthur-portrait.png" alt="" />
+          </div>
+        </section>
+
+        <section class="section section-head-body" aria-label="Tête et corps">
+          <div class="head-body-columns">
+            <div>
+              <div class="head-body-photo">
+                <img src="Images/photo_tete_index.jpg" alt="Homme donnant une conférence" />
+              </div>
+              <h2>La tête</h2>
+              <ul>
+                <li>Expert énergie-climat</li>
+                <li>Rapports &amp; conférences</li>
+                <li>Créateur et animateur d’ateliers</li>
+              </ul>
+              <a class="btn btn-blue" href="productions.html">Découvrir mes écrits et ateliers</a>
+            </div>
+            <div>
+              <div class="head-body-photo">
+                <img src="Images/photo_corps_index.jpg" alt="Homme dans un champ" />
+              </div>
+              <h2>Le corps</h2>
+              <ul>
+                <li>Maraîchage bio</li>
+                <li>Autonomie énergétique</li>
+                <li>Autoconstruction en paille</li>
+              </ul>
+              <a class="btn btn-ochre" href="agriculture.html">Découvrir la ferme et les chantiers</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section-manifesto" aria-label="Manifeste">
+          <h2>Pourquoi je refuse de choisir entre la plume & la pelle.</h2>
+          <p>
+            Comprendre l’impact carbone du béton pousse naturellement à construire en paille. Subir un aléa climatique
+            au champ donne une légitimité que les rapports n’ont pas. Pour moi, la transition écologique ne se décrète
+            pas, elle s’expérimente. C’est dans cet aller-retour permanent que je puise mon énergie.
+          </p>
+          <a class="btn btn-anthracite" href="manifeste.html">
+            Mon manifeste
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" aria-label="Pied de page">
+      <div class="container footer-inner">
+        <div>© <span id="year">2026</span> Arthur de Lassus</div>
+        <div class="footer-links">
+          <a href="productions.html#articles">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+    </script>
+  </body>
 </html>
