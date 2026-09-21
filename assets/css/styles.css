@@ -2076,3 +2076,190 @@ select:focus-visible{
 }
 .ferme-seminaire .ferme-transition-links{ margin-top: 32px; }
 
+/* ===================================================
+   LOT 7 — Refonte du hero de la page Agriculture
+   + emplacement photo reserve dans les colonnes photo
+   (ajouts uniquement : aucune regle existante supprimee.
+    Les regles .ferme-hero* ci-dessous surchargent
+    volontairement les regles d'origine, plus bas dans le
+    fichier, pour la seule page Agriculture.)
+   =================================================== */
+
+.ferme-hero{
+  min-height: 84vh;
+  align-items: center;
+  padding: 132px 0 64px;
+  background-position: 50% 60%;
+}
+.ferme-hero-overlay{
+  background:
+    linear-gradient(100deg, rgba(24,22,19,.9) 0%, rgba(24,22,19,.66) 40%, rgba(24,22,19,.3) 72%, rgba(24,22,19,.5) 100%),
+    linear-gradient(to top, rgba(24,22,19,.72) 0%, rgba(24,22,19,0) 58%);
+}
+.ferme-hero-copy{ max-width: 780px; }
+.ferme-hero-badge{ margin-bottom: 18px; }
+.ferme-hero-tagline{
+  max-width: 620px;
+  font-style: normal;
+  font-size: clamp(1.02rem, 2.1vw, 1.32rem);
+  line-height: 1.5;
+  opacity: .94;
+}
+.ferme-hero-facts{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ferme-hero-facts li{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.ferme-hero-facts strong{
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.01em;
+  color: #fff;
+}
+.ferme-hero-facts span{
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.72);
+}
+.ferme-hero-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+.ferme-hero .btn-outline{
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border-color: rgba(255,255,255,.5);
+}
+.ferme-hero .btn-outline:hover{
+  background: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.85);
+}
+@media (max-width: 720px){
+  .ferme-hero{
+    min-height: 0;
+    padding: 112px 0 48px;
+  }
+  .ferme-hero-facts{ gap: 14px 26px; }
+  .ferme-hero-facts span{ letter-spacing: .08em; }
+}
+
+/* Emplacement photo reserve a l'interieur d'une colonne
+   .schema-photo--stack (ex. future photo du puits,
+   future photo du microculteur).
+   Le libelle est porté par l'attribut data-slot. */
+.schema-photo-slot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  aspect-ratio: 5 / 4;
+  border: 2px dashed rgba(42,42,42,.25);
+  border-radius: 14px;
+  background: rgba(255,249,241,.4);
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+.schema-photo-slot::before{
+  content: attr(data-slot);
+  opacity: .6;
+}
+
+
+/* ===================================================
+   LOT 7 - Logos partenaires
+   1) taille doublee (hero et bandeau de confiance)
+   2) logos regroupes par offre dans "Ce que je propose"
+   3) emplacement reserve pour le logo EM Normandie
+   Toutes les nouvelles tailles restent INFERIEURES a la
+   taille native des fichiers (verifie avec img_dims.py) :
+   aucune image agrandie, donc aucun logo flou.
+   =================================================== */
+.hero-trust-logos{ gap: 16px 26px; }
+.hero-trust-logos img{ max-height: 52px; max-width: 172px; }
+.home-trust-logos{ gap: 26px 44px; }
+.home-trust-logos img{ max-height: 80px; max-width: 250px; }
+@media (max-width: 640px){
+  .hero-trust-logos img{ max-height: 38px; max-width: 124px; }
+  .home-trust-logos img{ max-height: 58px; max-width: 170px; }
+}
+
+/* Bande de logos d'une carte "Ce que je propose".
+   Meme hauteur d'occupation que l'emoji qu'elle remplace,
+   pour que les 3 titres de cartes restent alignes. */
+.home-offer-logos{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  min-height: 46px;
+  margin: 0 0 10px;
+}
+.home-offer-logos img{
+  max-height: 40px;
+  max-width: 132px;
+  width: auto;
+  object-fit: contain;
+}
+/* L'emoji conserve sa place dans la bande de logos, mais
+   sans marge : la bande garde la meme hauteur dans les 3 cartes. */
+.home-offer-logos .home-offer-icon{
+  font-size: 1.45rem;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Emplacement reserve pour un logo pas encore fourni
+   (meme principe que .schema-photo-slot : le libelle est
+   porte par l'attribut data-slot). */
+.partner-slot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  min-height: 40px;
+  border: 2px dashed rgba(42,42,42,.25);
+  border-radius: 10px;
+  background: rgba(255,249,241,.4);
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.partner-slot::before{
+  content: attr(data-slot);
+  opacity: .6;
+}
+
+/* Rangee discrete sous les 3 offres : les references qui
+   ne dependent pas d'une offre en particulier. */
+.home-offers-extra{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 22px 40px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(42,42,42,.08);
+}
+.home-offers-extra img{
+  max-height: 56px;
+  max-width: 190px;
+  width: auto;
+  object-fit: contain;
+  opacity: .85;
+}
+

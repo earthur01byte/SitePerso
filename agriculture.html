@@ -69,10 +69,23 @@
       <section class="ferme-hero" aria-label="Ferme du Bout des Bois">
         <div class="ferme-hero-overlay" aria-hidden="true"></div>
         <div class="container ferme-hero-content">
-          <h1>La Ferme du Bout des Bois</h1>
-          <p class="ferme-hero-tagline">
-            Maraîchage bio diversifié &amp; poules pondeuses, sur sol vivant, sans énergie fossile, depuis 2020.
-          </p>
+          <div class="ferme-hero-copy">
+            <span class="ferme-hero-badge">🌱 Maraîchage bio · sol vivant · depuis 2020</span>
+            <h1>La Ferme du Bout des Bois</h1>
+            <p class="ferme-hero-tagline">
+              Maraîchage bio diversifié &amp; poules pondeuses, sur sol vivant, sans une goutte d’énergie fossile.
+            </p>
+            <ul class="ferme-hero-facts">
+              <li><strong>3 250 m²</strong><span>cultivés</span></li>
+              <li><strong>130</strong><span>poules pondeuses</span></li>
+              <li><strong>0 labour</strong><span>depuis 2020</span></li>
+              <li><strong>4 kWc</strong><span>solaire hors réseau</span></li>
+            </ul>
+            <div class="ferme-hero-actions">
+              <a class="btn btn-glow" href="contact.html">Organiser une visite de la ferme</a>
+              <a class="btn btn-outline" href="#chiffres">La ferme en chiffres</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -123,7 +136,7 @@
       </section>
 
       <!-- 3. LA FERME EN CHIFFRES -->
-      <section class="section section-beige ferme-chiffres" aria-label="La ferme en chiffres">
+      <section class="section section-beige ferme-chiffres" id="chiffres" aria-label="La ferme en chiffres">
         <div class="container">
           <h2 class="section-title">La ferme en chiffres</h2>
           <div class="chiffres-grid">
@@ -286,8 +299,8 @@
               <h3>Présentation-témoignage</h3>
               <span class="seminaire-duree">1 h</span>
               <p>
-                Ma femme et moi racontons ce que nous avons fait, pourquoi, et ce que cela a changé : la ferme, la
-                maison, l’énergie, les arbitrages. Un retour d’expérience vécu, pas un cours.
+                Ma femme et moi racontons notre parcours, ce que nous avons fait, pourquoi, et ce que cela a
+                changé. Une prise de parole à deux voix, dynamique et engagée.
               </p>
             </article>
 
@@ -296,8 +309,8 @@
               <h3>Visite de la ferme</h3>
               <span class="seminaire-duree">1 h</span>
               <p>
-                Serres, plein champ, poulailler, installation solaire hors réseau, chambre froide solaire : on montre
-                les systèmes en fonctionnement, avec les chiffres réels.
+                Serres, plein champ, poulailler, installation solaire hors réseau, chambre froide solaire : nous
+                faisons le tour de la parcelle et des installations.
               </p>
             </article>
 
@@ -306,8 +319,8 @@
               <h3>Tâche concrète et manuelle</h3>
               <span class="seminaire-duree">1 h</span>
               <p>
-                Chacun met les mains dans la terre : semis, plantation, récolte. Le moment où le corps comprend ce que
-                la tête vient d’entendre.
+                Nous préparons une activité simple et attrayante : semis, plantation ou récolte en fonction de vos
+                envies et de la saison, afin de rendre la visite plus concrète.
               </p>
             </article>
           </div>
@@ -438,7 +451,22 @@
                 </p>
               </div>
             </div>
-            <div class="schema-photo"></div>
+            <div class="schema-photo schema-photo--img schema-photo--stack">
+              <img
+                src="Images/ferme-v2l.jpg"
+                alt="La voiture électrique de la ferme, câble de recharge branché : elle alimente la pompe du puits la nuit (V2L)"
+                width="900"
+                height="675"
+                loading="lazy"
+                decoding="async"
+              />
+              <div
+                class="schema-photo-slot"
+                role="img"
+                aria-label="Emplacement réservé : future photo du puits"
+                data-slot="Emplacement réservé : future photo du puits"
+              ></div>
+            </div>
           </div>
         </div>
       </section>
@@ -477,21 +505,19 @@
             </div>
             <div class="schema-photo schema-photo--img schema-photo--stack">
               <img
-                src="Images/ferme-v2l.jpg"
-                alt="Recharge d’un véhicule électrique par l’installation solaire de la ferme"
-                width="900"
-                height="675"
-                loading="lazy"
-                decoding="async"
-              />
-              <img
                 src="Images/ferme-recharge-ve.jpg"
-                alt="Point de recharge pour véhicule électrique alimenté au solaire, sur la ferme"
+                alt="Point de recharge auto-construit sur la parcelle, alimenté par les panneaux solaires de la ferme"
                 width="880"
                 height="1168"
                 loading="lazy"
                 decoding="async"
               />
+              <div
+                class="schema-photo-slot"
+                role="img"
+                aria-label="Emplacement réservé : future photo du microculteur"
+                data-slot="Emplacement réservé : future photo du microculteur"
+              ></div>
             </div>
           </div>
         </div>
