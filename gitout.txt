@@ -1,0 +1,28 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   agriculture.html
+	modified:   assets/css/styles.css
+	modified:   assets/js/main.js
+	modified:   contact.html
+	modified:   index.html
+	modified:   manifeste.html
+	modified:   productions.html
+	modified:   services.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Images/Arthur_LCI.png
+	"Images/Fresque_des_fronti\303\250res_plan\303\251taires.png"
+	"Images/Horizons_D\303\251carbon\303\251s.png"
+	gitcheck.py
+	images_list.txt
+	list_names.py
+	names.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+===STDERR===

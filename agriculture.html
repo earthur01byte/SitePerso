@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Agriculture — maraîchage et centres de ponte." />
+    <meta name="description" content="La Ferme du Bout des Bois : maraîchage biologique sur sol vivant, poules pondeuses, énergie solaire et maison en paille. Visites et ateliers à la ferme." />
     <title>Arthur de Lassus — Agriculture</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,11 +13,16 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
   </head>
-  <body>
+  <body class="page-overlay-header">
     <a class="skip-link" href="#contenu">Aller au contenu</a>
 
     <header class="site-header">
       <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <span>Arthur</span>
+          <span>de Lassus</span>
+        </a>
+
         <button class="nav-toggle" type="button" aria-controls="navigation" aria-expanded="false" data-nav-toggle>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path fill="currentColor" d="M4 7h16v2H4V7zm0 8h16v2H4v-2zm0-4h16v2H4v-2z" />
@@ -26,14 +31,13 @@
         </button>
 
         <nav id="navigation" class="site-nav" data-nav data-open="false" aria-label="Navigation principale">
-          <div class="container">
-            <div class="nav-links">
-              <a href="index.html">Accueil <small>🏠</small></a>
-              <a href="manifeste.html">Manifeste <small>&amp;</small></a>
-              <a href="agriculture.html" aria-current="page">Agriculture <small>🌱</small></a>
-              <a href="productions.html">Productions <small>📚</small></a>
-              <a href="services.html">Services <small>🎤</small></a>
-            </div>
+          <div class="nav-links">
+            <a href="index.html">Accueil <small>🏠</small></a>
+            <a href="manifeste.html">Manifeste <small>&amp;</small></a>
+            <a href="agriculture.html" aria-current="page">Agriculture <small>🌱</small></a>
+            <a href="productions.html">Productions <small>📚</small></a>
+            <a href="services.html">Services <small>🎤</small></a>
+            <a href="contact.html">Contact</a>
           </div>
         </nav>
       </div>
@@ -64,7 +68,7 @@
               <span class="philosophie-icon">🌿</span>
               <h3>Agriculture biologique certifiée</h3>
               <p>
-                L’agriculture bio est associée à des baisse d’impacts écologiques et elle est bien identifiée par les consommateurs. 
+                L’agriculture bio est associée à des baisses d’impacts écologiques et elle est bien identifiée par les consommateurs. 
                 C’est notre point de départ.
               </p>
             </article>
@@ -72,7 +76,7 @@
               <span class="philosophie-icon">🪱</span>
               <h3>Sol vivant</h3>
               <p>
-                Il faut pousser le bio plus loin, notamment sur le travail du sol pour préserver le sol. 
+                Il faut pousser le bio plus loin, notamment ne plus travailler le sol (pas de labour, pas de bêche) pour le préserver. 
                 Zéro travail du sol depuis 2020, même pas une grelinette. Nous nourrissons le sol avec du compost et la vie souterraine fait le reste.
               </p>
             </article>
@@ -135,7 +139,7 @@
             <div class="chiffre-card">
               <span class="chiffre-nombre">☀️</span>
               <span class="chiffre-unite">Autonomie énergétique</span>
-              <span class="chiffre-detail">5 kWc solaire · 7 kWh batterie</span>
+              <span class="chiffre-detail">4 kWc solaire · 7 kWh batterie</span>
             </div>
             <div class="chiffre-card">
               <span class="chiffre-nombre">💧</span>
@@ -157,7 +161,7 @@
               <p>
                 Tomates, concombres, poivrons, aubergines, courgettes, salades, herbes aromatiques… Les serres nous
                 permettent d’allonger les saisons et de protéger les cultures les plus sensibles. C’est ici que la
-                saison commence dès février avec les premiers semis.
+                saison commence dès fin février avec les premières plantations.
               </p>
             </div>
           </div>
@@ -197,7 +201,7 @@
               <span class="vente-point-icon">🤝</span>
               <h4>Un lien humain vrai</h4>
               <p>
-                On connaît les prénoms, les enfants, les préférences. Des invitations réciproques, des amitiés qui se
+                On connaît les prénoms, les enfants de nos clients, les préférences. Des invitations réciproques, des amitiés qui se
                 nouent.
               </p>
             </div>
@@ -233,8 +237,9 @@
             </div>
             <div class="ateliers-image">
               <img
-                src="https://images.pexels.com/photos/5965457/pexels-photo-5965457.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="Atelier à la ferme"
+                src="Images/photo_serre.jpg"
+                alt="Serres et cultures sur sol vivant à la Ferme du Bout des Bois"
+                loading="lazy"
               />
             </div>
           </div>
@@ -246,34 +251,38 @@
         <div class="container container-narrow">
           <h2 class="section-title">Autonomie énergétique</h2>
           <p class="text-lead">
-            La ferme fonctionne au soleil. Toute l’énergie nécessaire est produite sur place.
+            La ferme fonctionne au soleil. Toute l’énergie nécessaire est produite sur place. <br />
+            J'ai conçu et installé un système solaire+batterie, hors réseau.
           </p>
 
-          <div class="energie-schema">
-            <div class="energie-source">
-              <span class="energie-icon">☀️</span>
-              <h4>5 kWc de panneaux solaires</h4>
-              <p>Installés sur les serres. Ils produisent l’électricité de la ferme.</p>
+          <div class="schema-split">
+            <div class="schema-boxes">
+              <div class="energie-source">
+                <span class="energie-icon">☀️</span>
+                <h4>4 kWc de panneaux solaires</h4>
+                <p> Ils produisent l’électricité de la ferme.</p>
+              </div>
+              <div class="schema-connect">+</div>
+              <div class="energie-stockage">
+                <span class="energie-icon">🔋</span>
+                <h4>7 kWh de batterie</h4>
+                <p>
+                  Pour stocker et lisser la production. La ferme tourne aussi quand le soleil se couche, en maintenant les
+                  usages critiques.
+                </p>
+              </div>
+              <div class="schema-connect">↓</div>
+              <div class="energie-usages">
+                <span class="energie-icon">⚡</span>
+                <h4>Usages alimentés</h4>
+                <ul>
+                  <li>Pompe du puits</li>
+                  <li>Chambre froide</li>
+                  <li>Charge des véhicules électriques</li>
+                </ul>
+              </div>
             </div>
-            <div class="energie-fleche">→</div>
-            <div class="energie-stockage">
-              <span class="energie-icon">🔋</span>
-              <h4>7 kWh de batterie</h4>
-              <p>
-                Pour stocker et lisser la production. La ferme tourne aussi quand le soleil se couche, en maintenant les
-                usages critiques.
-              </p>
-            </div>
-            <div class="energie-fleche">→</div>
-            <div class="energie-usages">
-              <span class="energie-icon">⚡</span>
-              <h4>Usages alimentés</h4>
-              <ul>
-                <li>Pompe du puits</li>
-                <li>Chambre froide</li>
-                <li>Charge des véhicules électriques</li>
-              </ul>
-            </div>
+            <div class="schema-photo"></div>
           </div>
         </div>
       </section>
@@ -283,23 +292,33 @@
         <div class="container container-narrow">
           <h2 class="section-title">Autonomie en eau</h2>
           <p class="text-lead">L’eau d’irrigation vient d’un puits, pompée par l’énergie solaire.</p>
-          <div class="eau-details">
-            <div class="eau-card">
-              <span class="eau-icon">🕳️</span>
-              <h4>Puits à 5 mètres</h4>
-              <p>
-                Un puits peu profond qui capte la nappe phréatique locale. La pompe est alimentée directement par les
-                panneaux solaires : quand il fait beau, on arrose. Le système est d’une simplicité radicale.
-              </p>
+          <div class="schema-split schema-split--photo-left">
+            <div class="schema-boxes">
+              <div class="eau-card">
+                <span class="eau-icon">🕳️</span>
+                <h4>Puits à 5 mètres</h4>
+                <p>
+                  Un puits peu profond qui capte la nappe phréatique locale. La pompe est alimentée directement par les
+                  panneaux solaires. Les besoins en eau collent bien avec l'ensoleillement.
+                </p>
+              </div>
+              <div class="eau-card">
+                <span class="eau-icon">☀️🌙</span>
+                <h4>Innovation 2026</h4>
+                <p>
+                  Avec la sécheresse sans précédent de 2026, il a fallu allonger les temps d'irrigation. La voiture électrique a alimenté la centrale solaire pour faire tourner la pompe toute la nuit.
+                </p>
+              </div>
+              <div class="eau-card">
+                <span class="eau-icon">🚰</span>
+                <h4>Raccord réseau pour l’eau potable</h4>
+                <p>
+                  Seuls deux usages nécessitent l’eau du réseau, par obligation réglementaire : l’eau de boisson des
+                  poules et la dernière eau de lavage des légumes. Tout le reste — irrigation, nettoyage — vient du puits.
+                </p>
+              </div>
             </div>
-            <div class="eau-card">
-              <span class="eau-icon">🚰</span>
-              <h4>Raccord réseau pour l’eau potable</h4>
-              <p>
-                Seuls deux usages nécessitent l’eau du réseau, par obligation réglementaire : l’eau de boisson des
-                poules et la dernière eau de lavage des légumes. Tout le reste — irrigation, nettoyage — vient du puits.
-              </p>
-            </div>
+            <div class="schema-photo"></div>
           </div>
         </div>
       </section>
@@ -309,31 +328,34 @@
         <div class="container container-narrow">
           <h2 class="section-title">Zéro énergie fossile</h2>
           <p class="text-lead">Pas une goutte de pétrole, de diesel ou de gaz. Voici comment.</p>
-          <div class="fossile-grid">
-            <div class="fossile-card">
-              <span class="fossile-icon">🚗</span>
-              <h4>Véhicules 100 % électriques</h4>
-              <p>
-                Une voiture électrique et un utilitaire électrique, rechargés par nos panneaux solaires. Les livraisons,
-                les marchés, les trajets du quotidien : tout roule au soleil.
-              </p>
+          <div class="schema-split">
+            <div class="schema-boxes">
+              <div class="fossile-card">
+                <span class="fossile-icon">🚗</span>
+                <h4>Véhicules 100 % électriques</h4>
+                <p>
+                  Une voiture électrique et un utilitaire électrique, rechargés par nos panneaux solaires. Les livraisons,
+                  les marchés, les trajets du quotidien : tout roule au soleil.
+                </p>
+              </div>
+              <div class="fossile-card">
+                <span class="fossile-icon">🚜</span>
+                <h4>Pas de tracteur</h4>
+                <p>
+                  Puisqu’on ne travaille pas le sol, on n’a pas besoin de tracteur. Pas de labour = pas de machine lourde
+                  = pas de fioul. Le sol vivant nous libère du diesel.
+                </p>
+              </div>
+              <div class="fossile-card">
+                <span class="fossile-icon">🔧</span>
+                <h4>Microculteur à visseuse électrique</h4>
+                <p>
+                  Pour les petits travaux de surface, on utilise un microculteur qui vient des USA alimenté par une simple visseuse
+                  électrique. Léger, silencieux, suffisant.
+                </p>
+              </div>
             </div>
-            <div class="fossile-card">
-              <span class="fossile-icon">🚜</span>
-              <h4>Pas de tracteur</h4>
-              <p>
-                Puisqu’on ne travaille pas le sol, on n’a pas besoin de tracteur. Pas de labour = pas de machine lourde
-                = pas de fioul. Le sol vivant nous libère du diesel.
-              </p>
-            </div>
-            <div class="fossile-card">
-              <span class="fossile-icon">🔧</span>
-              <h4>Microculteur à visseuse électrique</h4>
-              <p>
-                Pour les petits travaux de surface, on utilise un microculteur qui vient des USA alimenté par une simple visseuse
-                électrique. Léger, silencieux, suffisant.
-              </p>
-            </div>
+            <div class="schema-photo"></div>
           </div>
         </div>
       </section>
@@ -347,38 +369,39 @@
             c’est possible.
           </p>
 
-          <div class="froid-explication">
-            <h4>Comment ça marche</h4>
-            <p>
-              Nous utilisons une climatisation classique (Airton, auto-installée) couplée à un boîtier
-              <strong>CoolBot</strong>. Ce petit appareil « trompe » la sonde de la climatisation et lui fait croire
-              qu’il fait plus chaud qu’en réalité. Résultat : la clim descend la température jusqu’à environ 5 °C, comme
-              une vraie chambre froide.
-            </p>
-
-            <div class="froid-avantages">
+          <div class="schema-split schema-split--photo-left">
+            <div class="schema-boxes">
+              <div class="froid-avantage">
+                <span>❄️</span>
+                <p>
+                  <strong>Comment ça marche</strong> Nous utilisons une climatisation classique auto-installée couplée à un boîtier CoolBot. <br /> Ce petit appareil « trompe » la sonde
+                  de la climatisation et lui fait croire qu’il fait plus chaud qu’en réalité. Résultat : la clim descend
+                  la température jusqu’à environ 5 °C, comme une vraie chambre froide.
+                </p>
+              </div>
               <div class="froid-avantage">
                 <span>💸</span>
                 <p>
-                  <strong>Coût d’installation réduit</strong> — Clim Airton auto-installée + CoolBot, une fraction du
+                  <strong>Coût d’installation réduit</strong> Clim Airton auto-installée + CoolBot, une fraction du
                   prix d’une chambre froide professionnelle.
                 </p>
               </div>
               <div class="froid-avantage">
                 <span>📊</span>
                 <p>
-                  <strong>Monitoring de la température</strong> — Le CoolBot permet de suivre et contrôler la
+                  <strong>Monitoring de la température</strong> Le CoolBot permet de suivre et contrôler la
                   température en continu.
                 </p>
               </div>
               <div class="froid-avantage">
                 <span>🧊</span>
                 <p>
-                  <strong>Chambre surisolée</strong> — Nous avons investi dans une enceinte de type « chambre froide
+                  <strong>Chambre surisolée</strong> Nous avons investi dans une enceinte de type « chambre froide
                   négative » surisolée pour limiter les pertes thermiques et réduire la consommation électrique.
                 </p>
               </div>
             </div>
+            <div class="schema-photo"></div>
           </div>
         </div>
       </section>

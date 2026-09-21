@@ -41,7 +41,7 @@
       try {
         await navigator.clipboard.writeText(email);
         const prev = copyBtn.textContent;
-        copyBtn.textContent = "Copied";
+        copyBtn.textContent = "Copié !";
         window.setTimeout(() => (copyBtn.textContent = prev), 1200);
       } catch {
         // If clipboard is blocked, fall back to selecting text in the UI.
@@ -57,15 +57,4 @@
     });
   }
 
-  const header = document.querySelector(".site-header");
-  if (header) {
-    const trigger = window.innerHeight * 0.2;
-    const onScroll = () => {
-      const visible = window.scrollY >= trigger;
-      header.classList.toggle("is-visible", visible);
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
 })();

@@ -1,0 +1,143 @@
+﻿. : Impossible de charger le fichier C:\Users\earth\Documents\WindowsPowerShell\profile.ps1, car l'exécution de scripts est désactivée sur ce système. 
+Pour plus d'informations, consultez about_Execution_Policies à l'adresse https://go.microsoft.com/fwlink/?LinkID=135170.
+Au caractère Ligne:1 : 3
++ . 'C:\Users\earth\Documents\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : Erreur de sécurité : (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+.Extension : Le terme «.Extension» n'est pas reconnu comme nom d'applet de commande, fonction, fichier de script ou programme exécutable. Vérifiez 
+l'orthographe du nom, ou si un chemin d'accès existe, vérifiez que le chemin d'accès est correct et réessayez.
+Au caractère Ligne:1 : 81
++ ... \Desktop\Cursor\SitePerso\Images' | Where-Object { .Extension -eq '.p ...
++                                                        ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (.Extension:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
