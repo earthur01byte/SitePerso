@@ -1815,3 +1815,51 @@ select:focus-visible{
   font-size: .9rem;
   font-weight: 700;
 }
+
+/* ===================================================
+   LOT 5 - Pages d'articles de blog
+   (ajouts uniquement : aucune regle existante modifiee)
+   =================================================== */
+
+.article-meta{
+  margin: 0 0 18px;
+  font-size: .9rem;
+}
+.article-meta a{
+  text-decoration: none;
+  font-weight: 700;
+}
+.article-meta a:hover{ text-decoration: underline; }
+
+.article .section-title{ margin-bottom: 14px; }
+.article h2{ margin-top: 30px; }
+.article p{ margin: 0 0 14px; }
+.article ul.clean,
+.article ol.clean{ margin: 12px 0 18px; }
+.article ul.clean li,
+.article ol.clean li{
+  margin: 8px 0;
+  line-height: 1.65;
+}
+.article blockquote{
+  margin: 22px 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  background: rgba(255,249,241,.9);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+}
+.article-foot{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.post-link{ margin: 12px 0 0; }
+.post-link .btn{
+  padding: 9px 12px;
+  font-size: .92rem;
+}

@@ -33,6 +33,53 @@
 
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Book",
+          "name": "Les fake news de l'écologie",
+          "author": [
+            {
+              "@type": "Person",
+              "name": "Arthur de Lassus"
+            },
+            {
+              "@type": "Person",
+              "name": "Alain Grandjean"
+            }
+          ],
+          "publisher": {
+            "@type": "Organization",
+            "name": "Éditions de l'Aube"
+          },
+          "inLanguage": "fr",
+          "bookFormat": "https://schema.org/Paperback",
+          "description": "Un ouvrage pour répondre, chiffres en main, aux idées fausses sur la transition énergétique : voiture électrique, climatisation, coût de la transition, pompes à chaleur, frontières planétaires.",
+          "author_url": "https://arthurdelassus.fr/"
+        },
+        {
+          "@type": "Book",
+          "name": "Et lentement tout bascule",
+          "author": [
+            {
+              "@type": "Person",
+              "name": "Arthur de Lassus"
+            },
+            {
+              "@type": "Person",
+              "name": "Blandine Lethu"
+            }
+          ],
+          "inLanguage": "fr",
+          "datePublished": "2020",
+          "description": "Le récit d'une bascule écologique vécue en couple, née d'une marche du Puy-en-Velay à Compostelle en 2015.",
+          "author_url": "https://arthurdelassus.fr/"
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -336,12 +383,15 @@
       <section class="section" id="blog" aria-label="Blog">
         <div class="container">
           <h2 class="section-title">Blog intégré</h2>
-          <p class="lede">Quelques articles disponibles directement sur ce site.</p>
+          <p class="lede">
+            Trois articles complets, à lire directement sur ce site — le reste de mes analyses
+            est publié sur LinkedIn.
+          </p>
 
           <div class="blog-list">
             <article class="post" id="post-ordres-de-grandeur">
               <header>
-                <a href="#post-ordres-de-grandeur">Ordres de grandeur : un réflexe utile</a>
+                <a href="blog-ordres-de-grandeur.html">Ordres de grandeur : un réflexe utile</a>
                 <time datetime="2026-02-24">24 fév. 2026</time>
               </header>
               <p>
@@ -352,11 +402,12 @@
                 <span class="tag">Énergie</span>
                 <span class="tag">Méthode</span>
               </div>
-            </article>
+                          <p class="post-link"><a class="btn btn-ghost" href="blog-ordres-de-grandeur.html">Lire l'article</a></p>
+</article>
 
             <article class="post" id="post-agri-et-energie">
               <header>
-                <a href="#post-agri-et-energie">Agriculture et énergie : ce qu’on oublie souvent</a>
+                <a href="blog-agriculture-et-energie.html">Agriculture et énergie : ce qu’on oublie souvent</a>
                 <time datetime="2026-02-10">10 fév. 2026</time>
               </header>
               <p>
@@ -366,11 +417,12 @@
                 <span class="tag">Agriculture</span>
                 <span class="tag">Climat</span>
               </div>
-            </article>
+                          <p class="post-link"><a class="btn btn-ghost" href="blog-agriculture-et-energie.html">Lire l'article</a></p>
+</article>
 
             <article class="post" id="post-animation-datelier">
               <header>
-                <a href="#post-animation-datelier">Animer un atelier : 5 règles simples</a>
+                <a href="blog-animer-un-atelier.html">Animer un atelier : 5 règles simples</a>
                 <time datetime="2026-01-22">22 janv. 2026</time>
               </header>
               <p>Objectif, cadre, rythme, traces, décision : une check-list pour des ateliers qui aboutissent.</p>
@@ -378,7 +430,8 @@
                 <span class="tag">Facilitation</span>
                 <span class="tag">Transmission</span>
               </div>
-            </article>
+                          <p class="post-link"><a class="btn btn-ghost" href="blog-animer-un-atelier.html">Lire l'article</a></p>
+</article>
           </div>
 
           <div class="hero-actions" style="margin-top:14px;">
