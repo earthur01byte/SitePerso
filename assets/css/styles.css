@@ -1908,17 +1908,17 @@ select:focus-visible{
   align-items: center;
   gap: 12px 20px;
   margin-top: 16px;
-  opacity: .7;
+  opacity: .78;
 }
 .hero-trust-logos img{
-  max-height: 22px;
-  max-width: 74px;
+  max-height: 26px;
+  max-width: 86px;
   width: auto;
   object-fit: contain;
 }
 @media (max-width: 640px){
   .hero-trust-logos{ gap: 10px 14px; }
-  .hero-trust-logos img{ max-height: 18px; max-width: 58px; }
+  .hero-trust-logos img{ max-height: 20px; max-width: 64px; }
   .hero-trust-stats{ gap: 10px 20px; }
 }
 
@@ -1933,7 +1933,6 @@ select:focus-visible{
   border: 0;
   background: none;
   padding: 0;
-  min-height: 0;
   border-radius: 18px;
   overflow: hidden;
   display: block;
@@ -1946,29 +1945,25 @@ select:focus-visible{
   border-radius: 18px;
   display: block;
 }
-/* Variante 2 photos empilees (ex. chambre froide + CoolBot) */
+/* Variante 2 photos empilees (ex. chambre froide + CoolBot) :
+   hauteur pilotee par un ratio fixe, colonne NON etiree
+   (align-self) pour ne jamais depasser la colonne de texte. */
 .schema-photo--stack{
   display: grid;
   gap: 12px;
+  min-height: 0;
 }
 .schema-photo--stack img{
   width: 100%;
   height: auto;
   min-height: 0;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 4;
   object-fit: cover;
   border-radius: 14px;
   display: block;
 }
 @media (min-width: 900px){
-  .schema-photo--stack{
-    grid-template-rows: 1fr 1fr;
-    height: 100%;
-  }
-  .schema-photo--stack img{
-    height: 100%;
-    aspect-ratio: auto;
-  }
+  .schema-photo--stack{ align-self: flex-start; }
 }
 
 /* ===================================================
