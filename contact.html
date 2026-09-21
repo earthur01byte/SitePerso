@@ -96,7 +96,10 @@
 
         <section class="section" id="formulaire" aria-label="Formulaire de contact">
           <h2>Formulaire</h2>
-          <p class="lede">Ce formulaire ouvre votre client mail (pas de stockage sur le site).</p>
+          <p class="lede">
+            Ce formulaire ouvre votre logiciel de messagerie (aucune donnée n’est stockée sur le site).
+            Si rien ne s’ouvre, utilisez « Copier le message » puis collez-le dans votre messagerie.
+          </p>
 
           <form class="form" id="contactForm">
             <div>
@@ -106,6 +109,17 @@
             <div>
               <label for="email">Email</label>
               <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="requestType">Type de demande</label>
+              <select id="requestType" name="requestType">
+                <option>Atelier de sensibilisation</option>
+                <option>Conférence</option>
+                <option>Cours / formation</option>
+                <option>Note ou rapport</option>
+                <option>Visite de la ferme</option>
+                <option>Autre demande</option>
+              </select>
             </div>
             <div>
               <label for="subject">Sujet</label>
@@ -118,8 +132,10 @@
             </div>
             <div class="hero-actions">
               <button class="btn btn-primary" type="submit">Envoyer l’email</button>
+              <button class="btn btn-ghost" type="button" id="copyMessage">Copier le message</button>
               <a class="btn btn-ghost" href="productions.html#articles">Lire le blog</a>
             </div>
+            <p class="help" id="formStatus" role="status" aria-live="polite"></p>
           </form>
         </section>
       </div>
@@ -139,24 +155,52 @@
       document.getElementById("year").textContent = String(new Date().getFullYear());
 
       const form = document.getElementById("contactForm");
+      const requestType = document.getElementById("requestType");
+      const subjectField = document.getElementById("subject");
+      const status = document.getElementById("formStatus");
+      const MAIL = "e.arthur01@gmail.com";
+
+      if (requestType && subjectField) {
+        requestType.addEventListener("change", () => {
+          if (!subjectField.value.trim()) subjectField.value = requestType.value;
+        });
+      }
+
+      const buildBody = (data) =>
+        `Nom : ${data.get("name") || ""}\n` +
+        `Email : ${data.get("email") || ""}\n` +
+        `Type de demande : ${data.get("requestType") || ""}\n\n` +
+        (data.get("message") || "") +
+        `\n\n—\nEnvoyé depuis arthurdelassus.fr`;
+
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const data = new FormData(form);
-        const name = String(data.get("name") || "");
-        const from = String(data.get("email") || "");
-        const subject = String(data.get("subject") || "");
-        const message = String(data.get("message") || "");
-
-        const to = "e.arthur01@gmail.com";
-        const body =
-          `Nom: ${name}\n` +
-          `Email: ${from}\n\n` +
-          message +
-          `\n\n—\nEnvoyé depuis arthurdelassus.fr`;
-
-        const href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const subject = String(data.get("subject") || "Demande depuis le site");
+        const href = `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildBody(data))}`;
         window.location.href = href;
+        if (status) {
+          status.textContent =
+            "Votre logiciel de messagerie va s’ouvrir. S’il ne s’ouvre pas, utilisez « Copier le message » puis collez-le dans votre messagerie.";
+        }
       });
+
+      const copyBtn = document.getElementById("copyMessage");
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+          const data = new FormData(form);
+          const subject = String(data.get("subject") || "Demande depuis le site");
+          const text = `À : ${MAIL}\nObjet : ${subject}\n\n${buildBody(data)}`;
+          try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.textContent = "Message copié !";
+            if (status) status.textContent = `Collez-le dans un email adressé à ${MAIL}.`;
+            window.setTimeout(() => (copyBtn.textContent = "Copier le message"), 2500);
+          } catch {
+            copyBtn.textContent = "Copie impossible";
+          }
+        });
+      }
     </script>
   </body>
 </html>
