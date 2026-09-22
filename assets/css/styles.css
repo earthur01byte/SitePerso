@@ -2263,3 +2263,98 @@ select:focus-visible{
   opacity: .85;
 }
 
+
+/* ===================================================
+   LOT 8 - Hero allegé, logos accoles aux chiffres,
+   livre « L'ecologie sans les mythes », offres
+   1) hero : 4 logos au lieu de 8, grossis pour occuper
+      la meme surface qu'avant ; titre « Ils m'ont fait
+      confiance » deplace SOUS la liste des chiffres
+   2) bandeau : les logos des 2 ateliers crees viennent
+      a cote de la statistique correspondante
+   3) livre : nouveau titre + sous-titre
+   4) offres : titre et logos cote a cote, logos
+      references sous le bouton, dans la meme carte
+   (ajouts uniquement : aucune regle existante modifiee)
+   =================================================== */
+
+/* --- 1. Hero : chiffres, puis titre, puis logos --- */
+.hero-trust-stats{ margin-bottom: 16px; }
+.hero-trust-logos{ gap: 18px 30px; }
+/* 4 logos au lieu de 8 : on double presque la hauteur
+   (52 -> 72 px) pour conserver la meme surface occupee.
+   72 px reste sous la hauteur native de chaque fichier
+   (131, 141, 128, 201 px) : aucun agrandissement. */
+.hero-trust-logos img{ max-height: 72px; max-width: 240px; }
+@media (max-width: 640px){
+  .hero-trust-logos img{ max-height: 52px; max-width: 168px; }
+}
+
+/* --- 2. Bandeau : logos des ateliers crees --- */
+.home-stat-ateliers{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.home-stat-logos{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 10px;
+}
+.home-stat-logos img{
+  max-height: 40px;
+  max-width: 132px;
+  width: auto;
+  object-fit: contain;
+  opacity: .85;
+  transition: opacity .2s ease;
+}
+.home-stat-logos img:hover{ opacity: 1; }
+
+/* --- 3. Livre a paraitre : sous-titre --- */
+.home-book-subtitle{
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .98rem;
+}
+.prod-book-subtitle{
+  margin: -4px 0 12px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .98rem;
+}
+
+/* --- 4. Offres --- */
+/* Le titre occupe la meme hauteur de ligne dans les 3
+   cartes (avec ou sans logos a sa droite), pour que les
+   paragraphes, les boutons et les logos du bas restent
+   alignes d'une carte a l'autre. */
+.home-offer h3{ line-height: 38px; }
+.home-offer-head{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin: 0 0 8px;
+}
+.home-offer-head h3{ margin: 0; }
+/* Logos places a droite du titre (carte « Ateliers ») */
+.home-offer-logos-inline{
+  justify-content: flex-end;
+  min-height: 0;
+  margin: 0;
+}
+.home-offer-logos-inline img{ max-height: 38px; max-width: 124px; }
+/* Logos de references places juste sous le bouton,
+   dans la meme boite au bord arrondi (.home-offer) */
+.home-offer-logos-foot{
+  min-height: 0;
+  margin: 16px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(42,42,42,.08);
+}
+
