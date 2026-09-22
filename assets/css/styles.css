@@ -2279,8 +2279,13 @@ select:focus-visible{
    =================================================== */
 
 /* --- 1. Hero : chiffres, puis titre, puis logos --- */
-.hero-trust-stats{ margin-bottom: 16px; }
-.hero-trust-logos{ gap: 18px 30px; }
+/* Espacements resserres pour que le bloc de confiance
+   tienne entierement sous la ligne de flottaison d'un
+   portable 1366x768 (le hero fait 100vh). */
+.hero-trust{ margin-top: 14px; padding-top: 14px; }
+.hero-trust-stats{ margin-bottom: 10px; }
+.hero-trust-title{ margin-bottom: 10px; }
+.hero-trust-logos{ gap: 12px 26px; margin-top: 10px; }
 /* 4 logos au lieu de 8 : on double presque la hauteur
    (52 -> 72 px) pour conserver la meme surface occupee.
    72 px reste sous la hauteur native de chaque fichier
