@@ -692,6 +692,24 @@ h3{ font-size: 22px; margin-top: 18px; }
 .prod-hero{
   padding-top: 24px;
 }
+/* Sommaire de la page : un bouton par section (ancres #livres, #ateliers,
+   #notes, #articles, #posts-linkedin). */
+.prod-sommaire{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+/* La barre de navigation est fixe : sans marge de defilement, une ancre
+   place le titre de section sous l'en-tete. */
+#livres,
+#ateliers,
+#notes,
+#articles,
+#posts-linkedin{
+  scroll-margin-top: 96px;
+}
 .prod-two-col{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -2366,7 +2384,10 @@ select:focus-visible{
 /* ===================================================
    LOT 10 - SECTION "MES POSTS LINKEDIN" (productions.html)
    Remplace l'ancienne section "Blog integre".
-   Grille de 3 colonnes ; chaque carte n'affiche d'abord que
+   Grille de 3 colonnes. Seuls les 6 premiers posts (les plus
+   aimes) sont visibles au chargement ; « Voir plus de posts »
+   affiche tout le theme selectionne, « Voir moins de posts »
+   revient aux 6 premiers. Chaque carte n'affiche d'abord que
    --lp-lignes lignes de texte (2), puis +3 lignes par clic sur
    "Voir plus" (-3 avec "Voir moins"). Les cartes sont filtrables
    par categorie via les puces .lp-chip (attribut data-lp-cats).
@@ -2425,6 +2446,8 @@ select:focus-visible{
   overflow: hidden;
 }
 .lp-card[hidden]{ display: none !important; }
+/* Carte masquee par la limite de posts affiches (« Voir plus de posts »). */
+.lp-card.lp-planque{ display: none !important; }
 .lp-card-media{
   display: block;
   margin: -16px -18px 14px;
@@ -2516,11 +2539,24 @@ select:focus-visible{
   white-space: nowrap;
 }
 .lp-link:hover{ text-decoration: underline; }
+/* « Voir plus / Voir moins de posts » : la grille ne montre que les 6 premiers
+   posts (les plus aimes) au chargement, le reste apparait a la demande. */
+.lp-plus-zone{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.lp-plus-zone[hidden]{ display: none !important; }
+.lp-plus-zone .btn{ font-family: inherit; font-size: .9rem; padding: 12px 22px; }
+.lp-plus-zone .btn[hidden]{ display: none !important; }
 @media (max-width: 980px){
   .lp-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 @media (max-width: 640px){
   .lp-grid{ grid-template-columns: 1fr; gap: 18px; }
   .lp-card-hook{ font-size: 1rem; }
+  .lp-plus-zone{ flex-direction: column; align-items: stretch; }
 }
 

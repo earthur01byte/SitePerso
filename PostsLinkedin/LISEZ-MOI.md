@@ -73,9 +73,17 @@ python maj_texte_lot10.py                    # categories dans les sauvegardes .
 
 - `productions.html` : la section est encadrée par `<!-- LP:START -->` et
   `<!-- LP:END -->` ; **ne pas l'éditer à la main**, elle est régénérée.
-- `assets/css/styles.css` : bloc « LOT 10 » (classes `.lp-*`).
-- `assets/js/main.js` : filtre par catégorie + « Voir plus » (+3 lignes) /
-  « Voir moins ». Lien partageable : `productions.html?cat=energie-climat`.
+  Le haut de page porte aussi un sommaire de 5 boutons d'ancre
+  (`#livres`, `#ateliers`, `#notes`, `#articles`, `#posts-linkedin`).
+- `assets/css/styles.css` : bloc « LOT 10 » (classes `.lp-*`) + `.prod-sommaire`.
+- `assets/js/main.js` : filtre par catégorie, dépliage du texte
+  (« Voir plus » +3 lignes / « Voir moins ») et limite d'affichage : **seuls les
+  6 posts les plus aimés sont visibles au chargement**, le bouton
+  « Voir plus de posts » révèle tout le thème sélectionné (le compteur indique
+  combien il en reste), « Voir moins de posts » revient à 6. Changer de thème
+  repart des 6 premiers. Sans JavaScript, tous les posts restent affichés et le
+  bouton n'apparaît pas. Lien partageable : `productions.html?cat=energie`.
 - Contrôles : `python check_html.py`, `check_classes.py`, `check_site.py`,
-  `test_lot10_posts.py` (auto-test du filtre et du dépliage),
-  `shot_lot10_posts.py` (captures 1440 / 1024 / 390 px).
+  `test_lot10_posts.py` (auto-test P1–P9 : filtre, dépliage, limite de 6 posts,
+  bouton « Voir plus de posts », liens externes),
+  `shot_lot10_posts.py` (captures 1440 / 960 / 390 px, état chargé et déplié).

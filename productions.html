@@ -117,8 +117,15 @@
         <div class="container container-narrow">
           <h1 class="section-title">Productions</h1>
           <p class="text-lead">
-            Livres, ateliers, rapports, articles — des formats différents pour un même fil rouge : transmettre simplement la complexité de la transition écologique et la rendre désirable, sans esquiver les questions qui dérangent.
+            Des formats différents pour un même fil rouge : transmettre simplement la complexité de la transition écologique et la rendre désirable, sans esquiver les questions qui dérangent.
           </p>
+          <nav class="prod-sommaire" aria-label="Accéder aux sections de la page">
+            <a class="btn btn-outline" href="#livres">Livres</a>
+            <a class="btn btn-outline" href="#ateliers">Ateliers de sensibilisation</a>
+            <a class="btn btn-outline" href="#notes">Notes d'expertise</a>
+            <a class="btn btn-outline" href="#articles">Billets de blog - idées reçues</a>
+            <a class="btn btn-outline" href="#posts-linkedin">Posts LinkedIn</a>
+          </nav>
         </div>
       </section>
 
@@ -175,7 +182,7 @@
       </section>
 
       <!-- 3. ATELIERS -->
-      <section class="section prod-ateliers" aria-label="Ateliers">
+      <section class="section prod-ateliers" id="ateliers" aria-label="Ateliers">
         <div class="container">
           <h2 class="section-title">Apprendre ensemble</h2>
             <p class="text-lead" style="margin-bottom:2rem;">
@@ -229,7 +236,7 @@
       </section>
 
       <!-- 4. RAPPORTS & NOTES -->
-      <section class="section prod-rapports" aria-label="Rapports et notes">
+      <section class="section prod-rapports" id="notes" aria-label="Rapports et notes">
         <div class="container">
           <h2 class="section-title">Travaux de recherche et d’expertise</h2>
           <p class="text-lead" style="margin-bottom:2rem;">
@@ -347,7 +354,7 @@
         <div class="container">
         <h2 class="section-title text-center">Mes posts LinkedIn</h2>
         <p class="lede lp-intro">
-          60 posts publiés sur LinkedIn (septembre 2024 et septembre 2026) : analyses, ordres de grandeur, retours de
+          De nombreux posts publiés sur LinkedIn : analyses, ordres de grandeur, retours de
           terrain et réactions à l’actualité. Filtrez par thème, dépliez le texte ligne par
           ligne, et ouvrez le post complet sur LinkedIn dans un nouvel onglet.
           <a href="https://www.linkedin.com/in/arthur-de-lassus/recent-activity/all/" target="_blank" rel="noopener">Voir mon fil LinkedIn</a>.
@@ -367,8 +374,8 @@
           <button class="lp-chip" type="button" data-lp-filter="agriculture" aria-pressed="false">Agriculture &amp; alimentation <span class="lp-chip-count">1</span></button>
           <button class="lp-chip" type="button" data-lp-filter="mobilite" aria-pressed="false">Mobilité <span class="lp-chip-count">1</span></button>
         </div>
-        <p class="lp-status" role="status"><span data-lp-compteur>60</span> posts affichés</p>
-        <div class="lp-grid" data-lp-grid>
+        <p class="lp-status" role="status"><span data-lp-compteur>60</span> posts affichés<span data-lp-total-zone hidden> sur <span data-lp-total>60</span></span></p>
+        <div class="lp-grid" id="lp-grille" data-lp-grid>
       <article class="lp-card" data-lp-cats="clim-chaleur politique" data-lp-likes="1005" data-lp-date="2026-06-26">
         <a class="lp-card-media" href="https://www.linkedin.com/posts/arthur-de-lassus_message-%C3%A0-tous-mes-amis-%C3%A9colo-sur-la-clim-activity-7476186130619744257-MBVA" target="_blank" rel="noopener">
           <img src="Images/posts/7476186130619744257.jpg" alt="Message à tous mes amis écolo sur la clim" loading="lazy" />
@@ -2037,6 +2044,14 @@ Wébinaire demain à 12h !</p>
           <a class="lp-link" href="https://www.linkedin.com/posts/arthur-de-lassus_mises-au-point-sur-le-solaire-pv-l%C3%A9olien-activity-7244102556879060992-aPhh" target="_blank" rel="noopener">Ouvrir sur LinkedIn ↗</a>
         </div>
       </article>
+        </div>
+        <!-- Limite d'affichage : seuls les 6 premiers posts sont visibles au chargement,
+             ce bloc les revele tous (et permet de revenir a 6). Les libelles des boutons
+             sont completes par main.js avec le nombre de posts restants ; sans JavaScript
+             le bloc reste masque et tous les posts sont affiches. -->
+        <div class="lp-plus-zone" data-lp-plus-zone hidden>
+          <button class="btn btn-ochre" type="button" data-lp-plus aria-expanded="false" aria-controls="lp-grille">Voir plus de posts</button>
+          <button class="btn btn-outline" type="button" data-lp-plus-moins hidden>Voir moins de posts</button>
         </div>
         </div>
       </section>
