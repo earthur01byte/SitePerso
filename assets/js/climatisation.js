@@ -18,6 +18,13 @@
   // le gabarit porte par le tableau, a remplacer quand les chiffres seront
   // arretes (une seule ligne a changer dans la page).
   const extDefaut = (tableau && tableau.getAttribute("data-fr-ext-defaut")) || "X h";
+  // Duree de reference des deux colonnes (« 15 h », « 20 h 30 »), barree devant
+  // la duree du jour : seules les etapes qui fournissent
+  // data-fr-interieur-avant / data-fr-exterieur-avant en affichent une.
+  const avantInterieur = tableau ? tableau.querySelector("[data-fr-compteur-avant]") : null;
+  const flecheInterieur = tableau ? tableau.querySelector("[data-fr-compteur-fleche]") : null;
+  const avantExterieur = tableau ? tableau.querySelector("[data-fr-ext-avant]") : null;
+  const flecheExterieur = tableau ? tableau.querySelector("[data-fr-ext-fleche]") : null;
   const terres = document.querySelector(".fr-globe-terres");
   const finale = document.querySelector(".fr-etape-finale");
   const doux = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -31,6 +38,15 @@
   const legendeDe = (vue) => {
     const boite = panneau.querySelector('[data-fr-vue-' + vue + "]");
     return boite ? boite.querySelector("[data-fr-legende]") : null;
+  };
+
+  // La reference barree et sa fleche disparaissent quand l'etape n'en fournit
+  // pas : le point de depart ne montre que la duree du jour.
+  const marquerReference = (noeud, fleche, texte) => {
+    if (!noeud) return;
+    noeud.textContent = texte || "";
+    noeud.hidden = !texte;
+    if (fleche) fleche.hidden = !texte;
   };
 
   const activer = (etape, index) => {
@@ -51,6 +67,10 @@
     if (extValeur) {
       extValeur.textContent = etape.getAttribute("data-fr-exterieur") || extDefaut;
     }
+    marquerReference(avantInterieur, flecheInterieur,
+                     etape.getAttribute("data-fr-interieur-avant"));
+    marquerReference(avantExterieur, flecheExterieur,
+                     etape.getAttribute("data-fr-exterieur-avant"));
 
     // La legende suit l'etape (titre + texte) quand elle en fournit une. Une
     // etape sans texte de legende vide celle de l'etape precedente (le point de
@@ -65,8 +85,9 @@
       if (noeudTexte) noeudTexte.textContent = texte || "";
     }
 
-    // Deux etapes de la fin se passent du tableau de bord (vegetalisation,
-    // habitabilite) : elles portent data-fr-tableau="masque".
+    // Les cinq dernieres etapes se passent du tableau de bord (benefices,
+    // points d'eau, cout, vegetation, habitabilite) : elles portent
+    // data-fr-tableau="masque".
     const tableauEtape = etape.getAttribute("data-fr-tableau");
     if (tableauEtape) {
       panneau.setAttribute("data-fr-tableau", tableauEtape);
@@ -106,9 +127,13 @@
       return;
     }
     const r = finale.getBoundingClientRect();
-    // La derniere etape est haute (170 vh) : la planete tourne donc sur toute
-    // sa traversee, sans que la section suivante arrive trop vite.
-    const course = Math.max(1, r.height);
+    // Le defilement qui fait tourner la planete est porte par l'espace reserve
+    // place apres la derniere carte ([data-fr-course]) : la carte, elle, garde
+    // la hauteur de son texte. Sans cet espace, on retombe sur la hauteur de la
+    // carte (mise en page ancienne).
+    const reserve = document.querySelector("[data-fr-course]");
+    const bas = reserve ? reserve.getBoundingClientRect().bottom : r.bottom;
+    const course = Math.max(1, bas - r.top);
     const avance = Math.min(1, Math.max(0, (window.innerHeight - r.top) / course));
     // Deplacement, pas rotation : la texture fait deux fois le diametre du
     // globe (672 unites), un tour complet correspond donc a ce defilement.

@@ -2714,36 +2714,10 @@ body.page-climatisation .fr-hero .container-narrow{
   height: auto;
   margin: 6px auto 0;
 }
-/* Clim reversible : un badge et un grand dessin par saison. Le dessin de la
-   saison en cours remplace l'autre (jamais les deux a la fois). */
-.fr-saison{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 6px 10px;
-  margin: 2px 2px 10px;
-}
-.fr-saison-nom{
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #fff;
-}
-.fr-saison-ete .fr-saison-nom{ background: #2F6B93; }
-.fr-saison-hiver .fr-saison-nom{ background: #C36A3D; }
-.fr-saison-impact{
-  font-size: .92rem;
-  font-weight: 600;
-  color: var(--text);
-}
-.fr-saison-hiver,
+/* Clim reversible : un grand dessin par saison, celui de la saison en cours
+   remplace l'autre (jamais les deux a la fois). */
 .fr-schema-hiver{ display: none; }
-[data-fr-panneau][data-fr-etat="pac-hiver"] .fr-saison-ete,
 [data-fr-panneau][data-fr-etat="pac-hiver"] .fr-schema-ete{ display: none; }
-[data-fr-panneau][data-fr-etat="pac-hiver"] .fr-saison-hiver{ display: flex; }
 [data-fr-panneau][data-fr-etat="pac-hiver"] .fr-schema-hiver{ display: block; }
 /* La planete tourne au fil du defilement : le script la fait defiler (et non
    tourner sur elle-meme), d'ou la transition lineaire ci-dessous. */
@@ -2774,10 +2748,16 @@ body.page-climatisation .fr-hero .container-narrow{
 [data-fr-panneau][data-fr-etat="clim"] [data-fr-couche="batiments"],
 [data-fr-panneau][data-fr-etat="clim"] [data-fr-couche="clim"],
 [data-fr-panneau][data-fr-etat="clim"] [data-fr-couche="seine"],
+[data-fr-panneau][data-fr-etat="clim"] [data-fr-couche="flocons"],
 [data-fr-panneau][data-fr-etat="exterieur"] [data-fr-couche="batiments"],
 [data-fr-panneau][data-fr-etat="exterieur"] [data-fr-couche="clim"],
 [data-fr-panneau][data-fr-etat="exterieur"] [data-fr-couche="seine"],
-[data-fr-panneau][data-fr-etat="exterieur"] [data-fr-couche="exterieur"]{ opacity: 1; }
+[data-fr-panneau][data-fr-etat="exterieur"] [data-fr-couche="flocons"],
+[data-fr-panneau][data-fr-etat="exterieur"] [data-fr-couche="exterieur"],
+/* Etat « fontaines » : Paris tel quel, plus les points d'eau. */
+[data-fr-panneau][data-fr-etat="fontaines"] [data-fr-couche="batiments"],
+[data-fr-panneau][data-fr-etat="fontaines"] [data-fr-couche="seine"],
+[data-fr-panneau][data-fr-etat="fontaines"] [data-fr-couche="fontaines"]{ opacity: 1; }
 /* L'eau de la Seine, sous le lit a sec eventuel. */
 .fr-carte .fr-seine-eau{ opacity: .95; }
 /* Legende et compteur, sous le visuel. */
@@ -2815,6 +2795,24 @@ body.page-climatisation .fr-hero .container-narrow{
   text-transform: uppercase;
   color: var(--muted);
 }
+/* La duree du jour, precedee de sa reference barree (« 15 h ») et d'une petite
+   fleche des que l'etape en fournit une : le panneau defile avec la page, la
+   comparaison reste donc sous les yeux du lecteur. */
+.fr-tableau-ligne{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
+  margin: 0;
+}
+.fr-tableau-avant{
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: line-through;
+  text-decoration-color: rgba(94,94,94,.5);
+}
+.fr-tableau-fleche{ color: var(--muted); font-size: 1rem; }
 .fr-tableau-valeur{
   margin: 0;
   font-size: 1.6rem;
@@ -2832,10 +2830,10 @@ body.page-climatisation .fr-hero .container-narrow{
   color: var(--muted);
 }
 /* Colonne des etapes. */
-/* Etapes 13 et 14 : le recit y parle de vegetation et d'habitabilite, plus de
-   durees — le tableau de bord s'efface (climatisation.js recopie
-   data-fr-tableau de l'etape sur le panneau). Sans JavaScript, il reste
-   visible : aucune information n'est perdue. */
+/* Etapes 10 a 14 : le recit y parle de vegetation, de points d'eau, de cout et
+   d'habitabilite, plus de durees. Le tableau de bord s'efface donc
+   (climatisation.js recopie data-fr-tableau de l'etape sur le panneau). Sans
+   JavaScript, il reste visible : aucune information n'est perdue. */
 [data-fr-panneau][data-fr-tableau="masque"] .fr-tableau{ display: none; }
 .fr-etapes{ display: grid; gap: 26px; padding-bottom: 60px; }
 /* Questions de transition : elles ouvrent la carte suivante. Elles ne portent
@@ -2854,9 +2852,10 @@ body.page-climatisation .fr-hero .container-narrow{
    centre du visuel, et la deuxieme carte reste sous la ligne de flottaison. */
 @media (min-width: 861px){
   .fr-etapes{ padding-top: clamp(90px, 15vh, 180px); }
-  /* Derniere etape : beaucoup de defilement, le temps de laisser tourner la
-     planete avant la section « sources et methode ». */
-  .fr-etape-finale{ min-height: 170vh; }
+  /* Derniere carte : le defilement qui fait tourner la planete est porte par un
+     espace reserve place apres elle (voir `.fr-course`). La carte, elle, garde
+     la hauteur de son texte. */
+  .fr-course{ height: 120vh; }
 }
 .fr-etape{
   padding: 24px 26px;
@@ -2938,7 +2937,7 @@ body.page-climatisation .fr-hero .container-narrow{
   .fr-panneau{ top: 76px; z-index: 5; }
   .fr-titre-ouverture{ max-width: 100%; }
   .fr-question{ margin-top: 26px; }
-  .fr-etape-finale{ min-height: 140vh; }
+  .fr-course{ height: 80vh; }
   .fr-vue-carte .fr-carte{ height: 32vh; }
   .fr-vue-pac .fr-schema,
   .fr-vue-arbre .fr-schema{ height: 30vh; }
