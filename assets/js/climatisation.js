@@ -52,15 +52,26 @@
       extValeur.textContent = etape.getAttribute("data-fr-exterieur") || extDefaut;
     }
 
-    // La legende suit l'etape (titre + texte) quand elle en fournit une.
+    // La legende suit l'etape (titre + texte) quand elle en fournit une. Une
+    // etape sans texte de legende vide celle de l'etape precedente (le point de
+    // depart n'a plus de commentaire sous la carte).
     const legende = legendeDe(vue);
     if (legende) {
       const titre = etape.getAttribute("data-fr-legende-titre");
       const texte = etape.getAttribute("data-fr-legende-texte");
       const noeudTitre = legende.querySelector(".fr-legende-titre");
-      const noeudTexte = legende.querySelector("span:last-of-type");
+      const noeudTexte = legende.querySelector("span:not(.fr-legende-titre)");
       if (titre && noeudTitre) noeudTitre.textContent = titre;
-      if (texte && noeudTexte) noeudTexte.textContent = texte;
+      if (noeudTexte) noeudTexte.textContent = texte || "";
+    }
+
+    // Deux etapes de la fin se passent du tableau de bord (vegetalisation,
+    // habitabilite) : elles portent data-fr-tableau="masque".
+    const tableauEtape = etape.getAttribute("data-fr-tableau");
+    if (tableauEtape) {
+      panneau.setAttribute("data-fr-tableau", tableauEtape);
+    } else {
+      panneau.removeAttribute("data-fr-tableau");
     }
 
     // Reperes exposes pour les controles automatises.
@@ -95,8 +106,10 @@
       return;
     }
     const r = finale.getBoundingClientRect();
-    const course = Math.max(1, r.height + window.innerHeight * 0.6);
-    const avance = Math.min(1, Math.max(0, (window.innerHeight * 0.7 - r.top) / course));
+    // La derniere etape est haute (170 vh) : la planete tourne donc sur toute
+    // sa traversee, sans que la section suivante arrive trop vite.
+    const course = Math.max(1, r.height);
+    const avance = Math.min(1, Math.max(0, (window.innerHeight - r.top) / course));
     // Deplacement, pas rotation : la texture fait deux fois le diametre du
     // globe (672 unites), un tour complet correspond donc a ce defilement.
     terres.style.transform = "translateX(" + (-672 * avance).toFixed(1) + "px)";

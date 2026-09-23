@@ -2592,7 +2592,33 @@ select:focus-visible{
    tout le texte reste lisible et la carte reste a l'etat de depart.
    =================================================== */
 /* Classe de <body> : point d'ancrage des surcharges propres a la page. */
-body.page-climatisation .fr-hero{ padding-top: 26px; }
+/* Ouverture « deepdive » : le premier ecran porte le titre, en tres grand, et
+   l'indication de defilement. La carte n'apparait qu'apres la question
+   d'ouverture, plus bas dans la page. */
+body.page-climatisation .fr-hero{
+  display: flex;
+  align-items: center;
+  min-height: 88vh;
+  padding: 40px 0 26px;
+}
+body.page-climatisation .fr-hero .container-narrow{
+  width: 100%;
+  max-width: min(1080px, 100% - 32px);
+}
+.fr-titre-ouverture{
+  margin: 0 auto 16px;
+  max-width: 24ch;
+  font-size: clamp(2.05rem, 5vw, 4.1rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.01em;
+}
+.fr-sous-titre{
+  margin: 0 auto 20px;
+  font-size: clamp(1rem, 1.7vw, 1.35rem);
+  font-style: italic;
+  color: var(--accent-2);
+}
 /* Badge d'identite de la page : le plaidoyer, lui, garde son titre (le H1). */
 .fr-badge{
   display: inline-block;
@@ -2611,11 +2637,40 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
   color: var(--muted);
   font-size: .86rem;
 }
+/* Indication de defilement : une phrase courte, une fleche qui respire et une
+   icone de souris — le repere classique des recits qui se deroulent. */
 .fr-defilement{
-  margin: 22px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 10px;
+  margin: 26px 0 0;
   color: var(--accent-2);
-  font-size: .9rem;
+  font-size: .88rem;
   font-weight: 600;
+}
+.fr-defilement-fleche{ width: 21px; height: 21px; animation: fr-defile 1.9s ease-in-out infinite; }
+.fr-defilement-souris{ width: 15px; height: 23px; }
+.fr-defilement .fr-molette{ animation: fr-molette 1.9s ease-in-out infinite; }
+@keyframes fr-defile{
+  0%, 100%{ transform: translateY(-2px); }
+  50%{ transform: translateY(3px); }
+}
+@keyframes fr-molette{
+  0%, 100%{ opacity: .25; }
+  50%{ opacity: 1; }
+}
+/* Question d'ouverture : elle precede le recit, donc l'apparition du panneau. */
+.fr-ouverture{ padding: clamp(44px, 10vh, 120px) 0 clamp(20px, 4vh, 50px); }
+.fr-ouverture-question{
+  margin: 0 auto;
+  max-width: 26ch;
+  font-size: clamp(1.7rem, 4.2vw, 3rem);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.12;
+  color: #8A3B16;
 }
 .fr-recit{
   display: grid;
@@ -2652,14 +2707,14 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
 /* Nom du lieu, en clair au-dessus du plan. */
 .fr-carte-titre{
   position: absolute;
-  top: 10px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  padding: 3px 12px;
-  font-size: .74rem;
+  padding: 5px 20px;
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: .14em;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted);
   background: rgba(255,249,241,.85);
@@ -2667,11 +2722,15 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
 }
 /* Lit de la Seine : un seul trace continu. */
 .fr-seine-fond{ stroke-linejoin: round; }
-/* Lit a sec (aval, hors de Paris) : le degrade brun -> bleu est pose par le
-   generateur de carte ; il n'apparait que quand l'eau irrigue la ville. */
+/* Lit a sec : le generateur teinte chaque segment du cours, du bleu (amont)
+   au marron (aval de Paris). Il n'apparait que quand l'eau irrigue la ville ;
+   l'eau bleue s'efface alors, pour ne pas teinter le lit par-dessous. */
 .fr-seine-sec{ opacity: 0; transition: opacity .5s ease; }
+.fr-carte .fr-seine-eau{ transition: opacity .5s ease; }
 [data-fr-panneau][data-fr-etat="irrigation"] .fr-seine-sec,
-[data-fr-panneau][data-fr-etat="ensemble"] .fr-seine-sec{ opacity: .95; }
+[data-fr-panneau][data-fr-etat="ensemble"] .fr-seine-sec{ opacity: 1; }
+[data-fr-panneau][data-fr-etat="irrigation"] .fr-carte .fr-seine-eau,
+[data-fr-panneau][data-fr-etat="ensemble"] .fr-carte .fr-seine-eau{ opacity: 0; }
 .fr-schema{
   display: block;
   width: 100%;
@@ -2722,6 +2781,7 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
 [data-fr-panneau] [data-fr-couche]{ opacity: 0; transition: opacity .5s ease; }
 [data-fr-panneau] [data-fr-couche="contour"],
 [data-fr-panneau] [data-fr-couche="districts"],
+[data-fr-panneau] [data-fr-couche="jardins"],
 [data-fr-panneau] [data-fr-couche="bois"]{ opacity: 1; }
 [data-fr-panneau][data-fr-etat="base"] [data-fr-couche="batiments"],
 [data-fr-panneau][data-fr-etat="base"] [data-fr-couche="seine"],
@@ -2801,22 +2861,31 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
   color: var(--muted);
 }
 /* Colonne des etapes. */
+/* Etapes 13 et 14 : le recit y parle de vegetation et d'habitabilite, plus de
+   durees — le tableau de bord s'efface (climatisation.js recopie
+   data-fr-tableau de l'etape sur le panneau). Sans JavaScript, il reste
+   visible : aucune information n'est perdue. */
+[data-fr-panneau][data-fr-tableau="masque"] .fr-tableau{ display: none; }
 .fr-etapes{ display: grid; gap: 26px; padding-bottom: 60px; }
 /* Questions de transition : elles ouvrent la carte suivante. Elles ne portent
    pas d'attribut data-fr-etape : la carte, elle, ne change pas. */
 .fr-question{
-  margin: 6px 0 -6px 2px;
-  padding-left: 16px;
+  margin: 36px 0 -4px 2px;
+  padding-left: 18px;
   border-left: 3px solid rgba(138,59,22,.28);
-  font-size: 1.06rem;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 600;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.2;
   color: #8A3B16;
 }
 /* La premiere carte s'aligne sur le panneau colle : elle arrive ainsi au
    centre du visuel, et la deuxieme carte reste sous la ligne de flottaison. */
 @media (min-width: 861px){
   .fr-etapes{ padding-top: clamp(90px, 15vh, 180px); }
+  /* Derniere etape : beaucoup de defilement, le temps de laisser tourner la
+     planete avant la section « sources et methode ». */
+  .fr-etape-finale{ min-height: 170vh; }
 }
 .fr-etape{
   padding: 24px 26px;
@@ -2853,7 +2922,9 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
 }
 .fr-mesure-avant{
   color: var(--muted);
-  font-size: 1.1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.05;
   text-decoration: line-through;
   text-decoration-color: rgba(94,94,94,.5);
 }
@@ -2894,6 +2965,10 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
 @media (max-width: 860px){
   .fr-recit{ grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
   .fr-panneau{ top: 76px; z-index: 5; }
+  .fr-titre-ouverture{ max-width: 100%; }
+  .fr-ouverture-question{ max-width: 100%; }
+  .fr-question{ margin-top: 26px; }
+  .fr-etape-finale{ min-height: 140vh; }
   .fr-vue-carte .fr-carte{ height: 32vh; }
   .fr-vue-pac .fr-schema,
   .fr-vue-arbre .fr-schema{ height: 30vh; }
@@ -2902,10 +2977,14 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
   .fr-tableau-valeur{ font-size: 1.35rem; }
   .fr-tableau-sujet{ font-size: .78rem; }
   .fr-etape{ padding: 20px 18px; }
+  .fr-mesure-avant,
   .fr-mesure-apres{ font-size: 1.7rem; }
 }
 @media (prefers-reduced-motion: reduce){
+  .fr-defilement-fleche,
+  .fr-defilement .fr-molette{ animation: none; }
   [data-fr-panneau] [data-fr-couche],
+  .fr-carte .fr-seine-eau,
   .fr-seine-sec,
   .fr-etape,
   .fr-globe-terres{ transition: none; }
@@ -2955,12 +3034,13 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
   margin: 0 0 20px;
 }
 /* Vignettes des medias : hauteur commune, largeurs proportionnelles pour ne
-   pas deformer des images aux ratios tres differents (3,07 / 1,83 / 0,91). */
+   pas deformer des images aux ratios tres differents (3,07 / 1,83 / 0,91).
+   Plus de legende sous les captures : l'image du Monde, plus etroite, se
+   retrouve au centre de la bande. */
 .home-clim-media-card{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
   margin: 0;
 }
 .home-clim-media-card img{
@@ -2973,15 +3053,9 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
   background: #fff;
   box-shadow: 0 6px 16px rgba(28,20,14,.07);
 }
-.home-clim-media-card figcaption{
-  max-width: 260px;
-  font-size: .78rem;
-  line-height: 1.35;
-  color: var(--muted);
-}
 /* Les trois captures tiennent sur une ligne : il faut un peu plus que les
-   760 px du conteneur courant (les legendes elargissent les vignettes).
-   Le texte, lui, garde ses propres max-width. */
+   760 px du conteneur courant (3,07 + 1,83 + 0,91 fois 132 px, plus les
+   ecarts). Le texte, lui, garde ses propres max-width. */
 @media (min-width: 1080px){
   .home-clim .container-narrow{ max-width: 1060px; }
 }
@@ -2995,11 +3069,6 @@ body.page-climatisation .fr-hero{ padding-top: 26px; }
   .home-clim-citation{ font-size: 1.08rem; }
   .home-clim-medias{ gap: 14px 16px; }
   .home-clim-media-card img{ height: 96px; }
-  .home-clim-media-card figcaption{
-    max-width: 150px;
-    font-size: .72rem;
-    text-align: center;
-  }
 }
 @media (max-width: 640px){
   .lp-grid{ grid-template-columns: 1fr; gap: 18px; }
