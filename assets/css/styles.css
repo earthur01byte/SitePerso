@@ -2363,3 +2363,164 @@ select:focus-visible{
   border-top: 1px solid rgba(42,42,42,.08);
 }
 
+/* ===================================================
+   LOT 10 - SECTION "MES POSTS LINKEDIN" (productions.html)
+   Remplace l'ancienne section "Blog integre".
+   Grille de 3 colonnes ; chaque carte n'affiche d'abord que
+   --lp-lignes lignes de texte (2), puis +3 lignes par clic sur
+   "Voir plus" (-3 avec "Voir moins"). Les cartes sont filtrables
+   par categorie via les puces .lp-chip (attribut data-lp-cats).
+   =================================================== */
+.lp-intro{
+  max-width: 780px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+.lp-filter{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  justify-content: center;
+  margin: 0 0 16px;
+}
+.lp-chip{
+  font-family: inherit;
+  font-size: .82rem;
+  line-height: 1.1;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.lp-chip:hover{ border-color: rgba(195,106,61,.55); }
+.lp-chip[aria-pressed="true"]{
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.lp-chip-count{ opacity: .72; font-size: .8em; margin-left: .3em; }
+.lp-status{
+  margin: 0 0 22px;
+  text-align: center;
+  color: var(--muted);
+  font-size: .85rem;
+}
+.lp-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 22px;
+  align-items: start;
+}
+.lp-card{
+  display: flex;
+  flex-direction: column;
+  padding: 16px 18px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 26px rgba(28,20,14,.07);
+  overflow: hidden;
+}
+.lp-card[hidden]{ display: none !important; }
+.lp-card-media{
+  display: block;
+  margin: -16px -18px 14px;
+  background: #EDE7DB;
+}
+.lp-card-media img{
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.lp-card-top{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+.lp-badge{
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #8A3B16;
+  background: rgba(195,106,61,.15);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.lp-card-hook{
+  margin: 0 0 8px;
+  font-size: 1.06rem;
+  line-height: 1.35;
+}
+.lp-card-meta{
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.lp-card-text{
+  position: relative;
+  margin: 0;
+  line-height: 1.6;
+  overflow: hidden;
+  max-height: calc(var(--lp-lignes, 2) * 1.6em);
+}
+.lp-card-text::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.7em;
+  background: linear-gradient(rgba(255,249,241,0), var(--surface));
+  pointer-events: none;
+}
+.lp-card-text.lp-complet::after{ display: none; }
+.lp-card-text p{ margin: 0 0 .7em; }
+.lp-card-text p:last-child{ margin-bottom: 0; }
+.lp-card-actions{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(42,42,42,.08);
+}
+.lp-more,
+.lp-moins{
+  font-family: inherit;
+  font-size: .85rem;
+  line-height: 1;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--accent-2);
+  cursor: pointer;
+}
+.lp-more:hover,
+.lp-moins:hover{ border-color: var(--accent); }
+.lp-more[hidden],
+.lp-moins[hidden]{ display: none !important; }
+.lp-link{
+  margin-left: auto;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.lp-link:hover{ text-decoration: underline; }
+@media (max-width: 980px){
+  .lp-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 640px){
+  .lp-grid{ grid-template-columns: 1fr; gap: 18px; }
+  .lp-card-hook{ font-size: 1rem; }
+}
+

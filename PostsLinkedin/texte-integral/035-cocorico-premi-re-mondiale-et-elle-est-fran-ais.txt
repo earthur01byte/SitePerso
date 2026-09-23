@@ -1,0 +1,97 @@
+ACCROCHE : 💥 Cocorico, première mondiale et elle est française !
+DATE     : 2025-07-22
+URL      : https://fr.linkedin.com/posts/arthur-de-lassus_cocorico-premi%C3%A8re-mondiale-et-elle-est-activity-7353460750524260352-Dkqi
+LIKES    : 586
+COMMENT. : 127
+IMAGE    : Images/posts/7353460750524260352.jpg
+CATEG.   : Énergie / Société & post-croissance
+
+------------------------------------------------------------------------
+
+💥 Cocorico, première mondiale et elle est française !
+
+Mistral vient de publier son bilan carbone et vous allez être surpris (ou pas pour ceux qui connaissent la question).
+
+
+
+Mistral est notre fleuron français/européen pour l'IA générative.
+
+Un de nos rares espoirs de ne pas être (trop) vassalisé par les US sur cette question comme nous le sommes (encore) pour les GAFAM.
+
+
+
+Ils ont pris l'option du challenger : proposer des modèles d'IA générative en open-source.
+
+
+
+Ils continuent à tracer ce sillon de la transparence sur la partie environnementale.
+
+Avec Carbone 4 et l'ADEME, ils publient le premier bilan environnementale de l'IA.
+
+Bravo à eux.
+
+Bravo aussi à l'ADEME pour son travail sur le numérique de qualité, malgré certains esprit grincheux.
+
+Bravo à Carbone 4. Le travail de ce cabinet est aussi une caution, Jean-Marc Jancovici, cofondateur, est souvent caustique sur le sujet de l'IA.
+
+
+
+L'impact marginale d'une réponse pour leur assistant IA Le Chat est de :
+
+👉 1,14 gCO₂e 👈 
+
+
+
+Donc si vous posez 10 question au Chat par jour sur un an, il y aura :
+
+4,16kgCO2e d'émissions (source en commentaire).
+
+
+
+Est-ce beaucoup ?
+
+
+
+C'est autant que :
+
+-21 km en voiture thermique seul
+
+-1,3 litre de lait (moyenne mondiale)
+
+-42g de steak (race à viande, moyenne mondiale)
+
+-moins d'une journée de chauffage au gaz
+
+
+
+Bref, pour le climat, choisis ton camp camarade !
+
+Concentre tes efforts sur ce qui a un gros impact carbone (et l'usage de Mistral n'en fait pas trop partie).
+
+Mets le paquet sur 
+
+1️⃣ les produits animaux (végétaliser l'assiette et c'est super bon)
+
+2️⃣ la voiture (voiture électrique quand on ne peut pas se passer de voiture, le thermique c'est tellement le Moyen-Âge)
+
+3️⃣ chauffage (passage à la pompe à chaleur, ça marche super bien)
+
+4️⃣ l'avion (pas trop d'alternative quand on est obligé de le prendre, à part payer la peau des fesses des carburants durables).
+
+
+
+Un post Linkedin ne peut pas faire le tour de la question de l'impact environnemental de l'IA, évidemment. Je suis preneur de vos compléments en commentaires.
+
+
+
+Je peux rajouter :
+
+-il y a des chances que l'usage de Mistral soit plus vertueux que les autres IA (électricité décarbonée en France).
+
+-il y a aussi la question de l'eau et de la consommation de matières. 
+
+Si des personnes compétentes veulent apporter leur éclairage, je suis preneur.
+
+
+
+Merci Mistral pour votre transparence !

@@ -1,0 +1,81 @@
+ACCROCHE : L'étude de l'INSEE qui enterre la rénovation énergétique monogeste.
+DATE     : 2025-07-15
+URL      : https://fr.linkedin.com/posts/arthur-de-lassus_l%C3%A9tude-de-linsee-qui-enterre-la-r%C3%A9novation-activity-7350777479558569985-C0OE
+LIKES    : 48
+COMMENT. : 110
+IMAGE    : Images/posts/7350777479558569985.jpg
+CATEG.   : Bâtiment & rénovation / Ordres de grandeur & mythes
+
+------------------------------------------------------------------------
+
+L'étude de l'INSEE qui enterre la rénovation énergétique monogeste.
+
+
+
+L'INSEE et le SDES viennent de sortir une étude de très grande qualité qui permet de mesurer en condition réelle les gains énergétiques suite à une isolation monogeste (changement de fenêtre, isolation des combles…).
+
+La base totale compte 1 million de ménages français et 80 000 ménages qui ont rénové leur logement.
+
+
+
+1/ Il y a bien une baisse observée de la consommation énergétique suite à la rénovation de 5 à 10%.
+
+2/ Le gain énergétique effectivement mesuré est entre 2 et 3 fois plus bas que ce que les modèles donnent théoriquement. Les modèles ne sont pas tant à blâmer, la question est plutôt sur la manière dont les occupants interagissent avec leur logement rénové.
+
+
+
+Ces investissements de rénovation ont un coût
+
+Ils permettent des gains en énergie, en euros et en CO2.
+
+Quelle est donc la rentabilité ?
+
+
+
+Avant de commencer, quel est le niveau d’une rentabilité raisonnable, vu de la société ?
+
+Je propose : 10 ans et 200-300€/tCO2.
+
+Et encore, si tout le monde pouvait internaliser ces niveaux de rendement, le monde serait très très différent de celui que l’on connaît. Pour la plupart des citoyens que je croise, une rentabilité inférieure à 4-5 ans est difficile à envisager et 100€/tCO2 est déjà ambitieux (pour du PV, un VE, une PAC etc).
+
+
+
+Revenons à notre étude et aux rentabilité qu’elle révèle.
+
+Ce qui est le plus important tient en 2 sous-parties :
+
+3.1/ Il faut entre 92 et 118 ans pour rentabiliser l'investissement [1].
+
+3.2/ Le coût de la rénovation est entre 2 800 et 14 500 € par tonne de CO2 évités [1].
+
+
+
+👉 Donc, les rénovations étudiées ici n'ont aucun sens financier et climatique. 👈 
+
+Il n'y a pas que le climat et les sous dans la vie, et on peut rénover pour d'autres raisons (insalubrité des logements par exemple). L'écart aux rentabilités “raisonnables” reste gigantesque.
+
+
+
+Je sais très bien que la rénovation est un sujet extrêmement populaire dans le milieu écologique.
+
+Ces données en situation réelle doivent amener à un profond reset de la manière dont on aborde la question de la rénovation en France.
+
+Cette étude regarde majoritairement des mono-gestes. Faut-il mettre fin à ces subventions ? Je pense que oui !
+
+Pourquoi s'échiner à rénover au lieu de, parfois, déconstruire et construire ? (cf scénario 3 de l'ADEME)
+
+Est-ce qu'il n'est pas préférable de se focaliser sur certains types très précis de réno et regarder simplement la décarbonation (PAC ou clim réversible cf mon article en commentaire) pour le reste des logements ?
+
+
+
+Le temps nous est compté pour décarboner, les € aussi.
+
+Pour mener à bien notre décarbonation et pour donner des conditions de logements dignes à tous les français, il faut un reset de nos réflexions sur la rénovation.
+
+
+
+Je suis très loin d'avoir la réponse aux questions que je pose.
+
+Cette étude sur données réelles de l'INSEE et du SDES est un bon point d'entrée pour provoquer un électrochoc sur le sujet.
+
+On en discute en commentaire (les sources y sont).

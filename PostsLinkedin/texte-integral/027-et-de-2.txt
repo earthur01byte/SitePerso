@@ -1,0 +1,49 @@
+ACCROCHE : Et de 2 !
+DATE     : 2025-08-21
+URL      : https://fr.linkedin.com/posts/arthur-de-lassus_et-de-2-deuxi%C3%A8me-analyse-sur-la-consommation-activity-7364295903542669313-kQ4Q
+LIKES    : 29
+COMMENT. : 21
+IMAGE    : Images/posts/7364295903542669313.jpg
+CATEG.   : Énergie / Ordres de grandeur & mythes
+
+------------------------------------------------------------------------
+
+Et de 2 !
+
+Deuxième analyse sur la consommation de l'IA.
+
+
+
+J'avais fait un premier post sur une première mondiale : Mistral avait communiqué sur les émissions marginales d'une requête.
+
+Résultat 1gCO2e par requête
+
+(Post en commentaire pour les détails)
+
+
+
+Google vient de sortir leur propre analyse.
+
+Evidement, ils disent que c'est une première mondiale (alors que les chauvins, eux savent...).
+
+Le résultat est très étonnant, je dois dire.
+
+0,00024 kWh d'électricité par requête médiane de Gemini.
+
+0,03 gCO2e/requête (ils ne prennent pas l'électricité moyenne US mais utilisent les GW d'électricité décarbonée qu'ils ont acheté)
+
+Une requête consomme 33 fois moins d'énergie en mars 2025 vs mars 2024 !
+
+Qu'il y ait des progrès : ok. Autant en 1 an, je ne m'y attendais pas.
+
+
+
+Une requête émettrait :
+
+0,014gCO2e si c'était avec l'électricité française (70 fois moins que Mistral visiblement).
+
+C'est là où ça paraît étonnant (Mistral n'est-il pas sensé avec de plus petits LLM efficients ?) et où des analyse scientifiques indépendantes seraient bien utiles.
+
+
+
+J'attends d'autres résultats avec impatience et vous pouvez me suivre pour avoir d'autres informations de ce type.

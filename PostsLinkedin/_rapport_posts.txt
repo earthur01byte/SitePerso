@@ -1,0 +1,14 @@
+RAPPORT D'EXTRACTION DES POSTS LINKEDIN
+Genere le 2026-09-23 08:06
+Posts traites : 61   |   extraits : 59   |   en echec : 2
+
+ECHEC  7391392257167216642  texte trouve mais compteurs absents  (https://fr.linkedin.com/posts/arthur-de-lassus_cest-ce-soir-pour-parler-de-finance-responsable-activity-7391392257167216642-7mkL)
+ECHEC  7011963795879165952  texte introuvable (mur de connexion ou variante degradee)  (https://fr.linkedin.com/posts/arthur-de-lassus_ipec-transition%C3%A9cologique-fresqueduclimat-activity-7011963795879165952-Z_Lx)
+PARTIEL 7404070927359135744  manque : commentaires
+PARTIEL 7391392257167216642  manque : likes, commentaires
+PARTIEL 7380856058963042304  manque : commentaires
+PARTIEL 7341933339957768193  manque : commentaires
+PARTIEL 7334126494530629632  manque : commentaires
+PARTIEL 7320085366634434561  manque : commentaires
+PARTIEL 7298290309891837953  manque : commentaires
+PARTIEL 7011963795879165952  manque : texte

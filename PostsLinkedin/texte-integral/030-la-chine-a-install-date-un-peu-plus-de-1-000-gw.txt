@@ -1,0 +1,41 @@
+ACCROCHE : La Chine a installé, à date, un peu plus de 1 000 GW de solaire sur tout le pays.
+DATE     : 2025-08-13
+URL      : https://fr.linkedin.com/posts/arthur-de-lassus_la-chine-a-install%C3%A9-%C3%A0-date-un-peu-plus-activity-7361298325381283842-Du_7
+LIKES    : 20
+COMMENT. : 2
+IMAGE    : Images/posts/7361298325381283842.jpg
+CATEG.   : Énergie
+
+------------------------------------------------------------------------
+
+La Chine a installé, à date, un peu plus de 1 000 GW de solaire sur tout le pays.
+
+
+
+Ce qui est le plus étonnant (pour nous français en tout cas), c'est que, grosso modo, la moitié du solaire est sur des toits et l'autre sur le sol en fermes solaires.
+
+
+
+Les chinois ont un système astucieux où ils groupent l'installation de PV sur toitures, localité après localité pour réduire drastiquement les coûts d'installation.
+
+
+
+Si seulement on était capable de faire la même chose dans un pays aussi centralisé que la France...
+
+
+
+Pour information, en mode plus capitaliste, l'Australie a des coûts d'installation de PV sur toiture inférieurs à 1$/Wc installé (2€/Wc en France).
+
+Une installation 2 fois moins chère à l'achat, c'est une électricité locale deux fois moins chère sur 25+ans (modulo l'actualisation).
+
+1€/kWc donne grand max 5c€/kWh sur 20 ans (hors actualisation) si tout est consommé.
+
+Avec une batterie pas trop chère et un système bien dimensionné, on monte à max 10c€/kWh consommé.
+
+
+
+Le kWh est à 20c€ TTC en France actuellement.
+
+
+
+Installateurs, abaissez vos prix d'installations solaires (et/ou travaillez au corps le réglementateur pour que l'installation soit plus simple/rapide, ce n'est pas normal qu'aussi peu de maison ait du solaire) !
