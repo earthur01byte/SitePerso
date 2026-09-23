@@ -123,7 +123,8 @@
             <radialGradient id="fr-degrade-chaud" cx="50%" cy="50%" r="65%"><stop offset="45%" stop-color="#BE5433" stop-opacity=".30"/><stop offset="100%" stop-color="#BE5433" stop-opacity=".05"/></radialGradient>
             <linearGradient id="fr-degrade-frais" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#1F4E74" stop-opacity=".70"/><stop offset="100%" stop-color="#6FAFD6" stop-opacity=".52"/></linearGradient>
             <radialGradient id="fr-degrade-halo" cx="50%" cy="42%" r="72%"><stop offset="0%" stop-color="#5AA0CC" stop-opacity=".55"/><stop offset="100%" stop-color="#2F6B93" stop-opacity=".34"/></radialGradient>
-            <g id="fr-flocon" fill="none" stroke="#EAF4FF" stroke-width="2.4" stroke-linecap="round"><path d="M0 -9V9M-7.8 -4.5L7.8 4.5M-7.8 4.5L7.8 -4.5"/><circle r="2.2" fill="#EAF4FF" stroke="none"/></g>
+            <g id="fr-flocon-branche" fill="none" stroke="#EAF4FF" stroke-width="2.2" stroke-linecap="round"><path d="M0 -4V-18M-4.5 -14L0 -9.5M4.5 -14L0 -9.5"/></g>
+            <g id="fr-flocon" fill="none" stroke="#EAF4FF" stroke-width="2.2" stroke-linecap="round"><use href="#fr-flocon-branche"/><use href="#fr-flocon-branche" transform="rotate(60)"/><use href="#fr-flocon-branche" transform="rotate(120)"/><use href="#fr-flocon-branche" transform="rotate(180)"/><use href="#fr-flocon-branche" transform="rotate(240)"/><use href="#fr-flocon-branche" transform="rotate(300)"/><circle r="3.2" fill="#EAF4FF" stroke="none"/></g>
           </defs>
           <g data-fr-couche="exterieur" mask="url(#fr-masque-hors-ville)">
             <rect x="0" y="0" width="1000" height="820" fill="url(#fr-degrade-chaud)"/>
@@ -368,7 +369,7 @@
                   <span class="fr-tableau-fleche" data-fr-ext-fleche hidden aria-hidden="true">→</span>
                   <span class="fr-tableau-valeur" data-fr-ext-valeur>X h</span>
                 </p>
-                <p class="fr-tableau-sujet" data-fr-ext-sujet>de stress thermique dehors, pendant la canicule</p>
+                <p class="fr-tableau-sujet" data-fr-ext-sujet>de stress thermique dehors, par jour de canicule</p>
               </div>
             </div>
           </div>
@@ -389,7 +390,7 @@
             data-fr-legende-titre="Paris aujourd'hui">
             <p class="fr-etape-num">1 / 14 · Le point de départ</p>
             <h2 class="fr-etape-titre">À Paris, 15 heures de stress thermique en intérieur</h2>
-              <p class="fr-mesure-note">On parle de <strong>stress thermique</strong> à partir de <strong>26 °C</strong> : au-delà, le corps ne se refroidit plus normalement, et chaque heure passée au-dessus compte.</p>
+              <p class="fr-mesure-note">On parle de <strong>stress thermique</strong> à partir de <strong>26 °C</strong>.</p>
             <p>
               Ce niveau de souffrance thermique n'est pas acceptable : nous allons voir
               quelles solutions on pourrait mettre en place pour le baisser.
@@ -402,7 +403,7 @@
             data-fr-interieur="14 h 59" data-fr-interieur-avant="15 h"
             data-fr-interieur-sujet="une minute de gagnée"
             data-fr-exterieur="20 h 20" data-fr-exterieur-avant="20 h 30"
-            data-fr-legende-titre="10 % de parcs" data-fr-legende-texte="Dix pour cent des bâtiments de Paris remplacés par des parcs.">
+            data-fr-legende-titre="10 % des bâtiments de Paris remplacés des parcs" >
             <p class="fr-etape-num">2 / 14 · Végétaliser</p>
             <h2 class="fr-etape-titre">10 % de parcs à la place des bâtiments</h2>
             <p class="fr-mesure">
@@ -425,7 +426,7 @@
             data-fr-interieur="13 h 20" data-fr-interieur-avant="15 h"
             data-fr-interieur-sujet="1 h 40 de gagnée"
             data-fr-exterieur="20 h 00" data-fr-exterieur-avant="20 h 30"
-            data-fr-legende-titre="Isoler" data-fr-legende-texte="Un manteau isolant sur tous les bâtiments de Paris.">
+            data-fr-legende-titre="Isoler en DPE A ou B tous les bâtiments.">
             <p class="fr-etape-num">3 / 14 · Isoler</p>
             <h2 class="fr-etape-titre">Isoler tous les bâtiments</h2>
             <p class="fr-mesure">
@@ -435,7 +436,7 @@
             </p>
             <p class="fr-mesure-note">Le meilleur des «&nbsp;alternatives&nbsp;», et pourtant loin du compte.</p>
             <p>
-              On renonce aux parcs et on isole tout le bâti parisien en catégorie A ou B du DPE.
+              On renonce aux parcs supplémentaires et on isole tout le bâti parisien en catégorie A ou B du DPE.
               On gagne 1 h 40 : c'est mieux que la végétalisation, mais clairement insuffisant.
               Avec les canicules que nous aurons, les nuits seront trop chaudes : il ne sera plus
               possible de refroidir les logements par surventilation nocturne et d'utiliser

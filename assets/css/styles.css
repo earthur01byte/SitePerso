@@ -2815,7 +2815,7 @@ body.page-climatisation .fr-hero .container-narrow{
 .fr-tableau-fleche{ color: var(--muted); font-size: 1rem; }
 .fr-tableau-valeur{
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.1;
   color: var(--accent-2);
@@ -2943,7 +2943,6 @@ body.page-climatisation .fr-hero .container-narrow{
   .fr-vue-arbre .fr-schema{ height: 30vh; }
   .fr-planete{ width: min(100%, 260px); }
   .fr-etapes{ padding-bottom: 40px; }
-  .fr-tableau-valeur{ font-size: 1.35rem; }
   .fr-tableau-sujet{ font-size: .78rem; }
   .fr-etape{ padding: 20px 18px; }
   .fr-mesure-avant,
