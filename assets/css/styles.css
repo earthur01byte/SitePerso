@@ -2831,8 +2831,8 @@ body.page-fraicheur .fr-hero{ padding-top: 26px; }
 
 /* ===================================================
    LOT 12 - ACCUEIL : bloc « climatisation dans les medias »
-   Renvoi vers la page Pour un droit a la fraicheur. Les vignettes des
-   medias sont typographiques (pas de logo officiel : marques deposees).
+   Renvoi vers la page Pour un droit a la fraicheur. Les vignettes sont des
+   captures des passages medias (hauteur commune, largeurs proportionnelles).
    =================================================== */
 .home-clim{ padding: 56px 0; }
 .home-clim-inner{
@@ -2862,28 +2862,41 @@ body.page-fraicheur .fr-hero{ padding-top: 26px; }
 .home-clim-medias{
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 18px 22px;
   justify-content: center;
-  margin: 0 0 18px;
+  margin: 0 0 20px;
 }
-.home-clim-media{
-  display: inline-flex;
+/* Vignettes des medias : hauteur commune, largeurs proportionnelles pour ne
+   pas deformer des images aux ratios tres differents (3,07 / 1,83 / 0,91). */
+.home-clim-media-card{
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 9px;
-  padding: 10px 16px;
-  background: #fff;
+  gap: 8px;
+  margin: 0;
+}
+.home-clim-media-card img{
+  display: block;
+  height: 132px;
+  width: auto;
+  max-width: 100%;
   border: 1px solid var(--border);
   border-radius: 10px;
-  font-size: .88rem;
-  font-weight: 700;
+  background: #fff;
   box-shadow: 0 6px 16px rgba(28,20,14,.07);
 }
-.home-clim-media::before{
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
+.home-clim-media-card figcaption{
+  max-width: 260px;
+  font-size: .78rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+/* Les trois captures tiennent sur une ligne : il faut un peu plus que les
+   760 px du conteneur courant (les legendes elargissent les vignettes).
+   Le texte, lui, garde ses propres max-width. */
+@media (min-width: 1080px){
+  .home-clim .container-narrow{ max-width: 1060px; }
 }
 .home-clim-texte{
   max-width: 700px;
@@ -2893,6 +2906,13 @@ body.page-fraicheur .fr-hero{ padding-top: 26px; }
 @media (max-width: 640px){
   .home-clim-inner{ padding: 26px 20px; }
   .home-clim-citation{ font-size: 1.08rem; }
+  .home-clim-medias{ gap: 14px 16px; }
+  .home-clim-media-card img{ height: 96px; }
+  .home-clim-media-card figcaption{
+    max-width: 150px;
+    font-size: .72rem;
+    text-align: center;
+  }
 }
 @media (max-width: 640px){
   .lp-grid{ grid-template-columns: 1fr; gap: 18px; }
