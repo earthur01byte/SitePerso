@@ -105,6 +105,7 @@
             <a href="agriculture.html">Agriculture <small>🌱</small></a>
             <a href="productions.html" aria-current="page">Productions <small>📚</small></a>
             <a href="services.html">Services <small>🎤</small></a>
+            <a href="fraicheur.html">Fraîcheur <small>❄️</small></a>
             <a href="contact.html">Contact</a>
           </div>
         </nav>
@@ -355,8 +356,8 @@
         <h2 class="section-title text-center">Mes posts LinkedIn</h2>
         <p class="lede lp-intro">
           De nombreux posts publiés sur LinkedIn : analyses, ordres de grandeur, retours de
-          terrain et réactions à l’actualité. Filtrez par thème, dépliez le texte ligne par
-          ligne, et ouvrez le post complet sur LinkedIn dans un nouvel onglet.
+          terrain et réactions à l’actualité. Filtrez par thème, dépliez chaque post en
+          entier, et ouvrez le post complet sur LinkedIn dans un nouvel onglet.
           <a href="https://www.linkedin.com/in/arthur-de-lassus/recent-activity/all/" target="_blank" rel="noopener">Voir mon fil LinkedIn</a>.
         </p>
         <div class="lp-filter" role="group" aria-label="Filtrer les posts par thème">
@@ -2044,14 +2045,15 @@ Wébinaire demain à 12h !</p>
           <a class="lp-link" href="https://www.linkedin.com/posts/arthur-de-lassus_mises-au-point-sur-le-solaire-pv-l%C3%A9olien-activity-7244102556879060992-aPhh" target="_blank" rel="noopener">Ouvrir sur LinkedIn ↗</a>
         </div>
       </article>
-        </div>
-        <!-- Limite d'affichage : seuls les 6 premiers posts sont visibles au chargement,
-             ce bloc les revele tous (et permet de revenir a 6). Les libelles des boutons
-             sont completes par main.js avec le nombre de posts restants ; sans JavaScript
-             le bloc reste masque et tous les posts sont affiches. -->
+        <!-- Affichage progressif : les 6 posts les plus aimes au chargement, puis
+             2 lignes de plus par clic sur « Voir plus de posts » (main.js). Sans
+             JavaScript le bloc reste masque et tous les posts sont affiches.
+             La barre est placee dans la grille pour que les boutons se superposent
+             a la ligne de posts suivante, montree en transparence. -->
         <div class="lp-plus-zone" data-lp-plus-zone hidden>
           <button class="btn btn-ochre" type="button" data-lp-plus aria-expanded="false" aria-controls="lp-grille">Voir plus de posts</button>
           <button class="btn btn-outline" type="button" data-lp-plus-moins hidden>Voir moins de posts</button>
+        </div>
         </div>
         </div>
       </section>
