@@ -7,7 +7,7 @@ Site simple en **7 pages** :
 - Agriculture (`agriculture.html`)
 - Services (`services.html`)
 - productions (+ blog intégré) (`productions.html`)
-- Pour un droit à la fraîcheur (`fraicheur.html`)
+- La climatisation (`climatisation.html`) — plaidoyer « Pour un droit à la fraîcheur »
 - Contact (`contact.html`)
 
 ## Prévisualiser en local

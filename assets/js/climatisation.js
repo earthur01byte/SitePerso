@@ -10,8 +10,14 @@
   const etapes = Array.prototype.slice.call(document.querySelectorAll("[data-fr-etape]"));
   if (!recit || !panneau || !etapes.length) return;
 
-  const valeur = document.querySelector("[data-fr-compteur-valeur]");
-  const sujet = document.querySelector("[data-fr-compteur-sujet]");
+  const tableau = document.querySelector("[data-fr-tableau]");
+  const valeur = tableau ? tableau.querySelector("[data-fr-compteur-valeur]") : null;
+  const sujet = tableau ? tableau.querySelector("[data-fr-compteur-sujet]") : null;
+  const extValeur = tableau ? tableau.querySelector("[data-fr-ext-valeur]") : null;
+  // Valeur de la colonne « En extérieur » quand l'etape n'en donne pas : c'est
+  // le gabarit porte par le tableau, a remplacer quand les chiffres seront
+  // arretes (une seule ligne a changer dans la page).
+  const extDefaut = (tableau && tableau.getAttribute("data-fr-ext-defaut")) || "X h";
   const terres = document.querySelector(".fr-globe-terres");
   const finale = document.querySelector(".fr-etape-finale");
   const doux = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -38,10 +44,13 @@
     etapes.forEach((e) => e.classList.remove("fr-etape-active"));
     etape.classList.add("fr-etape-active");
 
-    const mesure = etape.getAttribute("data-fr-mesure");
-    const sousTitre = etape.getAttribute("data-fr-sujet");
+    const mesure = etape.getAttribute("data-fr-interieur");
+    const sousTitre = etape.getAttribute("data-fr-interieur-sujet");
     if (valeur && mesure) valeur.textContent = mesure;
     if (sujet && sousTitre) sujet.textContent = sousTitre;
+    if (extValeur) {
+      extValeur.textContent = etape.getAttribute("data-fr-exterieur") || extDefaut;
+    }
 
     // La legende suit l'etape (titre + texte) quand elle en fournit une.
     const legende = legendeDe(vue);
@@ -88,7 +97,9 @@
     const r = finale.getBoundingClientRect();
     const course = Math.max(1, r.height + window.innerHeight * 0.6);
     const avance = Math.min(1, Math.max(0, (window.innerHeight * 0.7 - r.top) / course));
-    terres.style.transform = "rotate(" + (avance * 330).toFixed(1) + "deg)";
+    // Deplacement, pas rotation : la texture fait deux fois le diametre du
+    // globe (672 unites), un tour complet correspond donc a ce defilement.
+    terres.style.transform = "translateX(" + (-672 * avance).toFixed(1) + "px)";
   };
 
   const reagir = () => {

@@ -88,9 +88,9 @@ python maj_texte_lot10.py                    # categories dans les sauvegardes .
     trouve la barre de boutons, pour donner envie de cliquer ;
   - « Voir moins de posts » revient à 6, changer de thème repart des 6 premiers ;
   - sans JavaScript, tous les posts restent affichés et le bouton n'apparaît pas.
-- `fraicheur.html` (« Pour un droit à la fraîcheur ») renvoie vers ces posts
+- `climatisation.html` (« Pour un droit à la fraîcheur ») renvoie vers ces posts
   (« Voir mes posts sur la clim » → `productions.html#posts-linkedin`).
 - Contrôles : `python check_html.py`, `check_classes.py`, `check_site.py`,
-  `test_lot10_posts.py` (auto-test P1–P12), `test_fraicheur.py` (P1–P10),
+  `test_lot10_posts.py` (auto-test P1–P12), `test_climatisation.py` (P1–P12),
   `lancer_checks.py` (enchaîne tout et écrit des comptes rendus UTF-8),
-  `shot_lot10_posts.py` et `shot_fraicheur.py` (captures 1440 / 960 / 390 px).
+  `shot_lot10_posts.py` et `shot_climatisation.py` (captures 1440 / 960 / 390 px).
