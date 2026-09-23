@@ -2619,24 +2619,6 @@ body.page-climatisation .fr-hero .container-narrow{
   font-style: italic;
   color: var(--accent-2);
 }
-/* Badge d'identite de la page : le plaidoyer, lui, garde son titre (le H1). */
-.fr-badge{
-  display: inline-block;
-  margin: 0 0 12px;
-  padding: 6px 12px;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #8A3B16;
-  background: var(--accent-soft);
-  border-radius: 999px;
-}
-.fr-hero .fr-source{
-  margin: 14px 0 0;
-  color: var(--muted);
-  font-size: .86rem;
-}
 /* Indication de defilement : une phrase courte, une fleche qui respire et une
    icone de souris — le repere classique des recits qui se deroulent. */
 .fr-defilement{
@@ -2660,17 +2642,6 @@ body.page-climatisation .fr-hero .container-narrow{
 @keyframes fr-molette{
   0%, 100%{ opacity: .25; }
   50%{ opacity: 1; }
-}
-/* Question d'ouverture : elle precede le recit, donc l'apparition du panneau. */
-.fr-ouverture{ padding: clamp(44px, 10vh, 120px) 0 clamp(20px, 4vh, 50px); }
-.fr-ouverture-question{
-  margin: 0 auto;
-  max-width: 26ch;
-  font-size: clamp(1.7rem, 4.2vw, 3rem);
-  font-weight: 600;
-  font-style: italic;
-  line-height: 1.12;
-  color: #8A3B16;
 }
 .fr-recit{
   display: grid;
@@ -2966,7 +2937,6 @@ body.page-climatisation .fr-hero .container-narrow{
   .fr-recit{ grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
   .fr-panneau{ top: 76px; z-index: 5; }
   .fr-titre-ouverture{ max-width: 100%; }
-  .fr-ouverture-question{ max-width: 100%; }
   .fr-question{ margin-top: 26px; }
   .fr-etape-finale{ min-height: 140vh; }
   .fr-vue-carte .fr-carte{ height: 32vh; }

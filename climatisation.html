@@ -90,21 +90,10 @@
       <!-- 1. EN-TÊTE DE PAGE -->
       <section class="section fr-hero" aria-label="Climatisation : pour un droit à la fraîcheur">
         <div class="container container-narrow text-center">
-          <p class="fr-badge">Climatisation · plaidoyer</p>
           <h1 class="fr-titre-ouverture">Pourquoi la climatisation est un atout
             indispensable pour s'adapter et lutter contre le réchauffement
             climatique</h1>
             <p class="fr-sous-titre">Pour un droit à la fraîcheur</p>
-          <p class="text-lead">
-            Végétaliser, isoler, irriguer… et si tout cela ne suffisait pas ?
-            En canicule, à Paris, l'étude Viguier (2020) chiffre ce que chaque solution
-            apporte vraiment : <strong>la climatisation change d'échelle</strong>. Ce n'est
-            pas un confort, c'est une question de santé publique.
-          </p>
-          <p class="fr-source">
-            D'après l'étude Viguier, 2020 — ordres de grandeur pour Paris pendant une journée
-            de canicule.
-          </p>
           <p class="fr-defilement" aria-hidden="true">
             <span>Défiler pour continuer à lire</span>
             <svg class="fr-defilement-fleche" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v13M6.5 12.5 12 18l5.5-5.5"/></svg>
@@ -114,14 +103,6 @@
       </section>
 
       <!-- 2. LE RÉCIT : panneau collant + étapes qui défilent -->
-      <!-- Ouverture : la question posee avant que le panneau n'apparaisse. -->
-      <section class="section fr-ouverture" aria-label="Question d'ouverture">
-        <div class="container container-narrow text-center">
-          <p class="fr-ouverture-question">À quel point va-t-on souffrir de la
-            chaleur dans le futur&nbsp;?</p>
-        </div>
-      </section>
-
       <div class="fr-recit" data-fr-recit>
         <div class="fr-panneau">
           <div class="fr-panneau-boite" data-fr-panneau data-fr-vue="carte" data-fr-etat="base">
@@ -390,6 +371,13 @@
         </div>
 
         <div class="fr-etapes" data-fr-etapes>
+          <!-- Question d'ouverture : elle est la premiere ligne de la colonne des
+               etapes, donc juste avant la carte de l'etape 1 — c'est-a-dire au
+               moment ou le premier tableau du panneau apparait. Meme style que
+               les questions de transition (.fr-question). -->
+          <p class="fr-question">À quel point va-t-on souffrir de la
+            chaleur dans le futur&nbsp;?</p>
+
           <!-- ETAPES:START -->
           <section class="fr-etape" data-fr-etape data-fr-vue="carte" data-fr-etat="base"
             data-fr-interieur="15 h" data-fr-interieur-sujet="de stress thermique en intérieur (&gt; 26 °C), par jour de canicule"
@@ -397,16 +385,10 @@
             data-fr-legende-titre="Paris aujourd'hui">
             <p class="fr-etape-num">1 / 14 · Le point de départ</p>
             <h2 class="fr-etape-titre">À Paris, 15 heures de stress thermique en intérieur</h2>
-            <p class="fr-mesure">
-              <span class="fr-mesure-apres">15 h</span>
-              <span class="fr-mesure-sujet">par jour de canicule, en intérieur</span>
-            </p>
               <p class="fr-mesure-note">On parle de <strong>stress thermique</strong> à partir de <strong>26 °C</strong> : au-delà, le corps ne se refroidit plus normalement, et chaque heure passée au-dessus compte.</p>
             <p>
-              Pendant une canicule, en intérieur, un Parisien passe 15 heures par jour au-dessus
-              de la température à laquelle son corps ne se refroidit plus normalement. Ce n'est
-              pas une question de confort : nuits sans sommeil, travail dégradé, urgences
-              saturées, et des morts. C'est le point de comparaison de toute cette page.
+              Ce niveau de souffrance thermique n'est pas acceptable : nous allons voir
+              quelles solutions on pourrait mettre en place pour le baisser.
             </p>
           </section>
 
@@ -425,10 +407,10 @@
             </p>
             <p class="fr-mesure-note">Une minute de gagnée : c'est dérisoire.</p>
             <p>
-              C'est l'aménagement le plus consensuel : on remplace un dixième des bâtiments de
-              Paris par des parcs. Le chiffre paraît énorme, l'effet sur le stress thermique est
-              d'une minute. La végétalisation rafraîchit des rues ; elle ne rafraîchit pas des
-              logements, et à cette échelle de surface, elle ne change pas le climat intérieur.
+              On entend beaucoup parler des végétaux, qui seraient des climatiseurs. C'est vrai
+              seulement à la marge : <strong>1 minute</strong> gagnée en intérieur, 10 minutes
+              gagnées en extérieur. La végétalisation massive n'est pas une solution à la bonne
+              échelle.
             </p>
           </section>
 
@@ -447,10 +429,11 @@
             </p>
             <p class="fr-mesure-note">Le meilleur des «&nbsp;alternatives&nbsp;», et pourtant loin du compte.</p>
             <p>
-              On renonce aux parcs et on isole tout le bâti parisien. C'est le levier le plus
-              efficace parmi les alternatives à la climatisation : 13 h 20 au lieu de 15 h. Mais
-              une isolation protège surtout quand il fait frais la nuit : en canicule, une fois
-              la chaleur entrée, elle ne refroidit plus rien.
+              On renonce aux parcs et on isole tout le bâti parisien en catégorie A ou B du DPE.
+              On gagne 1 h 40 : c'est mieux que la végétalisation, mais clairement insuffisant.
+              Avec les canicules que nous aurons, les nuits seront trop chaudes : il ne sera plus
+              possible de refroidir les logements par surventilation nocturne et d'utiliser
+              l'isolation la nuit pour ralentir la pénétration de la chaleur.
             </p>
           </section>
 
@@ -469,10 +452,9 @@
             </p>
             <p class="fr-mesure-note">Vingt minutes de gagnée… et plus d'eau en aval.</p>
             <p>
-              On détourne l'eau du fleuve pour irriguer les arbres et rafraîchir les rues.
-              Résultat : 20 minutes de stress thermique en moins. Le prix : la Seine est
-              largement vidée, et en aval de Paris, il n'y a plus d'eau. Ce n'est pas un scénario
-              absurde : c'est la conséquence logique d'une solution locale poussée jusqu'au bout.
+              Si on utilise de l'eau pour irriguer les végétaux afin qu'ils jouent au maximum
+              leur rôle refroidissant, alors on gagne 20 minutes ; mais surtout, la consommation
+              d'eau est égale au débit de la Seine. Cette solution n'est pas généralisable.
             </p>
           </section>
 
@@ -492,10 +474,10 @@
             <p class="fr-mesure-note">2 h de gagnée, des milliards d'euros, et 13 h de stress thermique encore.</p>
             <p>
               En cumulant les trois solutions, on passe de 15 h à 13 h par jour de canicule.
-              Toujours treize heures de stress thermique quotidien, pour un coût de plusieurs
-              milliards d'euros et une part de l'eau du bassin parisien. C'est là que le débat
-              s'est trompé : ces solutions ne sont pas inutiles, elles sont <strong>largement
-              insuffisantes</strong>.
+              C'est un niveau de stress thermique inacceptable, malgré le déploiement de mesures
+              très ambitieuses et très coûteuses. Ces mesures sont présentées comme des
+              alternatives à la climatisation : elles n'en sont pas. Ce sont de petits
+              compléments.
             </p>
           </section>
 
@@ -516,9 +498,8 @@
             <p>
               On installe une climatisation partout, réglée à 23 °C en intérieur. Le stress
               thermique passe de 15 heures à <strong>20 minutes</strong> par jour de canicule.
-              Aucune autre solution testée sur cette page n'approche ce résultat : la climatisation
-              ne rafraîchit pas la rue, elle rafraîchit la vie des gens, là où ils dorment et
-              travaillent.
+              La climatisation est le seul moyen d'obtenir un niveau de confort décent l'été dans
+              les décennies à venir, à cause du réchauffement climatique.
             </p>
           </section>
 
