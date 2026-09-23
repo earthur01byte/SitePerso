@@ -1,12 +1,13 @@
 # arthurdelassus.fr (site statique)
 
-Site simple en **6 pages** :
+Site simple en **7 pages** :
 
 - Accueil (`index.html`)
 - À propos (`about.html`)
 - Agriculture (`agriculture.html`)
 - Services (`services.html`)
-- Productions (+ blog intégré) (`productions.html`)
+- productions (+ blog intégré) (`productions.html`)
+- Pour un droit à la fraîcheur (`fraicheur.html`)
 - Contact (`contact.html`)
 
 ## Prévisualiser en local
