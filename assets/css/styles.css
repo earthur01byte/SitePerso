@@ -2932,26 +2932,38 @@ body.page-climatisation .fr-hero .container-narrow{
   .fr-recit{ gap: 30px; }
 }
 @media (max-width: 860px){
-  .fr-recit{ grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
-  /* Le panneau reste dans le flux : colle, il occupait plus de la moitie de
-     l'ecran et le texte de l'etape defilait dessous. Chaque carte porte deja
-     ses propres durees, le tableau de bord n'a donc rien a y ajouter. */
-  .fr-panneau{ position: static; top: auto; z-index: auto; }
-  /* Hauteur naturelle (celle du viewBox) : une hauteur en vh rognait le dessin
-     et laissait des bandes vides sur les cotes. */
+  /* Une seule colonne : en grille, le panneau et les etapes tombent dans deux
+     rangees differentes, et un element collant ne peut pas sortir de sa rangee
+     (la carte disparaissait donc apres le premier ecran). En bloc, il colle
+     jusqu'a la fin du recit : on voit d'abord la carte, puis la question et sa
+     reponse qui defilent dessous. */
+  .fr-recit{ display: block; margin-top: 22px; }
+  .fr-panneau{ position: sticky; top: 60px; z-index: 5; margin-bottom: 18px; }
+  .fr-panneau-boite{ padding: 10px 10px 12px; }
+  /* Dessins bornes a 30 % de l'ecran : le panneau doit laisser la moitie de la
+     hauteur au texte. La largeur suit le rapport du viewBox, donc rien n'est
+     rogne et aucune bande vide n'apparait. */
   .fr-vue-carte .fr-carte,
   .fr-vue-pac .fr-schema,
-  .fr-vue-arbre .fr-schema{ height: auto; }
+  .fr-vue-arbre .fr-schema,
+  .fr-vue-protections .fr-schema{ height: min(29svh, 300px); width: auto; margin: 0 auto; }
+  .fr-legende{ margin-top: 6px; font-size: .78rem; }
+  .fr-tableau{ margin-top: 6px; padding-top: 6px; }
   .fr-titre-ouverture{ max-width: 100%; }
   .fr-question{ margin-top: 26px; }
   /* `svh` : la barre d'adresse des navigateurs mobiles change la hauteur du
      viewport, `vh` fait alors sauter le premier ecran quand elle se replie.
      Les navigateurs qui ignorent l'unite gardent le min-height du dessus. */
   body.page-climatisation .fr-hero{ min-height: 88svh; }
-  .fr-course{ height: 80vh; }
+  /* Plus de grand blanc apres la derniere carte : la planete finit de tourner
+     pendant la carte elle-meme (repli deja prevu par climatisation.js), et
+     « Envie d'en parler » enchaine immediatement. */
+  .fr-course{ height: 0; }
   .fr-planete{ width: min(100%, 260px); }
-  .fr-etapes{ padding-bottom: 40px; }
-  .fr-tableau-sujet{ font-size: .82rem; }
+  .fr-etapes{ padding-bottom: 24px; }
+  /* Les phrases du tableau de bord sont reprises dans chaque carte : sur
+     telephone, seuls les deux chiffres restent, pour laisser la place au texte. */
+  .fr-tableau-sujet{ display: none; }
   /* 11,8 px pour « etape 1 » sur telephone, c'est trop petit : on remonte d'un
      cran (12,5 px) sans toucher au rendu de bureau. */
   .fr-etape-num{ font-size: .78rem; }
@@ -3014,8 +3026,9 @@ body.page-climatisation .fr-hero .container-narrow{
 }
 /* Vignettes des medias : hauteur commune, largeurs proportionnelles pour ne
    pas deformer des images aux ratios tres differents (3,07 / 1,83 / 0,91).
-   Plus de legende sous les captures : l'image du Monde, plus etroite, se
-   retrouve au centre de la bande. */
+   Ordre voulu : France Inter a gauche, la tribune du Monde au centre (image en
+   portrait, la piece maitresse du plaidoyer), BFM a droite. Pas de legende
+   sous les captures : les trois images forment une bande. */
 .home-clim-media-card{
   display: flex;
   flex-direction: column;
@@ -3046,8 +3059,17 @@ body.page-climatisation .fr-hero .container-narrow{
 @media (max-width: 640px){
   .home-clim-inner{ padding: 26px 20px; }
   .home-clim-citation{ font-size: 1.08rem; }
-  .home-clim-medias{ gap: 14px 16px; }
-  .home-clim-media-card img{ height: 96px; }
+  /* Les trois vignettes restent sur une seule ligne, dans l'ordre France
+     Inter / tribune du Monde / BFM. Les colonnes suivent les proportions des
+     images (1,83 / 0,91 / 3,07) : chacune remplit la sienne, donc les hauteurs
+     restent egales et rien n'est deforme ni rogne. */
+  .home-clim-medias{
+    display: grid;
+    grid-template-columns: 1.83fr .91fr 3.07fr;
+    align-items: center;
+    gap: 10px;
+  }
+  .home-clim-media-card img{ height: auto; width: 100%; }
 }
 @media (max-width: 640px){
   .lp-grid{ grid-template-columns: 1fr; gap: 18px; }
