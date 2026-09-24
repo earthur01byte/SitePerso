@@ -98,7 +98,9 @@ header.site-header{
   gap: 10px;
   border: 1px solid var(--border);
   background: rgba(255,249,241,.72);
-  padding: 10px 12px;
+  /* 44 px de haut au moins : la cible tactile recommandee sur telephone. */
+  min-height: 44px;
+  padding: 12px 14px;
   border-radius: 999px;
   cursor:pointer;
 }
@@ -1591,13 +1593,6 @@ footer.site-footer{
     justify-content: space-between;
   }
 }
-.footer-links{
-  display:flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer-links a{ text-decoration: none; font-weight: 800; }
-
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
@@ -2729,6 +2724,9 @@ body.page-climatisation .fr-hero .container-narrow{
 [data-fr-panneau] [data-fr-couche="districts"],
 [data-fr-panneau] [data-fr-couche="jardins"],
 [data-fr-panneau] [data-fr-couche="bois"]{ opacity: 1; }
+/* Contours des communes alentour : un simple contexte, toujours visible, mais
+   volontairement efface — Paris, elle, garde son contour net. */
+[data-fr-panneau] [data-fr-couche="communes"]{ opacity: .45; }
 [data-fr-panneau][data-fr-etat="base"] [data-fr-couche="batiments"],
 [data-fr-panneau][data-fr-etat="base"] [data-fr-couche="seine"],
 [data-fr-panneau][data-fr-etat="parcs"] [data-fr-couche="batiments"],
@@ -2935,16 +2933,28 @@ body.page-climatisation .fr-hero .container-narrow{
 }
 @media (max-width: 860px){
   .fr-recit{ grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
-  .fr-panneau{ top: 76px; z-index: 5; }
+  /* Le panneau reste dans le flux : colle, il occupait plus de la moitie de
+     l'ecran et le texte de l'etape defilait dessous. Chaque carte porte deja
+     ses propres durees, le tableau de bord n'a donc rien a y ajouter. */
+  .fr-panneau{ position: static; top: auto; z-index: auto; }
+  /* Hauteur naturelle (celle du viewBox) : une hauteur en vh rognait le dessin
+     et laissait des bandes vides sur les cotes. */
+  .fr-vue-carte .fr-carte,
+  .fr-vue-pac .fr-schema,
+  .fr-vue-arbre .fr-schema{ height: auto; }
   .fr-titre-ouverture{ max-width: 100%; }
   .fr-question{ margin-top: 26px; }
+  /* `svh` : la barre d'adresse des navigateurs mobiles change la hauteur du
+     viewport, `vh` fait alors sauter le premier ecran quand elle se replie.
+     Les navigateurs qui ignorent l'unite gardent le min-height du dessus. */
+  body.page-climatisation .fr-hero{ min-height: 88svh; }
   .fr-course{ height: 80vh; }
-  .fr-vue-carte .fr-carte{ height: 32vh; }
-  .fr-vue-pac .fr-schema,
-  .fr-vue-arbre .fr-schema{ height: 30vh; }
   .fr-planete{ width: min(100%, 260px); }
   .fr-etapes{ padding-bottom: 40px; }
-  .fr-tableau-sujet{ font-size: .78rem; }
+  .fr-tableau-sujet{ font-size: .82rem; }
+  /* 11,8 px pour « etape 1 » sur telephone, c'est trop petit : on remonte d'un
+     cran (12,5 px) sans toucher au rendu de bureau. */
+  .fr-etape-num{ font-size: .78rem; }
   .fr-etape{ padding: 20px 18px; }
   .fr-mesure-avant,
   .fr-mesure-apres{ font-size: 1.7rem; }
