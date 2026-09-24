@@ -107,8 +107,7 @@
   // Sur telephone le panneau occupe le haut de l'ecran : c'est la question de
   // transition qui declenche le changement (le bas de la carte precedente
   // touche son haut) — la carte ne doit pas changer pendant que la question
-  // qui l'annonce est encore cachee derriere le panneau. Le repere est place a
-  // mi-hauteur, sous le panneau.
+  // qui l'annonce est encore cachee derriere le panneau.
   const ecranEtroit = window.matchMedia("(max-width: 860px)");
   const questionDe = (etape) => {
     const avant = etape.previousElementSibling;
@@ -116,7 +115,13 @@
     return etape;
   };
   const repereDe = (etape) => (ecranEtroit.matches ? questionDe(etape) : etape);
-  const ligneDe = () => window.innerHeight * (ecranEtroit.matches ? 0.5 : 0.55);
+  // Ligne de lecture sur telephone : 60 % de la hauteur. Deux contraintes :
+  // elle doit tomber sous le panneau, qui occupe le haut de l'ecran — sinon la
+  // carte change pendant que la question qui l'annonce est encore cachee
+  // derriere lui — et rester assez bas pour que le bas de la carte precedente
+  // soit visible lui aussi (52 px separent le bas d'une carte du haut de la
+  // question qui suit). 60 % verifie les deux jusqu'aux ecrans les plus courts.
+  const ligneDe = () => window.innerHeight * (ecranEtroit.matches ? 0.6 : 0.55);
 
   const etapeCourante = () => {
     const ligne = ligneDe();
@@ -187,7 +192,11 @@
   // plus hauts que la bande.
   if ("IntersectionObserver" in window) {
     const reperes = etapes.map((etape) => repereDe(etape));
-    const bande = ecranEtroit.matches ? "-47.5% 0px -52.5% 0px" : "-45% 0px -50% 0px";
+    // La bande d'observation se termine sur la ligne de lecture de la bascule
+    // (55 % a 60 % de la hauteur) : le filet declenche donc exactement comme
+    // l'ecoute du defilement, jamais avant. Sur grand ecran, bande d'origine
+    // (5 % de la hauteur, sous le panneau, soit 45 % a 50 %).
+    const bande = ecranEtroit.matches ? "-55% 0px -40% 0px" : "-45% 0px -50% 0px";
     const observateur = new IntersectionObserver((entrees) => {
       entrees.forEach((entree) => {
         if (!entree.isIntersecting) return;

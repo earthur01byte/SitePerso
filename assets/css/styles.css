@@ -2940,13 +2940,16 @@ body.page-climatisation .fr-hero .container-narrow{
   .fr-recit{ display: block; margin-top: 22px; }
   .fr-panneau{ position: sticky; top: 60px; z-index: 5; margin-bottom: 18px; }
   .fr-panneau-boite{ padding: 10px 10px 12px; }
-  /* Dessins deux fois plus petits qu'auparavant (29 % -> 14,5 % de la hauteur
-     d'ecran) : la carte de Paris garde le rapport de son viewBox, aucun
-     rognage, et les deux tiers de l'ecran restent au texte. */
+  /* Carte de Paris 50 % plus grande qu'au LOT 20 (14,5 % -> 21,75 % de la
+     hauteur d'ecran) : elle reste bornee pour que le panneau ne depasse pas la
+     moitie de l'ecran et que les deux tiers restent au texte. */
   .fr-vue-carte .fr-carte,
   .fr-vue-pac .fr-schema,
   .fr-vue-arbre .fr-schema,
-  .fr-vue-protections .fr-schema{ height: min(14.5svh, 150px); width: auto; margin: 0 auto; }
+  .fr-vue-protections .fr-schema{ height: min(21.75svh, 225px); width: auto; margin: 0 auto; }
+  /* Nom du lieu : meme corps que le texte des cartes (1rem) et non plus un
+     corps de titre de 24 px, qui ecrasait la carte. Boite ajustee au corps. */
+  .fr-carte-titre{ font-size: 1rem; padding: 2px 10px; }
   .fr-legende{ margin-top: 6px; font-size: .78rem; }
   .fr-tableau{ margin-top: 6px; padding-top: 6px; }
   .fr-titre-ouverture{ max-width: 100%; }
