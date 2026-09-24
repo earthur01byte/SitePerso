@@ -101,11 +101,28 @@
     document.documentElement.setAttribute("data-fr-etape-courante", String(index + 1));
   };
 
+  // Repere de la bascule. Sur grand ecran l'etape bascule quand son haut
+  // arrive a 55 % de la hauteur : le panneau est dans la colonne de gauche, la
+  // question et la carte restent lisibles cote a cote.
+  // Sur telephone le panneau occupe le haut de l'ecran : c'est la question de
+  // transition qui declenche le changement (le bas de la carte precedente
+  // touche son haut) — la carte ne doit pas changer pendant que la question
+  // qui l'annonce est encore cachee derriere le panneau. Le repere est place a
+  // mi-hauteur, sous le panneau.
+  const ecranEtroit = window.matchMedia("(max-width: 860px)");
+  const questionDe = (etape) => {
+    const avant = etape.previousElementSibling;
+    if (avant && avant.classList.contains("fr-question")) return avant;
+    return etape;
+  };
+  const repereDe = (etape) => (ecranEtroit.matches ? questionDe(etape) : etape);
+  const ligneDe = () => window.innerHeight * (ecranEtroit.matches ? 0.5 : 0.55);
+
   const etapeCourante = () => {
-    const ligne = window.innerHeight * 0.55;
+    const ligne = ligneDe();
     let trouve = 0;
     etapes.forEach((etape, i) => {
-      if (etape.getBoundingClientRect().top <= ligne) trouve = i;
+      if (repereDe(etape).getBoundingClientRect().top <= ligne) trouve = i;
     });
     return trouve;
   };
@@ -163,17 +180,21 @@
 
   // Filet de securite : l'IntersectionObserver repose sur la mise en page et
   // non sur les evenements de defilement, qui peuvent manquer (navigateur
-  // sans rendu d'image, onglet en arriere-plan, defilement instantane). La
-  // bande d'observation (5 % de la hauteur, sous le panneau) ne contient
-  // qu'une etape a la fois : les etapes sont bien plus hautes que la bande.
+  // sans rendu d'image, onglet en arriere-plan, defilement instantane). Il
+  // surveille le meme repere que la bascule : la question de transition sur
+  // telephone, la carte ailleurs. La bande d'observation (5 % de la hauteur,
+  // sous le panneau) ne contient qu'un repere a la fois : les reperes sont bien
+  // plus hauts que la bande.
   if ("IntersectionObserver" in window) {
+    const reperes = etapes.map((etape) => repereDe(etape));
+    const bande = ecranEtroit.matches ? "-47.5% 0px -52.5% 0px" : "-45% 0px -50% 0px";
     const observateur = new IntersectionObserver((entrees) => {
       entrees.forEach((entree) => {
         if (!entree.isIntersecting) return;
-        activerSiBesoin(etapes.indexOf(entree.target));
+        activerSiBesoin(reperes.indexOf(entree.target));
       });
-    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-    etapes.forEach((etape) => observateur.observe(etape));
+    }, { rootMargin: bande, threshold: 0 });
+    reperes.forEach((repere) => observateur.observe(repere));
   }
 
   reagir();

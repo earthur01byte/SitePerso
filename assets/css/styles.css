@@ -2940,13 +2940,13 @@ body.page-climatisation .fr-hero .container-narrow{
   .fr-recit{ display: block; margin-top: 22px; }
   .fr-panneau{ position: sticky; top: 60px; z-index: 5; margin-bottom: 18px; }
   .fr-panneau-boite{ padding: 10px 10px 12px; }
-  /* Dessins bornes a 30 % de l'ecran : le panneau doit laisser la moitie de la
-     hauteur au texte. La largeur suit le rapport du viewBox, donc rien n'est
-     rogne et aucune bande vide n'apparait. */
+  /* Dessins deux fois plus petits qu'auparavant (29 % -> 14,5 % de la hauteur
+     d'ecran) : la carte de Paris garde le rapport de son viewBox, aucun
+     rognage, et les deux tiers de l'ecran restent au texte. */
   .fr-vue-carte .fr-carte,
   .fr-vue-pac .fr-schema,
   .fr-vue-arbre .fr-schema,
-  .fr-vue-protections .fr-schema{ height: min(29svh, 300px); width: auto; margin: 0 auto; }
+  .fr-vue-protections .fr-schema{ height: min(14.5svh, 150px); width: auto; margin: 0 auto; }
   .fr-legende{ margin-top: 6px; font-size: .78rem; }
   .fr-tableau{ margin-top: 6px; padding-top: 6px; }
   .fr-titre-ouverture{ max-width: 100%; }
