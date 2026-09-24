@@ -85,9 +85,9 @@
       if (noeudTexte) noeudTexte.textContent = texte || "";
     }
 
-    // Les cinq dernieres etapes se passent du tableau de bord (benefices,
-    // points d'eau, cout, vegetation, habitabilite) : elles portent
-    // data-fr-tableau="masque".
+    // Les etapes qui portent data-fr-tableau="masque" se passent du tableau
+    // de bord : cout d'usage, PAC (le volet des durees n'a plus de sens),
+    // benefices, protections solaires, cout, vegetation, habitabilite.
     const tableauEtape = etape.getAttribute("data-fr-tableau");
     if (tableauEtape) {
       panneau.setAttribute("data-fr-tableau", tableauEtape);

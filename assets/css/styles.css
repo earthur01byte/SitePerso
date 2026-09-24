@@ -2664,7 +2664,8 @@ body.page-climatisation .fr-hero .container-narrow{
 [data-fr-panneau][data-fr-vue="carte"] .fr-vue-carte,
 [data-fr-panneau][data-fr-vue="pac"] .fr-vue-pac,
 [data-fr-panneau][data-fr-vue="arbre"] .fr-vue-arbre,
-[data-fr-panneau][data-fr-vue="globe"] .fr-vue-globe{ display: block; }
+[data-fr-panneau][data-fr-vue="globe"] .fr-vue-globe,
+[data-fr-panneau][data-fr-vue="protections"] .fr-vue-protections{ display: block; }
 .fr-carte{
   display: block;
   width: 100%;
