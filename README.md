@@ -93,9 +93,9 @@ d'offre, tirets).
   section : la carte ne fait que la hauteur de son contenu et reste collée au
   bas de la section (`.offer-side` + `justify-content:flex-end`).
 - La colonne de droite de chaque offre accueille donc une **photo** au-dessus de
-  l'encadré : `Images/HD_atelier.jpg` (Horizons Décarbonés),
-  `Images/Arthur_conference.jpg` (conférences) et, depuis le LOT 27,
-  `Images/Arthur_FdFP.jpg` (fresque).
+  l'encadré : `Images/HD_participants.jpg` pour Horizons Décarbonés (LOT 28,
+  qui remplace `Images/HD_atelier.jpg`), `Images/Arthur_conference.jpg`
+  (conférences) et, depuis le LOT 27, `Images/Arthur_FdFP.jpg` (fresque).
 - La fresque recevait `Images/Arthur_FdFP.jpg` dans sa colonne de texte, à
   l'emplacement libéré par le schéma ; le LOT 27 a inversé les deux (schéma à
   gauche, photo à droite).
@@ -131,7 +131,42 @@ visuels à 1440 px et sous 900 px), `shot_lot27.py` (capture de la section de la
 fresque à 1440 px et mobile 390 px, via `lancer_shot.py`),
 `diag_largeur_services.py` (aucun débordement horizontal de 1440 à 390 px).
 
+## Logos et photo de l'atelier (retouches du 25/09/2026, LOT 28)
 
+- La photo de l'offre Horizons Décarbonés devient `Images/HD_participants.jpg`
+  (participants réunis autour de la table, écran « Créez votre persona »). Elle
+  est dérivée du fichier fourni `Images/HD_participants.png` (1672x941, 2,2 Mo)
+  par `optimize_hd_participants.py` : 900x507, JPEG qualité 82, 86 Ko, original
+  conservé. `Images/HD_atelier.jpg` n'est plus référencé par le site.
+- **Tous les logos du site ont désormais un fond transparent** : 17 fichiers
+  dérivés en `Images/<nom>_transparent.png` par `detourer_logos.py`. Les
+  originaux restent en place (quatre d'entre eux sont des JPEG, sans canal
+  alpha) et les pages ne pointent plus que vers les versions détourées, via
+  `remplacer_refs_logos.py` (33 références dans `index.html`,
+  `ressources.html` et `services.html`).
+- Méthode : le blanc **relié aux bords** devient transparent (parcours en largeur
+  depuis les quatre bords sur les pixels quasi blancs), puis le premier anneau de
+  pixels est mis en semi-transparence selon sa luminosité, ce qui efface le
+  liseré d'anti-aliasing et le bruit des JPEG. Les blancs *intérieurs* au dessin
+  sont préservés : contres-lettres (les trous des o et des D) et figures blanches
+  (le Bibendum de Michelin, les lettres blanches de Quantis ou de Valence Romans
+  Agglo) restent opaques, ce qui évite qu'elles disparaissent sur fond sombre.
+- Cas particulier : le panneau blanc enfermé dans le cadre du logo ADEME n'était
+  pas relié aux bords ; une graine de détourage explicite (`GRAINES` dans
+  `detourer_logos.py`) le traite, soit 14,6 % de l'image en plus.
+- Les logos qui portent leur propre aplat de couleur (Décathlon, EM Normandie)
+  sont laissés tels quels : leur fond n'est pas blanc. `Images/Omexom_logo.png`
+  et `Images/logo_HD.png` ne sont utilisés par aucune page.
+- Les JPEG détourés sont enregistrés en PNG à palette (128 couleurs, alpha
+  conservé) : sans cela le bruit de compression resterait encodé tel quel et le
+  PNG pèserait cinq fois plus lourd que l'original.
+
+Contrôles du lot : `inventaire_logos.py` (recensement des logos référencés, mode,
+transparence, pages), `verif_lot28.py` (0 lien mort, 33 références basculées,
+transparence réelle de chaque fichier, tirets), `_diag_interieurs.py` (zones
+claires internes restantes), `shot_lot28.py` (planches « avant / après » des
+17 logos à taille réelle et en zoom 2x, sur fond crème et fond sombre, bandeaux
+de l'accueil et des services à 1440 px, mobile 390 px).
 
 ## Ponctuation : plus de tiret cadratin
 
