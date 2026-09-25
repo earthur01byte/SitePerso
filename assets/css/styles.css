@@ -960,30 +960,6 @@ h3{ font-size: 22px; margin-top: 18px; }
   font-size:1.6rem;
   margin-bottom:4px;
 }
-.services-audience-grid{
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap:1.2rem;
-  margin-top:1.8rem;
-}
-@media (max-width: 900px){
-  .services-audience-grid{
-    grid-template-columns:1fr;
-  }
-}
-.audience-card{
-  background: rgba(255,249,241,.9);
-  border-radius:14px;
-  padding:14px 16px;
-  border:1px solid var(--border);
-}
-.audience-card h3{
-  margin:0 0 6px;
-}
-.audience-card p{
-  margin:0;
-  color:var(--muted);
-}
 .services-stats{
   background:#f1e5d0;
 }
@@ -1010,54 +986,12 @@ h3{ font-size: 22px; margin-top: 18px; }
   display:block;
 }
 
-.services-clients{
-  background: rgba(255,249,241,.9);
-}
-.services-clients .client-logos{
-  display:grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap:1.5rem;
-  margin-top:1.8rem;
-  align-items:center;
-  justify-items:center;
-}
-@media (max-width: 900px){
-  .services-clients .client-logos{
-    grid-template-columns: repeat(3, minmax(0,1fr));
-  }
-}
-@media (max-width: 640px){
-  .services-clients .client-logos{
-    grid-template-columns: repeat(2, minmax(0,1fr));
-  }
-}
-.services-clients .client-logo img{
-  max-height: 104px;
-  width:auto;
-  object-fit: contain;
-}
-.services-clients .client-logo.client-logo-texte{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height: 64px;
-  width: 100%;
-  padding: .4rem .6rem;
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--muted);
-  font-size: .8rem;
-  font-weight: 600;
-  line-height: 1.25;
-  text-align: center;
-}
-
-/* Page Services : sections d'offres (LOT 24) */
+/* Page Services : sections d'offres (LOT 24, ajustements LOT 25) */
 .offer-layout{
   display:grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
   gap: 1.8rem;
-  align-items: start;
+  align-items: stretch;
 }
 @media (max-width: 900px){
   .offer-layout{
@@ -1067,13 +1001,41 @@ h3{ font-size: 22px; margin-top: 18px; }
 .offer-main > p{
   margin: 0 0 .9rem;
 }
-.offer-logo{
-  margin: 0 0 1rem;
+.offer-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap: 1.2rem;
+  margin: 0 0 1.1rem;
+}
+.offer-head-text{
+  min-width: 0;
+}
+.offer-head-text .prod-badge{
+  margin-bottom: 6px;
+}
+.offer-head .offer-title,
+.offer-head .offer-logo{
+  margin: 0;
 }
 .offer-logo img{
-  max-height: 96px;
+  max-height: 70px;
   width: auto;
   object-fit: contain;
+}
+.offer-schema{
+  margin: 1.4rem 0 .2rem;
+  text-align:center;
+}
+.offer-schema img{
+  max-width: 430px;
+  width: 100%;
+  height:auto;
+  border-radius: var(--radius-sm);
+}
+.offer-main ul.clean li strong{
+  color:#2C2C2C;
 }
 .offer-title{
   font-size: 1.8rem;
@@ -1093,7 +1055,7 @@ h3{ font-size: 22px; margin-top: 18px; }
 }
 .offer-logos{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
   gap: 1rem 1.4rem;
   align-items: center;
   justify-items: center;
@@ -1104,9 +1066,30 @@ h3{ font-size: 22px; margin-top: 18px; }
   border-radius: var(--radius-sm);
 }
 .offer-logos img{
-  max-height: 62px;
+  max-height: 58px;
+  max-width: 100%;
   width: auto;
   object-fit: contain;
+}
+/* Sur mobile, deux logos par ligne restent lisibles et plus compacts. */
+@media (max-width: 640px){
+  .offer-logos{
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: .8rem 1rem;
+  }
+  .offer-logos img{
+    max-height: 48px;
+  }
+}
+.offer-facts{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+@media (max-width: 900px){
+  .offer-facts{
+    justify-content:flex-start;
+  }
 }
 .offer-facts h3{
   margin: 0 0 .8rem;

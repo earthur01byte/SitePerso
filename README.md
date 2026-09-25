@@ -3,12 +3,15 @@
 Site simple en **7 pages** :
 
 - Accueil (`index.html`)
-- À propos (`about.html`)
+- Manifeste (`manifeste.html`)
 - Agriculture (`agriculture.html`)
 - Services (`services.html`)
-- ressources (+ blog intégré) (`ressources.html`)
-- La climatisation (`climatisation.html`) — plaidoyer « Pour un droit à la fraîcheur »
+- Ressources, billets masqués (`ressources.html`)
+- Climatisation (`climatisation.html`) : plaidoyer « Pour un droit à la fraîcheur »
 - Contact (`contact.html`)
+
+`fraicheur.html` est l'ancienne adresse du plaidoyer : la page redirige vers
+`climatisation.html`.
 
 ## Prévisualiser en local
 
@@ -37,19 +40,57 @@ langues, tarif) :
 
 | Offre | Ancre | Logo de l'offre |
 | --- | --- | --- |
-| Horizons Décarbonés | `#horizons-decarbones` | `Images/Horizons_Décarbonés.png` |
-| La Fresque des frontières planétaires | `#frontieres-planetaires` | `Images/Fresque_des_frontières_planétaires.png` |
-| Mes conférences | `#conferences` | — |
-| Cours et formation | `#cours` | — |
-| Notes et expertise | `#notes` | — |
+| Horizons Décarbonés | `#horizons-decarbones` | `Images/logo_HD_transparent.png` |
+| La Fresque des frontières planétaires | `#frontieres-planetaires` | `Images/Logo_FdFP.png` |
+| Conférences et interventions | `#conferences` | (aucun) |
+| Cours et formation | `#cours` | (aucun) |
+| Notes et expertise | `#notes` | (aucun) |
 
 Les liens venant de `index.html` et `agriculture.html` pointent sur
 `#horizons-decarbones`. Les bandes de logos des offres contiennent les
-organisations les plus significatives ; le bandeau « Ils m'ont fait confiance »
-en fin de page garde les quatre structures non citées plus haut (ADEME, HEC, CNFPT,
-EDF).
+organisations les plus significatives.
 
 Contrôles du lot (dans `_outils_siteperso/`) : `verif_lot24.py` (ancres, images,
 résidus, équilibre des balises), `diag_largeur_services.py` (débordement horizontal
 de 1440 à 390 px), `shot_lot24.py` (captures, à lancer via `lancer_shot.py` pour un
 journal UTF-8 fiable).
+
+## Page Services (retouches du 25/09/2026, LOT 25)
+
+- Chaque atelier commence par un **bloc d'en-tête** : pastille (« Créateur » /
+  « Cocréateur ») et titre à gauche, logo à droite (`.offer-head`).
+- Logos des ateliers : `Images/logo_HD_transparent.png` pour Horizons Décarbonés,
+  `Images/Logo_FdFP.png` pour la Fresque des frontières planétaires. Les anciens
+  noms (`Horizons_Décarbonés.png`, `Fresque_des_frontières_planétaires.png`) ont
+  été mis à jour partout, y compris sur `index.html`, `agriculture.html` et
+  `ressources.html`.
+- `Images/logo_HD.png` est le fichier fourni (fond bleu-gris opaque) : il est
+  conservé tel quel, et `detourer_logo_hd.py` en dérive la version détourée
+  utilisée par le site.
+- Le **schéma des neuf frontières planétaires**
+  (`Images/Frontières_planétaires.webp`) illustre la section de la fresque.
+- Bandeaux de logos complétés : Quantis (fresque) ; CNFPT, UniLaSalle et CRÉDOC
+  (conférences).
+- « Mes conférences » devient **« Conférences et interventions »**, avec une
+  intervention supplémentaire (« Pour une vision systémique de la transition
+  écologique ! »). Les intitulés de conférences, de cours et de travaux passent en
+  gras noir, la phrase de conclusion en gris (`.help`).
+- Les encadrés « En pratique » sont alignés en bas de leur colonne
+  (`.offer-facts`) : leur bouton tombe au niveau du bas du texte.
+- Les sections **« Ils m'ont fait confiance »** et **« Pour qui ? »** sont
+  supprimées, avec leur CSS (`.services-clients`, `.client-logos`,
+  `.services-audience-grid`, `.audience-card`). ADEME, HEC et EDF ne sont plus
+  affichés ; CNFPT est passé dans le bandeau des conférences.
+- Alternance des fonds : Horizons (blanc) / Fresque (beige) / Conférences
+  (blanc) / Cours (beige) / Notes (blanc).
+
+Contrôles du lot : `verif_lot25.py` (logos présents, sections retirées, en-têtes
+d'offre, tirets).
+
+## Ponctuation : plus de tiret cadratin
+
+Le site n'utilise plus de tiret cadratin (—). Selon son rôle dans la phrase, il est
+remplacé par un deux-points, une virgule ou des parenthèses ; les titres de page
+utilisent la barre verticale (« Arthur de Lassus | Services »).
+`nettoyer_tirets.py` applique et contrôle cette convention, `verif_lot25.py` la
+vérifie page par page.
