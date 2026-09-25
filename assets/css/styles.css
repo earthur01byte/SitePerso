@@ -1052,21 +1052,70 @@ h3{ font-size: 22px; margin-top: 18px; }
   text-align: center;
 }
 
-/* Page Services : bloc « Qui je suis » */
-.services-qui-je-suis .quisuis-photo{
-  margin: 0;
-}
-.services-qui-je-suis .quisuis-photo img{
-  display:block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+/* Page Services : sections d'offres (LOT 24) */
+.offer-layout{
+  display:grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 1.8rem;
+  align-items: start;
 }
 @media (max-width: 900px){
-  .services-qui-je-suis .prod-two-col{
+  .offer-layout{
     grid-template-columns: 1fr;
   }
+}
+.offer-main > p{
+  margin: 0 0 .9rem;
+}
+.offer-logo{
+  margin: 0 0 1rem;
+}
+.offer-logo img{
+  max-height: 96px;
+  width: auto;
+  object-fit: contain;
+}
+.offer-title{
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 .8rem;
+  color: #2C2C2C;
+}
+.offer-subtitle{
+  margin: 1.5rem 0 .5rem;
+}
+.offer-logos-cap{
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 1.4rem 0 .6rem;
+}
+.offer-logos{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1rem 1.4rem;
+  align-items: center;
+  justify-items: center;
+  margin: 0 0 1.2rem;
+  padding: .9rem 1.1rem;
+  background: rgba(255,249,241,.9);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.offer-logos img{
+  max-height: 62px;
+  width: auto;
+  object-fit: contain;
+}
+.offer-facts h3{
+  margin: 0 0 .8rem;
+}
+.offer-facts ul.clean{
+  margin: 0 0 1.1rem;
+}
+.offer-facts ul.clean li{
+  margin: .45rem 0;
 }
 
 /* ===================================================
