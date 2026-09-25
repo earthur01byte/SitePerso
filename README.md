@@ -87,6 +87,30 @@ journal UTF-8 fiable).
 Contrôles du lot : `verif_lot25.py` (logos présents, sections retirées, en-têtes
 d'offre, tirets).
 
+## Page Services (retouches du 25/09/2026, LOT 26)
+
+- Les encadrés « En pratique » ne s'étirent plus sur toute la hauteur de la
+  section : la carte ne fait que la hauteur de son contenu et reste collée au
+  bas de la section (`.offer-side` + `justify-content:flex-end`).
+- La colonne de droite de chaque offre accueille donc une **photo** au-dessus de
+  l'encadré : `Images/HD_atelier.jpg` (Horizons Décarbonés),
+  `Images/Arthur_conference.jpg` (conférences), et le schéma des neuf frontières
+  planétaires pour la fresque, juste au-dessus du panneau.
+- La fresque reçoit `Images/Arthur_FdFP.jpg` dans sa colonne de texte
+  (`.offer-photo--inline`, 420 px de large), à l'emplacement libéré par le schéma.
+- Bandeaux de logos ramenés à une seule ligne : Omexom et Vinci Énergies sont
+  retirés du bandeau de la fresque (la mention reste dans le texte), CNFPT est
+  retiré du bandeau des conférences.
+- `optimize_services_photos.py` dérive les trois photos web depuis les fichiers
+  fournis (JPEG qualité 82, largeur max 900 px, originaux conservés) : 4,4 Mo
+  d'origine, 279 Ko au final.
+- Sous 900 px, la colonne de droite repasse en simple empilement (photo puis
+  encadré).
+
+Contrôles du lot : `shot_lot26.py` (captures par section à 1440 px et mobile
+390 px, à lancer via `lancer_shot.py`), `diag_largeur_services.py` (aucun
+débordement horizontal de 1440 à 390 px).
+
 ## Ponctuation : plus de tiret cadratin
 
 Le site n'utilise plus de tiret cadratin (—). Selon son rôle dans la phrase, il est

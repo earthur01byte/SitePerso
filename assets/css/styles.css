@@ -1081,14 +1081,52 @@ h3{ font-size: 22px; margin-top: 18px; }
     max-height: 48px;
   }
 }
-.offer-facts{
+/* LOT 26 : colonne de droite des offres = photo (ou schéma) + panneau
+   « En pratique ». La colonne est alignée sur le bas de la section, et le
+   panneau ne fait que la hauteur de son contenu : il touche le bas sans
+   s'étirer vers le haut. */
+.offer-side{
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
+  gap: 1.2rem;
+  min-width: 0;
+}
+.offer-side .offer-schema{
+  margin: 0;
+}
+.offer-side .offer-facts{
+  flex: 0 0 auto;
+}
+.offer-photo{
+  margin: 0;
+  overflow: hidden;
+  border-radius: 18px;
+}
+.offer-photo img{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+/* Photo placée dans la colonne de texte (fresque) : centrée et bornée. */
+.offer-photo--inline{
+  max-width: 420px;
+  margin: 1.4rem auto .2rem;
+}
+.offer-facts{
+  display:flex;
+  flex-direction:column;
 }
 @media (max-width: 900px){
-  .offer-facts{
-    justify-content:flex-start;
+  .offer-side{
+    display:block;
+  }
+  .offer-side .offer-facts{
+    margin-top: 1.5rem;
+  }
+  .offer-photo--inline{
+    margin: 1.4rem auto 0;
   }
 }
 .offer-facts h3{
