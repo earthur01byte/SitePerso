@@ -94,10 +94,11 @@ d'offre, tirets).
   bas de la section (`.offer-side` + `justify-content:flex-end`).
 - La colonne de droite de chaque offre accueille donc une **photo** au-dessus de
   l'encadré : `Images/HD_atelier.jpg` (Horizons Décarbonés),
-  `Images/Arthur_conference.jpg` (conférences), et le schéma des neuf frontières
-  planétaires pour la fresque, juste au-dessus du panneau.
-- La fresque reçoit `Images/Arthur_FdFP.jpg` dans sa colonne de texte
-  (`.offer-photo--inline`, 420 px de large), à l'emplacement libéré par le schéma.
+  `Images/Arthur_conference.jpg` (conférences) et, depuis le LOT 27,
+  `Images/Arthur_FdFP.jpg` (fresque).
+- La fresque recevait `Images/Arthur_FdFP.jpg` dans sa colonne de texte, à
+  l'emplacement libéré par le schéma ; le LOT 27 a inversé les deux (schéma à
+  gauche, photo à droite).
 - Bandeaux de logos ramenés à une seule ligne : Omexom et Vinci Énergies sont
   retirés du bandeau de la fresque (la mention reste dans le texte), CNFPT est
   retiré du bandeau des conférences.
@@ -110,6 +111,26 @@ d'offre, tirets).
 Contrôles du lot : `shot_lot26.py` (captures par section à 1440 px et mobile
 390 px, à lancer via `lancer_shot.py`), `diag_largeur_services.py` (aucun
 débordement horizontal de 1440 à 390 px).
+## Page Services (retouches du 25/09/2026, LOT 27)
+
+- Les deux visuels de la Fresque des frontières planétaires ont **changé de
+  colonne** : le schéma des neuf frontières planétaires est désormais dans la
+  colonne de texte de la fresque, à l'emplacement qu'occupait la photo, et
+  `Images/Arthur_FdFP.jpg` passe dans la colonne de droite, au-dessus de
+  l'encadré « En pratique » (comme les autres offres).
+- Le schéma est réduit de moitié : `.offer-schema--inline img` plafonne à
+  215 px de large (contre 430 px pour `.offer-schema`), centré, soit 215x208 px
+  rendus au lieu de 430x415 px.
+- `.offer-photo--inline` (la variante créée au LOT 26 pour la photo dans la
+  colonne de texte) et `.offer-side .offer-schema` sont supprimées, plus rien ne
+  les utilisant.
+
+Contrôles du lot : `verif_lot27.py` (taille et position rendues des deux
+visuels à 1440 px et sous 900 px), `shot_lot27.py` (capture de la section de la
+fresque à 1440 px et mobile 390 px, via `lancer_shot.py`),
+`diag_largeur_services.py` (aucun débordement horizontal de 1440 à 390 px).
+
+
 
 ## Ponctuation : plus de tiret cadratin
 

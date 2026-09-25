@@ -1034,6 +1034,11 @@ h3{ font-size: 22px; margin-top: 18px; }
   height:auto;
   border-radius: var(--radius-sm);
 }
+/* Schéma placé dans la colonne de texte (fresque) : demi-format, centré par
+   le text-align:center de .offer-schema. */
+.offer-schema--inline img{
+  max-width: 215px;
+}
 .offer-main ul.clean li strong{
   color:#2C2C2C;
 }
@@ -1081,19 +1086,15 @@ h3{ font-size: 22px; margin-top: 18px; }
     max-height: 48px;
   }
 }
-/* LOT 26 : colonne de droite des offres = photo (ou schéma) + panneau
-   « En pratique ». La colonne est alignée sur le bas de la section, et le
-   panneau ne fait que la hauteur de son contenu : il touche le bas sans
-   s'étirer vers le haut. */
+/* LOT 26 : colonne de droite des offres = photo + panneau « En pratique ».
+   La colonne est alignée sur le bas de la section, et le panneau ne fait que
+   la hauteur de son contenu : il touche le bas sans s'étirer vers le haut. */
 .offer-side{
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
   gap: 1.2rem;
   min-width: 0;
-}
-.offer-side .offer-schema{
-  margin: 0;
 }
 .offer-side .offer-facts{
   flex: 0 0 auto;
@@ -1109,11 +1110,6 @@ h3{ font-size: 22px; margin-top: 18px; }
   height: auto;
   border-radius: 18px;
 }
-/* Photo placée dans la colonne de texte (fresque) : centrée et bornée. */
-.offer-photo--inline{
-  max-width: 420px;
-  margin: 1.4rem auto .2rem;
-}
 .offer-facts{
   display:flex;
   flex-direction:column;
@@ -1124,9 +1120,6 @@ h3{ font-size: 22px; margin-top: 18px; }
   }
   .offer-side .offer-facts{
     margin-top: 1.5rem;
-  }
-  .offer-photo--inline{
-    margin: 1.4rem auto 0;
   }
 }
 .offer-facts h3{
