@@ -111,6 +111,7 @@ d'offre, tirets).
 Contrôles du lot : `shot_lot26.py` (captures par section à 1440 px et mobile
 390 px, à lancer via `lancer_shot.py`), `diag_largeur_services.py` (aucun
 débordement horizontal de 1440 à 390 px).
+
 ## Page Services (retouches du 25/09/2026, LOT 27)
 
 - Les deux visuels de la Fresque des frontières planétaires ont **changé de
