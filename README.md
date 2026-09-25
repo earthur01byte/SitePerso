@@ -6,7 +6,7 @@ Site simple en **7 pages** :
 - À propos (`about.html`)
 - Agriculture (`agriculture.html`)
 - Services (`services.html`)
-- productions (+ blog intégré) (`productions.html`)
+- ressources (+ blog intégré) (`ressources.html`)
 - La climatisation (`climatisation.html`) — plaidoyer « Pour un droit à la fraîcheur »
 - Contact (`contact.html`)
 
@@ -25,4 +25,4 @@ Puis ouvrir `http://localhost:5500`.
 ## À personnaliser
 
 - Email et lien LinkedIn : `contact.html`
-- Articles : section `Articles publiés` dans `productions.html`
+- Articles : section `Articles publiés` dans `ressources.html`

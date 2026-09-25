@@ -73,7 +73,7 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Ateliers de sensibilisation",
+              "name": "Mes ateliers",
               "description": "Ateliers participatifs Horizons Décarbonés et Fresque des frontières planétaires."
             }
           },
@@ -81,7 +81,7 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Conférences",
+              "name": "Mes conférences",
               "description": "Interventions de 45 à 60 minutes : keynote, table ronde, événement interne."
             }
           },
@@ -97,7 +97,7 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Notes et rapports",
+              "name": "Notes et expertise",
               "description": "Écrits sur mesure : notes de synthèse, rapports d'analyse, articles de fond."
             }
           }
@@ -128,7 +128,7 @@
             <a href="index.html">Accueil <small>🏠</small></a>
             <a href="manifeste.html">Manifeste <small>&amp;</small></a>
             <a href="agriculture.html">Agriculture <small>🌱</small></a>
-            <a href="productions.html">Productions <small>📚</small></a>
+            <a href="ressources.html">Ressources <small>📚</small></a>
             <a href="services.html" aria-current="page">Services <small>🎤</small></a>
             <a href="climatisation.html">Climatisation <small>❄️</small></a>
             <a href="contact.html">Contact</a>
@@ -146,10 +146,50 @@
             Des interventions qui allient rigueur intellectuelle et envie d’agir — pour des publics professionnels,
             académiques ou citoyens.
           </p>
+          <nav class="prod-sommaire" aria-label="Accéder aux sections de la page">
+            <a class="btn btn-outline" href="#ateliers">Mes ateliers</a>
+            <a class="btn btn-outline" href="#conferences">Mes conférences</a>
+            <a class="btn btn-outline" href="#cours">Cours et formation</a>
+            <a class="btn btn-outline" href="#notes">Notes et expertise</a>
+          </nav>
         </div>
       </section>
 
 
+
+      <!-- 2. QUI JE SUIS -->
+      <section class="section services-qui-je-suis" id="qui-je-suis" aria-label="Qui je suis">
+        <div class="container">
+          <div class="prod-two-col">
+            <figure class="quisuis-photo">
+              <img
+                src="Images/Arthur_LCI_nette.png"
+                alt="Arthur de Lassus en plateau télévisé"
+                loading="lazy"
+              />
+            </figure>
+            <div>
+              <h2 class="section-title">Qui je suis</h2>
+              <p>
+                Ingénieur, cofondateur des ateliers <strong>Horizons Décarbonés</strong> et de <strong>La Fresque des
+                frontières planétaires</strong>, coauteur avec Alain Grandjean de <em>L’écologie sans les mythes</em>
+                (Éditions de l’Aube). Je travaille sur la transition énergétique depuis plus de dix ans, avec une
+                obsession : sortir des faux débats et mettre des ordres de grandeur là où il n’y a souvent que des
+                opinions.
+              </p>
+              <ul class="clean">
+                <li><strong>Rigueur</strong> — des chiffres sourcés, jamais d’argument d’autorité.</li>
+                <li><strong>Pédagogie</strong> — plus de 5 000 participants à mes ateliers, des centaines d’animateurs formés.</li>
+                <li><strong>Indépendance</strong> — aucune école de pensée, aucune industrie ne me finance.</li>
+              </ul>
+              <div class="hero-actions">
+                <a class="btn btn-blue" href="contact.html">Parlons de votre projet</a>
+                <a class="btn btn-ghost" href="ressources.html">Voir mes ressources</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- 3. BLOCS DE SERVICES -->
       <section class="section services-grid-section" aria-label="Types de services">
@@ -158,16 +198,24 @@
             <!-- Ateliers -->
             <article class="service-card" id="ateliers">
               <div class="service-icon">🧩</div>
-              <h2>Ateliers de sensibilisation</h2>
+              <h2>Mes ateliers</h2>
               <p>
-                Deux ateliers participatifs pour entrer dans la transition écologique par l’expérience, les ordres de
-                grandeur et la discussion collective.
+                Deux ateliers participatifs pour entrer dans la transition écologique par l'expérience, les ordres de
+                grandeur et la discussion collective. Créés en 2022 avec Amaury Lethu, ils ont déjà réuni plus de
+                5 000 participants et formé des centaines d'animateurs, en France et dans le monde.
               </p>
-              <ul class="clean">
-                <li><strong>Horizons Décarbonés (HD)</strong> — se projeter concrètement dans un monde bas carbone.</li>
-                <li><strong>La Fresque des frontières planétaires (FdFP)</strong> — explorer le concept des frontières planétaires et passer à l'action sans angle mort écologique.</li>
-              </ul>
-              <p class="help">Public : entreprises, collectivités, associations.</p>
+              <h3>Horizons Décarbonés</h3>
+              <p>
+                Pour se projeter concrètement dans un monde bas carbone : les leviers, les ordres de grandeur, les
+                arbitrages — et l'élan qui revient quand on remplace les slogans par des faits.
+              </p>
+              <h3>La Fresque des frontières planétaires</h3>
+              <p>
+                Pour regarder la transition sans angle mort écologique : au-delà du climat, les autres frontières
+                planétaires — eau douce, azote, biodiversité, acidification des océans… — et ce qu'elles changent à nos
+                stratégies.
+              </p>
+              <p class="help">Public : entreprises, collectivités, associations, enseignement scolaire et supérieur.</p>
               <p class="help">Format : atelier participatif, en présentiel ou en distanciel.</p>
               <a class="btn btn-ochre" href="contact.html">Organiser un atelier</a>
             </article>
@@ -175,7 +223,7 @@
             <!-- Conférences -->
             <article class="service-card" id="conferences">
               <div class="service-icon">🎤</div>
-              <h2>Conférences</h2>
+              <h2>Mes conférences</h2>
               <p>
                 Des interventions de 45 à 60 minutes, chiffrées mais accessibles, adaptées à votre événement ou votre
                 contexte interne.
@@ -191,7 +239,7 @@
             <!-- Cours & formation -->
             <article class="service-card" id="cours">
               <div class="service-icon">🎓</div>
-              <h2>Cours &amp; formation</h2>
+              <h2>Cours et formation</h2>
               <p>
                 Des séquences pédagogiques structurées pour approfondir la décarbonation et les grands enjeux de
                 durabilité.
@@ -207,7 +255,7 @@
             <!-- Notes & rapports -->
             <article class="service-card" id="notes">
               <div class="service-icon">✒️</div>
-              <h2>Notes &amp; rapports</h2>
+              <h2>Notes et expertise</h2>
               <p>
                 Des écrits sur mesure, pour éclairer une décision, un débat public ou une stratégie sectorielle, avec des
                 ordres de grandeur clairs.
@@ -229,30 +277,48 @@
         <div class="container">
           <h2 class="section-title">Ils m'ont fait confiance</h2>
           <div class="client-logos">
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/Decathlon_logo.jpg" alt="Décathlon" loading="lazy" />
             </a>
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/ADEME_logo.png" alt="ADEME" loading="lazy" />
             </a>
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/Carbone4_logo.png" alt="Carbone 4" loading="lazy" />
             </a>
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/SchneiderElectric_logo.png" alt="Schneider Electric" loading="lazy" />
             </a>
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/IFRI_logo.jpg" alt="IFRI" loading="lazy" />
             </a>
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/ValenceAgglo_logo.png" alt="Valence Romans Agglomération" loading="lazy" />
             </a>
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/HEC_logo.png" alt="HEC" loading="lazy" />
             </a>
-            <a class="client-logo"  target="_blank" rel="noopener">
+            <a class="client-logo" target="_blank" rel="noopener">
               <img src="Images/CNFPT_logo.png" alt="CNFPT" loading="lazy" />
             </a>
+            <a class="client-logo" target="_blank" rel="noopener">
+              <img src="Images/EMN_logo.png" alt="EMN" loading="lazy" />
+            </a>
+            <a class="client-logo" target="_blank" rel="noopener">
+              <img src="Images/Logo_Vinci_Energies.webp" alt="Vinci Énergies" loading="lazy" />
+            </a>
+            <a class="client-logo" target="_blank" rel="noopener">
+              <img src="Images/Département_49_logo.png" alt="Département de Maine-et-Loire" loading="lazy" />
+            </a>
+            <a class="client-logo" target="_blank" rel="noopener">
+              <img src="Images/EDF_logo.png" alt="EDF" loading="lazy" />
+            </a>
+            <div class="client-logo client-logo-texte">TotalEnergies</div>
+            <div class="client-logo client-logo-texte">Michelin</div>
+            <div class="client-logo client-logo-texte">Ville de Saint-Herblain</div>
+            <div class="client-logo client-logo-texte">Omexon</div>
+            <div class="client-logo client-logo-texte">Campus de la Transition</div>
+            <div class="client-logo client-logo-texte">ICP</div>
           </div>
         </div>
       </section>

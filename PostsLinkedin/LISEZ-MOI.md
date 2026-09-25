@@ -2,7 +2,7 @@
 
 Ce dossier contient la **copie locale de tous les posts LinkedIn** d'Arthur
 de Lassus (texte intégral, mesures d'engagement, date, image) et sert de source
-au bloc « Mes posts LinkedIn » de `productions.html`.
+au bloc « Mes posts LinkedIn » de `ressources.html`.
 
 Objectif : ne rien perdre si LinkedIn ferme ou change, et afficher les posts sur
 le site sans iframe LinkedIn, avec un lien qui ouvre le post dans un nouvel onglet.
@@ -27,7 +27,7 @@ Les images sont dans `../Images/posts/<id du post>.jpg` (max 1000 px de large).
 cd C:\Users\earth\Desktop\Cursor_Cline\_outils_siteperso
 $env:PYTHONIOENCODING='utf-8'
 python fetch_posts_linkedin.py --reprend     # collecte (reprend ce qui est deja fait)
-python build_posts_linkedin.py               # CSV + section HTML de productions.html
+python build_posts_linkedin.py               # CSV + section HTML de ressources.html
 python maj_texte_lot10.py                    # categories dans les sauvegardes .txt
 ```
 
@@ -71,13 +71,13 @@ python maj_texte_lot10.py                    # categories dans les sauvegardes .
 
 ## Côté site
 
-- `productions.html` : la section est encadrée par `<!-- LP:START -->` et
+- `ressources.html` : la section est encadrée par `<!-- LP:START -->` et
   `<!-- LP:END -->` ; **ne pas l'éditer à la main**, elle est régénérée.
   Le haut de page porte aussi un sommaire de 5 boutons d'ancre
   (`#livres`, `#ateliers`, `#notes`, `#articles`, `#posts-linkedin`).
 - `assets/css/styles.css` : blocs « LOT 10/11 » (classes `.lp-*`) + `.prod-sommaire`.
 - `assets/js/main.js` :
-  - filtre par catégorie (`.lp-chip`) et lien partageable `productions.html?cat=energie` ;
+  - filtre par catégorie (`.lp-chip`) et lien partageable `ressources.html?cat=energie` ;
   - **dépliage du texte** : « Voir plus » montre tout le post d'un coup (classe
     `.lp-ouvert`, plus aucune limite de hauteur), « Voir moins » revient à 2 lignes ;
   - **affichage progressif** : les 6 posts les plus aimés au chargement, puis
@@ -89,7 +89,7 @@ python maj_texte_lot10.py                    # categories dans les sauvegardes .
   - « Voir moins de posts » revient à 6, changer de thème repart des 6 premiers ;
   - sans JavaScript, tous les posts restent affichés et le bouton n'apparaît pas.
 - `climatisation.html` (« Pour un droit à la fraîcheur ») renvoie vers ces posts
-  (« Voir mes posts sur la clim » → `productions.html#posts-linkedin`).
+  (« Voir mes posts sur la clim » → `ressources.html#posts-linkedin`).
 - Contrôles : `python check_html.py`, `check_classes.py`, `check_site.py`,
   `test_lot10_posts.py` (auto-test P1–P12), `test_climatisation.py` (P1–P12),
   `lancer_checks.py` (enchaîne tout et écrit des comptes rendus UTF-8),

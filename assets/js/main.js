@@ -57,7 +57,7 @@
     });
   }
 
-  // --- LOT 10/11 : section « Mes posts LinkedIn » (productions.html) ---
+  // --- LOT 10/11 : section « Mes posts LinkedIn » (ressources.html) ---
   // Filtre par categorie (.lp-chip), affichage progressif par 2 lignes de
   // posts (6 au depart, +2 lignes par clic sur « Voir plus de posts », retour
   // a 6 avec « Voir moins de posts ») et depliage du texte de chaque carte.
@@ -229,7 +229,7 @@
       maj();
     });
 
-    // Lien partageable : productions.html?cat=energie
+    // Lien partageable : ressources.html?cat=energie
     const demandee = new URLSearchParams(window.location.search).get("cat");
     const connue = puces.some((p) => p.getAttribute("data-lp-filter") === demandee);
     if (connue) categorie = demandee;

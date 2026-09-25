@@ -867,6 +867,12 @@ h3{ font-size: 22px; margin-top: 18px; }
   padding:18px 18px 20px;
   border:1px solid var(--border);
   box-shadow:0 10px 30px rgba(28,20,14,.06);
+  display:flex;
+  flex-direction:column;
+}
+.prod-article-card a.btn{
+  margin-top:auto;
+  align-self:flex-start;
 }
 .prod-article-card h3{
   margin-top:4px;
@@ -1029,6 +1035,38 @@ h3{ font-size: 22px; margin-top: 18px; }
   max-height: 104px;
   width:auto;
   object-fit: contain;
+}
+.services-clients .client-logo.client-logo-texte{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height: 64px;
+  width: 100%;
+  padding: .4rem .6rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* Page Services : bloc « Qui je suis » */
+.services-qui-je-suis .quisuis-photo{
+  margin: 0;
+}
+.services-qui-je-suis .quisuis-photo img{
+  display:block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+@media (max-width: 900px){
+  .services-qui-je-suis .prod-two-col{
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===================================================
@@ -2377,7 +2415,7 @@ select:focus-visible{
 }
 
 /* ===================================================
-   LOT 10/11 - SECTION "MES POSTS LINKEDIN" (productions.html)
+   LOT 10/11 - SECTION "MES POSTS LINKEDIN" (ressources.html)
    Remplace l'ancienne section "Blog integre".
    Grille de 3 colonnes. Les 6 posts les plus aimes sont visibles au
    chargement, puis 2 lignes de plus par clic sur « Voir plus de posts »
