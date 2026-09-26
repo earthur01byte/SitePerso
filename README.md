@@ -303,6 +303,27 @@ partir : par l'API, par le logiciel de messagerie du visiteur, ou par
 copier-coller. Le bouton reste masqué dans tous les autres cas (scénarios 3 et 5
 de `test_contact31.py`, et capture `formulaire-secours.png`).
 
+### Architecture retenue : Netlify + SMTP Infomaniak
+
+Le site étant publié par GitHub Pages (qui n'exécute aucun code), le backend vit
+dans un dossier séparé, `C:\Users\earth\Desktop\Cursor_Cline\Backend_Netlify` :
+des fonctions Netlify (offre gratuite, usage professionnel autorisé) qui envoient
+par le **SMTP d'Infomaniak**, déjà aligné avec le SPF du domaine, ce qui évite de
+toucher au DNS alors que le DMARC est en `p=reject`. `api.arthurdelassus.com`
+s'obtient par un simple CNAME, sans déplacer le DNS ni toucher à GitHub Pages.
+
+Les chemins publics restent `message.php`, `diagnostic.php` et `test_envoi.php` :
+le site n'a donc rien à changer, et la version PHP écrite au même moment (dossier
+`Backend_siteperso`, pour un hébergement Infomaniak) reste utilisable telle quelle
+si l'architecture évolue un jour.
+
+- Procédure de mise en ligne : `Backend_Netlify\INSTALLATION_NETLIFY.md`.
+- Comparaison des quatre architectures possibles (coûts, effort, réservation) :
+  `Backend_siteperso\CHOIX_HEBERGEMENT.md`.
+- Vérifications : `Backend_Netlify\outils\essai_local.js` (banc Node, 47
+  contrôles, aucun envoi réseau), `test_contact31_js.py` (le vrai navigateur
+  envoie au vrai backend, cinq scénarios) et `verif_lot31b.py` (tour complet).
+
 ### Pièges consignés au LOT 31
 
 1. **PHP n'est pas installé sur la machine** : impossible de lancer le moindre
