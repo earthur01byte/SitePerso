@@ -237,3 +237,96 @@ adresses déclarées), `menage_lot30.py`, `diag_largeur_agriculture30.py`
 l'accueil et des repères du héros, zoom 2x, écran 390 px, et contrôle
 fonctionnel du compteur lu dans le navigateur).
 
+
+## Formulaire de contact et backend PHP (26/09/2026, LOT 31)
+
+Le formulaire de `contact.html` n'ouvre plus de logiciel de messagerie : il
+envoie la demande à une petite API PHP, qui expédie deux emails depuis
+`arthur@arthurdelassus.com` (un pour Arthur, un accusé de réception pour le
+visiteur). Le site reste entièrement statique.
+
+**Côté site**
+
+- Trois champs utiles (nom, email, type de demande, message) et deux champs
+  techniques : un champ piège invisible (`site_web`) et l'heure d'arrivée sur la
+  page (`depart`).
+- L'envoi se fait en `fetch` vers `https://api.arthurdelassus.com/message.php`,
+  adresse déclarée une seule fois dans l'attribut `data-api` du formulaire :
+  changer de serveur = changer cet attribut.
+- La logique vit dans `assets/js/main.js` (même endroit que le filtre des
+  ressources), sous `// --- Formulaire de contact ---`, et les styles en fin de
+  `styles.css` (champ piège, champs en erreur, messages de retour).
+- Les messages de retour sont annoncés (`aria-live`), les champs fautifs
+  reçoivent `aria-invalid="true"` et une bordure rouge, le bouton se désactive
+  pendant l'envoi.
+- Repli si l'API ne répond pas : le message du serveur est affiché, sinon un
+  texte qui renvoie vers l'adresse email, et le bouton « Copier le message »
+  reste disponible.
+- Onze boutons de `index.html`, `services.html` et `agriculture.html` appellent
+  désormais `contact.html?type=...#formulaire` : le type de demande arrive
+  pré-choisi et la page défile jusqu'au formulaire (« Organiser cet atelier » →
+  atelier, « Réserver une conférence » → conférence, « Construire mon séminaire
+  au vert » → séminaire, etc.).
+
+**Côté hébergement** (dossier hors du dépôt :
+`C:\Users\earth\Desktop\Cursor_Cline\Backend_siteperso`)
+
+```
+api/       message.php + .htaccess        (racine du sous-domaine)
+lib/       config, SMTP, validation, modeles d'emails + .htaccess « Require all denied »
+outils/    diagnostic.php, test_envoi.php (proteges par une cle)
+journal/   journaux et brouillons du mode test + .htaccess
+```
+
+- Client SMTP maison (`lib/smtp.php`) : `mail.infomaniak.com`, port 465 en SSL,
+  authentification par mot de passe d'application. Aucune bibliothèque externe.
+- `mode_test` à `true` par défaut : les emails sont écrits dans `journal/mails/`
+  au lieu d'être envoyés, ce qui permet d'essayer le parcours complet sans rien
+  expédier. `outils/diagnostic.php` et `outils/test_envoi.php` valident
+  l'installation depuis le navigateur.
+- Protection : validation serveur, champ piège, contrôle du temps de
+  remplissage, cinq envois par heure et par adresse IP, journaux purgés au-delà
+  de douze mois.
+- Le mode d'emploi détaillé (sous-domaine, mot de passe d'application, dépôt
+  FTP, dépannage) est dans `Backend_siteperso/README.md`.
+
+### Pièges consignés au LOT 31
+
+1. **PHP n'est pas installé sur la machine** : impossible de lancer le moindre
+   `php -l`. Le backend est donc contrôlé par `verifier_php.py` (en-tête des
+   fichiers, équilibre des délimiteurs hors chaînes et commentaires, fichiers
+   inclus, fonctions maison appelées mais non définies, doublons), et le
+   **contrat de l'API est reproduit en Python** dans `test_contact31.py` : même
+   URL, mêmes codes (200/422/503), même forme de réponse. Chrome remplit alors
+   vraiment le formulaire et l'on vérifie ce qui est envoyé et ce qui s'affiche.
+   La validation définitive reste à faire sur Infomaniak avec
+   `outils/diagnostic.php`.
+2. **Positions de remplacement** : parcourir `finditer` sur une chaîne que l'on
+   modifie au fil de la boucle décale les positions suivantes et produit des
+   remplacements corrompus (c'est ainsi que `services.html` s'est retrouvé avec
+   une balise ouverte en trop, `</a></li>` orphelins et une accolade en
+   désordre). Le script corrigé parcourt les correspondances **de la fin vers le
+   début** et refuse toute correspondance dont le contenu dépasse 200 caractères
+   ou contient un `<a `. Leçon : relancer `check_html.py` après toute retouche
+   d'HTML par expression régulière, il détecte la casse.
+3. **Page de contrôle** : `check_html.py` a signalé les deux balises orphelines
+   avec leurs numéros de ligne, ce qui a permis de localiser le dégât en une
+   minute. Les captures, elles, ne l'auraient pas montré.
+4. **Fins de ligne** : l'éditeur écrit en CRLF, `normaliser_backend.py` remet
+   les fichiers du backend en LF pour qu'ils restent comparables d'une fois sur
+   l'autre.
+5. **Le contrôle du style se fait dans le navigateur** : à l'œil, le vert et le
+   rouge des messages paraissaient identiques sur une petite capture ;
+   `controle_couleurs31.py` lit la couleur calculée par Chrome
+   (`rgb(28, 124, 74)`, `rgb(179, 38, 30)`) et confirme aussi que le champ piège
+   reste hors écran.
+
+Contrôles du lot : `verif_lot31.py` (formulaire sans mailto, sept types
+identiques côté site et côté backend, onze liens pré-remplis, équilibre de
+`main.js` et de `styles.css`, contrôles statiques du backend, absence de renvoi
+vers `reservation.html`), `verifier_php.py`, `test_contact31.py` (quatre
+scénarios joués dans Chrome), `controle_couleurs31.py`, `shot_lot31.py`
+(captures du formulaire vierge, après envoi, en erreur, avec type pré-rempli, et
+en 390 px). Résultats : `TOUT EST OK` pour les trois vérifications de la série
+(`verif_lot31.py`, `check_html.py`, `check_site.py`).
+

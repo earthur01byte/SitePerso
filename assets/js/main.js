@@ -236,4 +236,124 @@
     appliquer();
   }
 
+  // --- Formulaire de contact ----------------------------------------------
+  // Envoi direct a l'API (api.arthurdelassus.com) : le visiteur reste sur la
+  // page, aucun logiciel de messagerie a ouvrir, aucun mailto:. Si l'API ne
+  // repond pas, on propose de copier le message ou d'ecrire a l'adresse.
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    const adresse = "arthur@arthurdelassus.com";
+    const api = (contactForm.getAttribute("data-api") || "").replace(/\/+$/, "");
+    const statut = document.getElementById("formStatus");
+    const boutonEnvoi = contactForm.querySelector('button[type="submit"]');
+    const boutonCopie = document.getElementById("copyMessage");
+    const champType = document.getElementById("type");
+    const champDepart = document.getElementById("depart");
+    const libelles = {};
+    if (champType) {
+      Array.from(champType.options).forEach((o) => {
+        libelles[o.value] = o.textContent.trim();
+      });
+    }
+
+    const majDepart = () => {
+      if (champDepart) champDepart.value = String(Math.floor(Date.now() / 1000));
+    };
+    majDepart();
+
+    // contact.html?type=conference : le type vient du bouton clique ailleurs.
+    const demande = new URLSearchParams(window.location.search).get("type");
+    if (champType && demande && libelles[demande]) champType.value = demande;
+
+    const lire = () => Object.fromEntries(new FormData(contactForm).entries());
+    const libelle = (valeur) => libelles[valeur] || "Demande";
+    const texteMessage = (d) => [
+      "À : " + adresse,
+      "",
+      "Nom : " + (d.nom || ""),
+      "Email : " + (d.email || ""),
+      "Demande : " + libelle(d.type),
+      "",
+      d.message || "",
+    ].join("\n");
+
+    const dire = (message, genre) => {
+      if (!statut) return;
+      statut.textContent = message;
+      statut.classList.remove("aide-ok", "aide-souci");
+      if (genre) statut.classList.add(genre);
+    };
+
+    const verifier = (d) => {
+      const regles = [
+        ["nom", (v) => v.trim().length >= 2, "Indiquez votre nom."],
+        ["email", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+          "Cette adresse email ne semble pas valide."],
+        ["message", (v) => v.trim().length >= 10,
+          "Décrivez votre demande en quelques mots (10 caractères minimum)."],
+      ];
+      for (const [cle, valide, message] of regles) {
+        const champ = contactForm.elements[cle];
+        const valeur = String(d[cle] || "");
+        const bon = valide(valeur);
+        if (champ) {
+          if (bon) champ.removeAttribute("aria-invalid");
+          else champ.setAttribute("aria-invalid", "true");
+        }
+        if (!bon) {
+          dire(message, "aide-souci");
+          if (champ && champ.focus) champ.focus();
+          return false;
+        }
+      }
+      return true;
+    };
+
+    contactForm.addEventListener("submit", async (evenement) => {
+      evenement.preventDefault();
+      const donnees = lire();
+      if (!verifier(donnees)) return;
+      if (boutonEnvoi) boutonEnvoi.disabled = true;
+      dire("Envoi en cours…");
+      let messageServeur = "";
+      try {
+        const reponse = await fetch(api + "/message.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(donnees),
+        });
+        const resultat = await reponse.json().catch(() => ({}));
+        if (!reponse.ok || resultat.ok !== true) {
+          messageServeur = typeof resultat.erreur === "string" ? resultat.erreur : "";
+          throw new Error("envoi refuse");
+        }
+        contactForm.reset();
+        majDepart();
+        dire(resultat.message || "Message envoyé. Je vous réponds sous 48 heures.", "aide-ok");
+      } catch (erreur) {
+        window.console.warn("Formulaire de contact : envoi impossible.", erreur);
+        dire(messageServeur ||
+          "L’envoi n’a pas abouti. Réessayez dans un instant, écrivez à " + adresse +
+          ", ou utilisez « Copier le message ».", "aide-souci");
+      } finally {
+        if (boutonEnvoi) boutonEnvoi.disabled = false;
+      }
+    });
+
+    if (boutonCopie) {
+      boutonCopie.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(texteMessage(lire()));
+          boutonCopie.textContent = "Message copié !";
+          dire("Collez-le dans un email adressé à " + adresse + ".");
+          window.setTimeout(() => {
+            boutonCopie.textContent = "Copier le message";
+          }, 2500);
+        } catch (erreur) {
+          boutonCopie.textContent = "Copie impossible";
+        }
+      });
+    }
+  }
+
 })();

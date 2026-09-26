@@ -71,8 +71,7 @@
           <div>
             <h1>📬 Contact</h1>
             <p class="lede">
-              Le plus simple : un message avec votre contexte, le format souhaité (atelier, conférence, projet) et vos
-              contraintes de calendrier.
+              Décrivez votre contexte en quelques lignes : je vous réponds sous 48 heures, par email.
             </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#formulaire">Écrire un message</a>
@@ -96,48 +95,56 @@
         </section>
 
         <section class="section" id="formulaire" aria-label="Formulaire de contact">
-          <h2>Formulaire</h2>
+          <h2>Écrire un message</h2>
           <p class="lede">
-            Ce formulaire ouvre votre logiciel de messagerie (aucune donnée n’est stockée sur le site).
-            Si rien ne s’ouvre, utilisez « Copier le message » puis collez-le dans votre messagerie.
+            Trois champs suffisent. Votre message arrive directement dans ma boîte et vous recevez aussitôt un accusé
+            de réception : vous n’avez rien à ouvrir ni à recopier.
           </p>
 
-          <form class="form" id="contactForm">
+          <form class="form" id="contactForm" data-api="https://api.arthurdelassus.com" novalidate>
             <div>
               <label for="name">Nom</label>
-              <input id="name" name="name" autocomplete="name" required />
+              <input id="name" name="nom" autocomplete="name" required />
             </div>
             <div>
               <label for="email">Email</label>
               <input id="email" name="email" type="email" autocomplete="email" required />
             </div>
             <div>
-              <label for="requestType">Type de demande</label>
-              <select id="requestType" name="requestType">
-                <option>Atelier de sensibilisation</option>
-                <option>Conférence</option>
-                <option>Cours / formation</option>
-                <option>Note ou rapport</option>
-                <option>Visite de la ferme</option>
-                <option>Séminaire au vert / visite apprenante</option>
-                <option>Autre demande</option>
+              <label for="type">Type de demande</label>
+              <select id="type" name="type">
+                <option value="atelier">Atelier de sensibilisation</option>
+                <option value="conference">Conférence</option>
+                <option value="cours">Cours / formation</option>
+                <option value="note">Note ou rapport</option>
+                <option value="visite">Visite de la ferme</option>
+                <option value="seminaire">Séminaire au vert / visite apprenante</option>
+                <option value="autre">Autre demande</option>
               </select>
-            </div>
-            <div>
-              <label for="subject">Sujet</label>
-              <input id="subject" name="subject" required />
             </div>
             <div>
               <label for="message">Message</label>
               <textarea id="message" name="message" required></textarea>
               <p class="help">Indiquez le format, le public, la date souhaitée, et toute contrainte utile.</p>
             </div>
+
+            <!-- Champ piege : invisible pour un humain, rempli par les robots. -->
+            <div class="form-piege" aria-hidden="true">
+              <label for="site_web">Site web</label>
+              <input id="site_web" name="site_web" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="depart" id="depart" value="" />
+
             <div class="hero-actions">
-              <button class="btn btn-primary" type="submit">Envoyer l’email</button>
+              <button class="btn btn-primary" type="submit">Envoyer le message</button>
               <button class="btn btn-ghost" type="button" id="copyMessage">Copier le message</button>
-              <a class="btn btn-ghost" href="ressources.html#posts-linkedin">Lire mes posts LinkedIn</a>
             </div>
             <p class="help" id="formStatus" role="status" aria-live="polite"></p>
+            <p class="help">
+              L’envoi ne fonctionne pas ? Écrivez à
+              <a href="mailto:arthur@arthurdelassus.com">arthur@arthurdelassus.com</a> : les messages arrivent au même
+              endroit.
+            </p>
           </form>
         </section>
       </div>
@@ -152,53 +159,8 @@
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
 
-      const form = document.getElementById("contactForm");
-      const requestType = document.getElementById("requestType");
-      const subjectField = document.getElementById("subject");
-      const status = document.getElementById("formStatus");
-      const MAIL = "arthur@arthurdelassus.com";
-
-      if (requestType && subjectField) {
-        requestType.addEventListener("change", () => {
-          if (!subjectField.value.trim()) subjectField.value = requestType.value;
-        });
-      }
-
-      const buildBody = (data) =>
-        `Nom : ${data.get("name") || ""}\n` +
-        `Email : ${data.get("email") || ""}\n` +
-        `Type de demande : ${data.get("requestType") || ""}\n\n` +
-        (data.get("message") || "") +
-        `\n\nEnvoyé depuis arthurdelassus.com`;
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const data = new FormData(form);
-        const subject = String(data.get("subject") || "Demande depuis le site");
-        const href = `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildBody(data))}`;
-        window.location.href = href;
-        if (status) {
-          status.textContent =
-            "Votre logiciel de messagerie va s’ouvrir. S’il ne s’ouvre pas, utilisez « Copier le message » puis collez-le dans votre messagerie.";
-        }
-      });
-
-      const copyBtn = document.getElementById("copyMessage");
-      if (copyBtn) {
-        copyBtn.addEventListener("click", async () => {
-          const data = new FormData(form);
-          const subject = String(data.get("subject") || "Demande depuis le site");
-          const text = `À : ${MAIL}\nObjet : ${subject}\n\n${buildBody(data)}`;
-          try {
-            await navigator.clipboard.writeText(text);
-            copyBtn.textContent = "Message copié !";
-            if (status) status.textContent = `Collez-le dans un email adressé à ${MAIL}.`;
-            window.setTimeout(() => (copyBtn.textContent = "Copier le message"), 2500);
-          } catch {
-            copyBtn.textContent = "Copie impossible";
-          }
-        });
-      }
+      // L’envoi du formulaire de contact est traite dans assets/js/main.js :
+      // envoi direct a l’API, sans ouvrir de logiciel de messagerie.
     </script>
   </body>
 </html>
