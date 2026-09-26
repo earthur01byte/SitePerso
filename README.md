@@ -1,4 +1,4 @@
-# arthurdelassus.fr (site statique)
+# arthurdelassus.com (site statique)
 
 Site simple en **7 pages** :
 
@@ -175,3 +175,65 @@ remplacé par un deux-points, une virgule ou des parenthèses ; les titres de pa
 utilisent la barre verticale (« Arthur de Lassus | Services »).
 `nettoyer_tirets.py` applique et contrôle cette convention, `verif_lot25.py` la
 vérifie page par page.
+
+## Domaine, compteur d'années et ménage (26/09/2026, LOT 30)
+
+- **Le domaine du site est `arthurdelassus.com`**, le `.fr` n'existe pas. Les 54
+  occurrences de `.fr` ont été basculées (canonical, `og:url`, `og:image`,
+  `twitter:image` et identifiants JSON-LD des 8 pages, les 7 adresses de
+  `sitemap.xml`, la ligne `Sitemap:` de `robots.txt`, le titre du README, un
+  commentaire de `styles.css`). Conséquence concrète corrigée : les aperçus de
+  partage sur LinkedIn, X ou WhatsApp pointaient vers un domaine inexistant et
+  s'affichaient **sans image** ; Google était invité à indexer une adresse
+  morte, en contradiction avec le `CNAME` du dépôt.
+- **Adresse de contact publique : `arthur@arthurdelassus.com`** (11 occurrences
+  de l'adresse Gmail remplacées : JSON-LD de `index.html` et `services.html`,
+  liens `mailto:` de `ressources.html` et `contact.html`).
+- **Compteur d'années d'expérience** : `index.html` remplace la statistique
+  « 2020 début du maraîchage bio sur sol vivant » par « 7 années d'expérience
+  agricole » (`id="annees-agri"`), et `agriculture.html` ajoute une entrée dans
+  la liste de repères du héros (`.ferme-hero-facts`, `id="annees-maraichage"`,
+  « 7 années de maraîchage »). La valeur se calcule en JavaScript avec
+  `année courante - 2019` : 7 en 2026, 8 en 2027, 9 en 2028, sans intervention.
+  Le nombre écrit dans le HTML n'est qu'un repli sans JavaScript et la valeur
+  lue par les moteurs de recherche ; `verif_lot30.py` alerte quand il devient
+  périmé. Les repères factuels « depuis 2020 » d'`agriculture.html` sont
+  conservés (badge du héros, liste de repères, bande de chiffres), et la bande
+  « La ferme en chiffres » reste à 8 cartes, donc équilibrée en 4x2.
+- **Manifeste** : « Des canicules en série et **une** sécheresse inédite par son
+  intensité et sa durée **ont** mis à genou le secteur agricole. »
+- **Ménage** : les quatre sources lourdes non suivies par git
+  (`Atelier_HD.jpg`, `HD_participants.png`, `Arthur_FdFP.png`,
+  `Arthur_conférence.png`, 5,9 Mo au total) sont sorties du site et vivent
+  désormais dans `C:\Users\earth\Desktop\Cursor_Cline\Sources_siteperso`, hors
+  du dossier publié. Les trois restes de
+  tests `_tmp_*.html` sont supprimés, et `Todo/` (deux captures d'écran) a été
+  recopié dans `Sources_siteperso\_archive_Todo` puis supprimé du site. Le
+  dépôt ne contient plus aucun fichier non suivi par git.
+
+### Pièges consignés au LOT 30
+
+1. **Fins de ligne** : un fichier lu en mode texte puis réécrit avec
+   `newline="\n"` perd un octet par ligne s'il était en CRLF (`styles.css` a
+   ainsi « maigri » de 3 183 octets sans que git ne voie rien, la normalisation
+   automatique masquant le changement). Les remplacements de texte utilisent
+   donc `newline=""` en lecture comme en écriture, et
+   `restaurer_fins_de_ligne.py` remet les fichiers concernés en CRLF.
+2. **Défilement et captures** : le site est en `scroll-behavior: smooth`, et en
+   Chrome headless un défilement animé ne progresse pas dans le temps virtuel ;
+   de plus `--screenshot` capture toujours le haut de la page. Les pages
+   contenant des sections en `100vh`, une fenêtre très haute déforme tout.
+   `shot_lot30.py` amène donc le bloc visé en haut par une transformation CSS
+   (aucun reflow, le rendu reste celui d'une fenêtre réelle).
+3. **Fenêtre minimale de Chrome** : la largeur ne descend pas sous 500 px, le
+   rendu à 390 px passe par un cadre `iframe` de 390 px (même méthode qu'au
+   LOT 28), avec un relevé du débordement horizontal dans le document interne.
+
+Contrôles du lot : `verif_lot30.py` (résidus de domaine et d'adresse, cohérence
+canonical/og/CNAME, phrase du manifeste, présence et valeur des deux compteurs,
+ménage, liens d'images, tirets), `basculer_domaine.py` (bascule et contrôle des
+adresses déclarées), `menage_lot30.py`, `diag_largeur_agriculture30.py`
+(débordement de 1440 à 360 px), `shot_lot30.py` (captures du bandeau de
+l'accueil et des repères du héros, zoom 2x, écran 390 px, et contrôle
+fonctionnel du compteur lu dans le navigateur).
+

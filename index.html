@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Arthur de Lassus, expert énergie-climat et maraîcher bio : ateliers Horizons Décarbonés et Fresque des frontières planétaires, conférences, cours et rapports." />
-    <link rel="canonical" href="https://arthurdelassus.fr/" />
+    <link rel="canonical" href="https://arthurdelassus.com/" />
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -13,10 +13,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Arthur de Lassus" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:url" content="https://arthurdelassus.fr/" />
+    <meta property="og:url" content="https://arthurdelassus.com/" />
     <meta property="og:title" content="Arthur de Lassus | Accueil" />
     <meta property="og:description" content="Arthur de Lassus, expert énergie-climat et maraîcher bio : ateliers Horizons Décarbonés et Fresque des frontières planétaires, conférences, cours et rapports." />
-    <meta property="og:image" content="https://arthurdelassus.fr/Images/og-image.jpg" />
+    <meta property="og:image" content="https://arthurdelassus.com/Images/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Arthur de Lassus, expert énergie-climat et maraîcher bio" />
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Arthur de Lassus | Accueil" />
     <meta name="twitter:description" content="Arthur de Lassus, expert énergie-climat et maraîcher bio : ateliers Horizons Décarbonés et Fresque des frontières planétaires, conférences, cours et rapports." />
-    <meta name="twitter:image" content="https://arthurdelassus.fr/Images/og-image.jpg" />
+    <meta name="twitter:image" content="https://arthurdelassus.com/Images/og-image.jpg" />
     <title>Arthur de Lassus | Accueil</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,11 +39,11 @@
       "@graph": [
         {
           "@type": "Person",
-          "@id": "https://arthurdelassus.fr/#arthur",
+          "@id": "https://arthurdelassus.com/#arthur",
           "name": "Arthur de Lassus",
-          "url": "https://arthurdelassus.fr/",
+          "url": "https://arthurdelassus.com/",
           "jobTitle": "Expert énergie-climat et maraîcher bio",
-          "email": "mailto:e.arthur01@gmail.com",
+          "email": "mailto:arthur@arthurdelassus.com",
           "sameAs": [
             "https://www.linkedin.com/in/arthur-de-lassus/"
           ],
@@ -62,12 +62,12 @@
         },
         {
           "@type": "WebSite",
-          "@id": "https://arthurdelassus.fr/#site",
-          "url": "https://arthurdelassus.fr/",
+          "@id": "https://arthurdelassus.com/#site",
+          "url": "https://arthurdelassus.com/",
           "name": "Arthur de Lassus",
           "inLanguage": "fr-FR",
           "publisher": {
-            "@id": "https://arthurdelassus.fr/#arthur"
+            "@id": "https://arthurdelassus.com/#arthur"
           }
         }
       ]
@@ -170,7 +170,7 @@
                 <img src="Images/Logo_FdFP.png" alt="Fresque des frontières planétaires" loading="lazy" />
               </div>
             </div>
-            <div class="home-stat"><strong>2020</strong><span>début du maraîchage bio sur sol vivant</span></div>
+            <div class="home-stat"><strong id="annees-agri">7</strong><span>années d'expérience agricole</span></div>
           </div>
         </div>
       </section>
@@ -225,7 +225,7 @@
                 chiffres en main, aux idées fausses qui encombrent le débat écologique.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-ochre" href="mailto:e.arthur01@gmail.com?subject=Me%20pr%C3%A9venir%20%C3%A0%20la%20sortie%20du%20livre%20L%27%C3%A9cologie%20sans%20les%20mythes">Me prévenir à la sortie</a>
+                <a class="btn btn-ochre" href="mailto:arthur@arthurdelassus.com?subject=Me%20pr%C3%A9venir%20%C3%A0%20la%20sortie%20du%20livre%20L%27%C3%A9cologie%20sans%20les%20mythes">Me prévenir à la sortie</a>
                 <a class="btn btn-outline" href="ressources.html#livres">Voir tous mes livres</a>
               </div>
             </div>
@@ -336,6 +336,12 @@
 
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
+
+      // Annees d'experience agricole : maraichage bio depuis 2020, la premiere
+      // annee compte, d'ou le 2019. Le 7 ecrit dans la page sert de repli sans
+      // JavaScript et de valeur lue par les moteurs de recherche.
+      const anneesAgri = document.getElementById("annees-agri");
+      if (anneesAgri) anneesAgri.textContent = String(new Date().getFullYear() - 2019);
     </script>
   </body>
 </html>

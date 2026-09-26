@@ -5,4 +5,4 @@ Allow: /
 # Les sauvegardes et outils de travail sont hors du site (dossier parent), donc
 # inaccessibles depuis le web.
 
-Sitemap: https://arthurdelassus.fr/sitemap.xml
+Sitemap: https://arthurdelassus.com/sitemap.xml

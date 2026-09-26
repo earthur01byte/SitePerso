@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="La Ferme du Bout des Bois : maraîchage biologique sur sol vivant, poules pondeuses, énergie solaire et maison en paille. Visites et ateliers à la ferme." />
-    <link rel="canonical" href="https://arthurdelassus.fr/agriculture.html" />
+    <link rel="canonical" href="https://arthurdelassus.com/agriculture.html" />
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -13,10 +13,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Arthur de Lassus" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:url" content="https://arthurdelassus.fr/agriculture.html" />
+    <meta property="og:url" content="https://arthurdelassus.com/agriculture.html" />
     <meta property="og:title" content="Arthur de Lassus | Agriculture" />
     <meta property="og:description" content="La Ferme du Bout des Bois : maraîchage biologique sur sol vivant, poules pondeuses, énergie solaire et maison en paille. Visites et ateliers à la ferme." />
-    <meta property="og:image" content="https://arthurdelassus.fr/Images/og-image.jpg" />
+    <meta property="og:image" content="https://arthurdelassus.com/Images/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Arthur de Lassus, expert énergie-climat et maraîcher bio" />
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Arthur de Lassus | Agriculture" />
     <meta name="twitter:description" content="La Ferme du Bout des Bois : maraîchage biologique sur sol vivant, poules pondeuses, énergie solaire et maison en paille. Visites et ateliers à la ferme." />
-    <meta name="twitter:image" content="https://arthurdelassus.fr/Images/og-image.jpg" />
+    <meta name="twitter:image" content="https://arthurdelassus.com/Images/og-image.jpg" />
     <title>Arthur de Lassus | Agriculture</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -77,6 +77,7 @@
               Maraîchage bio diversifié &amp; poules pondeuses, sur sol vivant, sans une goutte d’énergie fossile.
             </p>
             <ul class="ferme-hero-facts">
+              <li><strong id="annees-maraichage">7</strong><span>années de maraîchage</span></li>
               <li><strong>3 250 m²</strong><span>cultivés</span></li>
               <li><strong>130</strong><span>poules pondeuses</span></li>
               <li><strong>0 labour</strong><span>depuis 2020</span></li>
@@ -596,6 +597,11 @@
 
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
+
+      // Meme compteur que l'accueil : maraichage bio depuis 2020, premiere
+      // annee comptee, donc 2026 donne 7 et 2027 donnera 8.
+      const anneesMaraichage = document.getElementById("annees-maraichage");
+      if (anneesMaraichage) anneesMaraichage.textContent = String(new Date().getFullYear() - 2019);
     </script>
   </body>
 </html>

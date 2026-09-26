@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Contacter Arthur de Lassus : ateliers, conférences, cours, notes d'expertise ou visites de la ferme. Réponse par email ou sur LinkedIn." />
-    <link rel="canonical" href="https://arthurdelassus.fr/contact.html" />
+    <link rel="canonical" href="https://arthurdelassus.com/contact.html" />
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -13,10 +13,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Arthur de Lassus" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:url" content="https://arthurdelassus.fr/contact.html" />
+    <meta property="og:url" content="https://arthurdelassus.com/contact.html" />
     <meta property="og:title" content="Arthur de Lassus | Contact" />
     <meta property="og:description" content="Contacter Arthur de Lassus : ateliers, conférences, cours, notes d&#x27;expertise ou visites de la ferme. Réponse par email ou sur LinkedIn." />
-    <meta property="og:image" content="https://arthurdelassus.fr/Images/og-image.jpg" />
+    <meta property="og:image" content="https://arthurdelassus.com/Images/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Arthur de Lassus, expert énergie-climat et maraîcher bio" />
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Arthur de Lassus | Contact" />
     <meta name="twitter:description" content="Contacter Arthur de Lassus : ateliers, conférences, cours, notes d&#x27;expertise ou visites de la ferme. Réponse par email ou sur LinkedIn." />
-    <meta name="twitter:image" content="https://arthurdelassus.fr/Images/og-image.jpg" />
+    <meta name="twitter:image" content="https://arthurdelassus.com/Images/og-image.jpg" />
     <title>Arthur de Lassus | Contact</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -83,10 +83,10 @@
             <h3 class="card-title">Coordonnées</h3>
             <p style="margin:0; color: var(--muted);">
               Email :
-              <a href="mailto:e.arthur01@gmail.com" data-email-text>e.arthur01@gmail.com</a>
+              <a href="mailto:arthur@arthurdelassus.com" data-email-text>arthur@arthurdelassus.com</a>
             </p>
             <div class="hero-actions" style="margin-top:12px;">
-              <button class="btn btn-ghost" type="button" data-copy-email data-email="e.arthur01@gmail.com">
+              <button class="btn btn-ghost" type="button" data-copy-email data-email="arthur@arthurdelassus.com">
                 Copier l’email
               </button>
               <a class="btn btn-ghost" href="https://www.linkedin.com/in/arthur-de-lassus/" rel="noopener">LinkedIn</a>
@@ -156,7 +156,7 @@
       const requestType = document.getElementById("requestType");
       const subjectField = document.getElementById("subject");
       const status = document.getElementById("formStatus");
-      const MAIL = "e.arthur01@gmail.com";
+      const MAIL = "arthur@arthurdelassus.com";
 
       if (requestType && subjectField) {
         requestType.addEventListener("change", () => {
@@ -169,7 +169,7 @@
         `Email : ${data.get("email") || ""}\n` +
         `Type de demande : ${data.get("requestType") || ""}\n\n` +
         (data.get("message") || "") +
-        `\n\nEnvoyé depuis arthurdelassus.fr`;
+        `\n\nEnvoyé depuis arthurdelassus.com`;
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
