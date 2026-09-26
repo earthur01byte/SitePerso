@@ -261,21 +261,29 @@
     };
     majDepart();
 
+    // Sortie de secours : ouvre le logiciel de messagerie du visiteur avec le
+    // message deja rempli. Elle n'apparait que si l'envoi automatique echoue
+    // (service indisponible, pas de reponse du serveur).
+    const boutonMail = document.getElementById("openMail");
+    const montrerSecours = () => {
+      if (boutonMail) boutonMail.hidden = false;
+    };
+    if (!api) montrerSecours();
+
     // contact.html?type=conference : le type vient du bouton clique ailleurs.
     const demande = new URLSearchParams(window.location.search).get("type");
     if (champType && demande && libelles[demande]) champType.value = demande;
 
     const lire = () => Object.fromEntries(new FormData(contactForm).entries());
     const libelle = (valeur) => libelles[valeur] || "Demande";
-    const texteMessage = (d) => [
-      "À : " + adresse,
-      "",
+    const corpsMessage = (d) => [
       "Nom : " + (d.nom || ""),
       "Email : " + (d.email || ""),
       "Demande : " + libelle(d.type),
       "",
       d.message || "",
     ].join("\n");
+    const texteMessage = (d) => "À : " + adresse + "\n\n" + corpsMessage(d);
 
     const dire = (message, genre) => {
       if (!statut) return;
@@ -332,13 +340,25 @@
         dire(resultat.message || "Message envoyé. Je vous réponds sous 48 heures.", "aide-ok");
       } catch (erreur) {
         window.console.warn("Formulaire de contact : envoi impossible.", erreur);
+        montrerSecours();
         dire(messageServeur ||
-          "L’envoi n’a pas abouti. Réessayez dans un instant, écrivez à " + adresse +
-          ", ou utilisez « Copier le message ».", "aide-souci");
+          "L’envoi automatique n’a pas abouti. Utilisez « Ouvrir mon logiciel de messagerie » " +
+          "ou « Copier le message », ou écrivez à " + adresse + ".", "aide-souci");
       } finally {
         if (boutonEnvoi) boutonEnvoi.disabled = false;
       }
     });
+
+    // Bouton de secours : son lien mailto est construit au moment du clic, avec
+    // le contenu saisi, pour que le visiteur retrouve son message deja ecrit.
+    if (boutonMail) {
+      boutonMail.addEventListener("click", () => {
+        const donnees = lire();
+        boutonMail.href = "mailto:" + adresse
+          + "?subject=" + encodeURIComponent(libelle(donnees.type))
+          + "&body=" + encodeURIComponent(corpsMessage(donnees));
+      });
+    }
 
     if (boutonCopie) {
       boutonCopie.addEventListener("click", async () => {

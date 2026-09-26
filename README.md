@@ -290,6 +290,19 @@ journal/   journaux et brouillons du mode test + .htaccess
 - Le mode d'emploi détaillé (sous-domaine, mot de passe d'application, dépôt
   FTP, dépannage) est dans `Backend_siteperso/README.md`.
 
+### Filet de sécurité tant que l'API n'est pas en place
+
+Le site est publié par GitHub Pages, qui n'exécute aucun code : le backend vit
+forcément ailleurs (voir `Backend_siteperso\CHOIX_HEBERGEMENT.md` pour les
+chemins possibles et `INSTALLATION.md` pour la procédure). Tant qu'il n'existe
+pas, l'envoi automatique échoue ; plutôt que de laisser le visiteur dans une
+impasse, le formulaire révèle alors un troisième bouton, « Ouvrir mon logiciel de
+messagerie », dont le lien `mailto:` est construit au moment du clic avec le
+contenu déjà saisi (nom, email, type, message). Le message peut donc toujours
+partir : par l'API, par le logiciel de messagerie du visiteur, ou par
+copier-coller. Le bouton reste masqué dans tous les autres cas (scénarios 3 et 5
+de `test_contact31.py`, et capture `formulaire-secours.png`).
+
 ### Pièges consignés au LOT 31
 
 1. **PHP n'est pas installé sur la machine** : impossible de lancer le moindre

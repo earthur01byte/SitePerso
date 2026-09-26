@@ -3201,4 +3201,8 @@ body.page-climatisation .fr-hero .container-narrow{
 .help.aide-ok{ color: #1C7C4A; font-weight: 600; }
 .help.aide-souci{ color: #B3261E; font-weight: 600; }
 .form button[type="submit"][disabled]{ opacity: .6; cursor: progress; }
+/* Le bouton de secours (ouvrir le logiciel de messagerie) reste cache tant que
+   l'envoi automatique fonctionne ; .btn impose son propre display, d'ou la
+   regle explicite, comme pour les autres boutons masques du site. */
+.form .btn[hidden]{ display: none !important; }
 
