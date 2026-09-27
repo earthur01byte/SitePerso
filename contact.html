@@ -33,6 +33,7 @@
 
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
+    <script defer src="assets/js/contact.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -59,7 +60,6 @@
             <a href="ressources.html">Ressources <small>📚</small></a>
             <a href="services.html">Services <small>🎤</small></a>
             <a href="climatisation.html">Climatisation <small>❄️</small></a>
-            <a href="contact.html" aria-current="page">Contact</a>
           </div>
         </nav>
       </div>
@@ -137,10 +137,10 @@
 
             <div class="hero-actions">
               <button class="btn btn-primary" type="submit">Envoyer le message</button>
-              <button class="btn btn-ghost" type="button" id="copyMessage">Copier le message</button>
-              <a class="btn btn-ghost" id="openMail" href="mailto:arthur@arthurdelassus.com" hidden>Ouvrir mon logiciel de messagerie</a>
+              <button class="btn btn-ghost" type="button" data-copier-message>Copier le message</button>
+              <a class="btn btn-ghost" data-ouvrir-messagerie href="mailto:arthur@arthurdelassus.com" hidden>Ouvrir mon logiciel de messagerie</a>
             </div>
-            <p class="help" id="formStatus" role="status" aria-live="polite"></p>
+            <p class="help" data-statut role="status" aria-live="polite"></p>
             <p class="help">
               Le message part directement depuis la page. S’il ne part pas, le bouton « Ouvrir mon logiciel de
               messagerie » prend le relais avec le message déjà rempli, ou écrivez à
@@ -154,6 +154,7 @@
     <footer class="site-footer" aria-label="Pied de page">
       <div class="container footer-inner">
         <div>© <span id="year">2026</span> Arthur de Lassus</div>
+        <div class="footer-contact"><a href="contact.html" data-ouvrir-contact>Me contacter</a></div>
       </div>
     </footer>
 

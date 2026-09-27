@@ -364,3 +364,54 @@ scénarios joués dans Chrome), `controle_couleurs31.py`, `shot_lot31.py`
 en 390 px). Résultats : `TOUT EST OK` pour les trois vérifications de la série
 (`verif_lot31.py`, `check_html.py`, `check_site.py`).
 
+
+## Contact dans le pied de page et en fenêtre (LOT 33, 27/09/2026)
+
+Le lien « Contact » a quitté le menu du haut : il figure maintenant **à droite du
+pied de page de chaque page**, et les boutons du site (`Organiser un atelier`,
+`Réserver une conférence`, `Demander une note`, `Me contacter`…) ouvrent une
+**fenêtre** par-dessus la page en cours, sans changer d'adresse.
+
+| Élément | Où | Rôle |
+| --- | --- | --- |
+| `assets/js/contact.js` | les 7 pages | formulaire partagé et fenêtre |
+| `#modaleContact` | 6 pages (hors `contact.html`) | la fenêtre et son formulaire |
+| `.footer-contact` | les 7 pages | le lien, à droite du pied de page |
+
+Points de conception :
+
+- **Un seul code pour les deux emplacements** : `contact.js` branche tout
+  formulaire portant `data-api` — celui de `contact.html` comme celui de la
+  fenêtre. L'ancien bloc a été retiré de `main.js`.
+- **Le type de demande suit le bouton** : `data-ouvrir-contact="note"` règle le
+  menu déroulant à l'ouverture. Le `href` vers `contact.html?type=...` est
+  conservé : sans JavaScript, le visiteur arrive sur la page de contact.
+- **Le lien du pied de page** ouvre la fenêtre ; sur `contact.html`, qui n'en a
+  pas, il conduit le curseur au formulaire de la page.
+- **Le message de succès annonce l'accusé de réception** — « Un accusé de
+  réception vient d'être envoyé à … ». Cet accusé existe déjà côté backend
+  (`lib/emails.js`, fonction `emailAccuse`) ; il est désormais visible pour le
+  visiteur.
+- **Accessibilité** : `role="dialog"`, `aria-modal`, fermeture par Échap, par la
+  croix ou par le fond assombri, focus placé dans la fenêtre puis rendu au
+  bouton d'origine, défilement de la page bloqué pendant l'ouverture.
+- Sur téléphone (≤ 640 px), la fenêtre occupe tout l'écran et les boutons
+  s'empilent.
+
+Contrôles du lot : `_lot33_modale.py` (transformations, idempotentes),
+`test_contact33.py` (Chrome : deux pages, ouverture, type pré-rempli, envoi,
+message affiché, fermeture, captures dont le pied de page), `test_contact31.py`
+(non-régression du formulaire en page), `check_html.py`, `check_site.py`.
+
+Pièges consignés :
+
+1. Assembler un fichier JavaScript par morceaux a consommé la fermeture de
+   l'IIFE dans `contact.js` : `node --check` l'a signalé tout de suite —
+   contrôler la syntaxe après tout assemblage.
+2. L'ordre des attributs des boutons varie d'une page à l'autre (`class` avant ou
+   après `href`) : la détection porte donc sur la balise entière, jamais sur une
+   suite d'attributs.
+3. Le type pré-rempli par l'adresse (`contact.html?type=conference`) était porté
+   par l'ancien bloc de `main.js` : sa suppression l'a fait disparaître, et
+   `test_contact31.py` l'a vu aussitôt. Comportement rétabli dans `contact.js`.
+

@@ -33,6 +33,7 @@
 
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
+    <script defer src="assets/js/contact.js"></script>
     <script defer src="assets/js/climatisation.js"></script>
     <script type="application/ld+json">
     {
@@ -80,7 +81,6 @@
             <a href="ressources.html">Ressources <small>📚</small></a>
             <a href="services.html">Services <small>🎤</small></a>
             <a href="climatisation.html" aria-current="page">Climatisation <small>❄️</small></a>
-            <a href="contact.html">Contact</a>
           </div>
         </nav>
       </div>
@@ -770,7 +770,7 @@
             de grandeur de la transition.
           </p>
           <div class="ferme-transition-links">
-            <a class="btn btn-anthracite" href="contact.html">Me contacter</a>
+            <a class="btn btn-anthracite" href="contact.html" data-ouvrir-contact="">Me contacter</a>
           </div>
         </div>
       </section>
@@ -839,11 +839,78 @@
     <footer class="site-footer" aria-label="Pied de page">
       <div class="container footer-inner">
         <div>© <span id="year">2026</span> Arthur de Lassus</div>
+        <div class="footer-contact"><a href="contact.html" data-ouvrir-contact>Me contacter</a></div>
       </div>
     </footer>
 
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
     </script>
+    <!-- Fenetre de contact (LOT 33). Elle est ouverte par les boutons du site
+         (« Me contacter », « Demander une note », ...) et par le lien du pied de
+         page : le visiteur ne quitte pas la page qu'il lisait. Le formulaire
+         poste vers la meme API que contact.html, et le visiteur recoit un accuse
+         de reception par email. Les identifiants sont suffixes « Modale » pour ne
+         jamais entrer en conflit avec ceux de la page. -->
+    <div class="modale" id="modaleContact" hidden>
+      <div class="modale-fond" data-modale-fermer></div>
+      <div class="modale-boite" role="dialog" aria-modal="true" aria-labelledby="modaleTitre" aria-describedby="modaleIntro">
+        <button class="modale-fermer" type="button" data-modale-fermer aria-label="Fermer la fenêtre">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z" /></svg>
+        </button>
+        <h2 id="modaleTitre">Me contacter</h2>
+        <p class="lede" id="modaleIntro">
+          Trois champs suffisent. Votre message arrive directement dans ma boîte et vous recevez aussitôt un
+          accusé de réception par email : vous n’avez rien à ouvrir ni à recopier.
+        </p>
+
+        <form class="form" id="contactFormModale" data-api="https://api.arthurdelassus.com" novalidate>
+          <div>
+            <label for="nomModale">Nom</label>
+            <input id="nomModale" name="nom" autocomplete="name" required />
+          </div>
+          <div>
+            <label for="emailModale">Email</label>
+            <input id="emailModale" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div>
+            <label for="typeModale">Type de demande</label>
+            <select id="typeModale" name="type">
+              <option value="atelier">Atelier de sensibilisation</option>
+              <option value="conference">Conférence</option>
+              <option value="cours">Cours / formation</option>
+              <option value="note">Note ou rapport</option>
+              <option value="visite">Visite de la ferme</option>
+              <option value="seminaire">Séminaire au vert / visite apprenante</option>
+              <option value="autre">Autre demande</option>
+            </select>
+          </div>
+          <div>
+            <label for="messageModale">Message</label>
+            <textarea id="messageModale" name="message" required></textarea>
+            <p class="help">Indiquez le format, le public, la date souhaitée, et toute contrainte utile.</p>
+          </div>
+
+          <!-- Champ piege : invisible pour un humain, rempli par les robots. -->
+          <div class="form-piege" aria-hidden="true">
+            <label for="site_webModale">Site web</label>
+            <input id="site_webModale" name="site_web" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="depart" value="" />
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="submit">Envoyer le message</button>
+            <button class="btn btn-ghost" type="button" data-copier-message>Copier le message</button>
+            <a class="btn btn-ghost" data-ouvrir-messagerie href="mailto:arthur@arthurdelassus.com" hidden>Ouvrir mon logiciel de messagerie</a>
+          </div>
+          <p class="help" data-statut role="status" aria-live="polite"></p>
+          <p class="help">
+            Le message part directement depuis cette page. S’il ne part pas, le bouton « Ouvrir mon logiciel de
+            messagerie » prend le relais avec le message déjà rempli, ou écrivez à
+            <a href="mailto:arthur@arthurdelassus.com">arthur@arthurdelassus.com</a>.
+          </p>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
