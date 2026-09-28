@@ -436,6 +436,9 @@ a refusé (« ne contient pas suffisamment de contenu »).
   de `check_html.py` et `check_site.py` : elle est contrôlée comme les autres.
 - Elle porte la **fenêtre de contact** et charge `contact.js`, comme les autres
   pages.
+- Elle est liée **deux fois depuis l'accueil** : dans le pied de page, et dans la
+  section « Prendre rendez-vous en ligne » ajoutée après le second refus de
+  validation Google (voir plus bas).
 
 Ce qu'elle déclare, pour mémoire : responsable de traitement ; données collectées
 (contact, rendez-vous, journaux techniques) ; finalités et bases légales ; durées
@@ -457,5 +460,40 @@ page isolé en 1280 px et sur 390 px), `_diag_entete32.py` (comparaison de l'en-
 avec celui de `index.html`), `check_html.py`, `check_site.py`, `test_contact33.py`.
 Résultats : `TOUT EST OK` partout ; page mesurée à 1424 px de large pour une fenêtre
 de 1440, donc aucun débordement horizontal.
+
+### Section « Prendre rendez-vous en ligne » de l'accueil (LOT 32, suite)
+
+La validation du branding a d'abord été refusée pour deux motifs nouveaux, sans
+rapport avec la page de confidentialité : « votre page d'accueil n'explique pas
+l'objectif de votre application » et « le nom d'application *Site
+arthurdelassus.com* ne correspond pas à celui qui figure sur votre page
+d'accueil ». Google demande en effet que la page d'accueil **identifie
+l'application ou la marque** et **décrive ce qu'elle fait** (elle ne peut pas
+être une simple page de connexion), et que le lien des règles de confidentialité
+y soit présent et identique à celui de l'écran de consentement.
+
+La page d'accueil porte donc une section « Prendre rendez-vous en ligne », placée
+juste avant le manifeste :
+
+- elle **nomme l'application** — `arthurdelassus.com`, dont le nom est « Arthur de
+  Lassus » — et **décrit son objet** : créneaux libres lus dans Google Agenda,
+  rendez-vous inscrit dans l'agenda, confirmation par email, aucun accès au
+  compte Google du visiteur ;
+- elle porte le **lien vers les règles de confidentialité**, deux fois (bouton et
+  phrase de clôture), en plus du lien du pied de page ;
+- elle réutilise le gabarit existant (`section`, `.container.container-narrow`,
+  `.section-title`, `.text-lead`, `.btn`) ; seule la règle `.hero-actions-centre`
+  est ajoutée, pour centrer les deux boutons sous le texte.
+
+Reste à faire dans la console Google : *Nom de l'application* = **Arthur de
+Lassus** (le libellé exact de l'accueil), *Page d'accueil* =
+`https://arthurdelassus.com/` — et non `/index.html` — puis resoumettre.
+
+Contrôles : `_lot32_branding_accueil.py` (idempotent : il pose la section et la
+règle CSS, puis vérifie les six exigences sur les fichiers écrits — 6/6 au
+vert), `shot_lot32_accueil.py` lancé par `lancer_shot.py` (section isolée en
+1440 px, sur 390 px, et dans la page réelle ; document mesuré à 1424 px pour une
+fenêtre de 1440), `check_html.py`, `check_classes.py` (index.html : 80 classes,
+toutes définies) et `check_site.py` (`TOUT EST OK`).
 
 
