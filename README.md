@@ -436,9 +436,8 @@ a refusé (« ne contient pas suffisamment de contenu »).
   de `check_html.py` et `check_site.py` : elle est contrôlée comme les autres.
 - Elle porte la **fenêtre de contact** et charge `contact.js`, comme les autres
   pages.
-- Elle est liée **deux fois depuis l'accueil** : dans le pied de page, et dans la
-  section « Prendre rendez-vous en ligne » ajoutée après le second refus de
-  validation Google (voir plus bas).
+- Elle est liée depuis le **pied de page de chaque page**, dont la nouvelle page
+  « Prendre rendez-vous » (voir plus bas).
 
 Ce qu'elle déclare, pour mémoire : responsable de traitement ; données collectées
 (contact, rendez-vous, journaux techniques) ; finalités et bases légales ; durées
@@ -461,39 +460,51 @@ avec celui de `index.html`), `check_html.py`, `check_site.py`, `test_contact33.p
 Résultats : `TOUT EST OK` partout ; page mesurée à 1424 px de large pour une fenêtre
 de 1440, donc aucun débordement horizontal.
 
-### Section « Prendre rendez-vous en ligne » de l'accueil (LOT 32, suite)
+### Page « Prendre rendez-vous » (LOT 32, suite)
 
-La validation du branding a d'abord été refusée pour deux motifs nouveaux, sans
-rapport avec la page de confidentialité : « votre page d'accueil n'explique pas
+La validation du branding a été refusée pour deux motifs nouveaux, sans rapport
+avec la page de confidentialité : « votre page d'accueil n'explique pas
 l'objectif de votre application » et « le nom d'application *Site
 arthurdelassus.com* ne correspond pas à celui qui figure sur votre page
-d'accueil ». Google demande en effet que la page d'accueil **identifie
-l'application ou la marque** et **décrive ce qu'elle fait** (elle ne peut pas
-être une simple page de connexion), et que le lien des règles de confidentialité
-y soit présent et identique à celui de l'écran de consentement.
+d'accueil ». Google demande que la page déclarée **identifie l'application ou la
+marque** et **décrive ce qu'elle fait** (elle ne peut pas être une simple page de
+connexion), et que le lien des règles de confidentialité y soit présent.
 
-La page d'accueil porte donc une section « Prendre rendez-vous en ligne », placée
-juste avant le manifeste :
+Une section avait d'abord été ajoutée à l'accueil pour y répondre. Arthur n'en a
+pas voulu sur sa page d'accueil : elle est devenue la page
+**`prendre-rendez-vous.html`**, qu'il déclarera dans la console Google comme page
+d'accueil de l'application (le champ pointait jusque-là sur `index.html`).
 
-- elle **nomme l'application** — `arthurdelassus.com`, dont le nom est « Arthur de
+- Elle reprend le gabarit des pages de contenu : `.container.container-narrow.article`,
+  titre `.section-title`, chapô `.article-meta`, listes `ol.clean`, `.article-foot`
+  pour les deux boutons. Aucune règle CSS nouvelle n'a été nécessaire : la classe
+  `.hero-actions-centre`, posée pour la section, est retirée avec elle.
+- Elle **nomme l'application** — `arthurdelassus.com`, dont le nom est « Arthur de
   Lassus » — et **décrit son objet** : créneaux libres lus dans Google Agenda,
-  rendez-vous inscrit dans l'agenda, confirmation par email, aucun accès au
-  compte Google du visiteur ;
-- elle porte le **lien vers les règles de confidentialité**, deux fois (bouton et
-  phrase de clôture), en plus du lien du pied de page ;
-- elle réutilise le gabarit existant (`section`, `.container.container-narrow`,
-  `.section-title`, `.text-lead`, `.btn`) ; seule la règle `.hero-actions-centre`
-  est ajoutée, pour centrer les deux boutons sous le texte.
+  rendez-vous inscrit dans l'agenda, confirmation par email, aucun accès au compte
+  Google du visiteur. Elle déroule la marche à suivre en quatre étapes et renvoie
+  aux règles de confidentialité.
+- Elle est liée depuis le **pied de page des huit autres pages**, avant « Me
+  contacter » (trois liens : Confidentialité, Prendre rendez-vous, Me contacter),
+  et déclarée dans `sitemap.xml` (priorité 0.6).
+- Elle porte la **fenêtre de contact**, comme les autres pages : « Demander un
+  rendez-vous » ouvre le formulaire sur place. Ce bouton basculera sur la fenêtre
+  de réservation quand `creneaux.php` et `reserver.php` seront livrés.
 
 Reste à faire dans la console Google : *Nom de l'application* = **Arthur de
-Lassus** (le libellé exact de l'accueil), *Page d'accueil* =
-`https://arthurdelassus.com/` — et non `/index.html` — puis resoumettre.
+Lassus** (le libellé écrit sur cette page, comme `arthurdelassus.com`) et
+*Page d'accueil de l'application* =
+`https://arthurdelassus.com/prendre-rendez-vous.html`, puis resoumettre.
 
-Contrôles : `_lot32_branding_accueil.py` (idempotent : il pose la section et la
-règle CSS, puis vérifie les six exigences sur les fichiers écrits — 6/6 au
-vert), `shot_lot32_accueil.py` lancé par `lancer_shot.py` (section isolée en
-1440 px, sur 390 px, et dans la page réelle ; document mesuré à 1424 px pour une
-fenêtre de 1440), `check_html.py`, `check_classes.py` (index.html : 80 classes,
-toutes définies) et `check_site.py` (`TOUT EST OK`).
+Contrôles : `_lot32_page_rdv.py` (idempotent : retrait de la section de l'accueil
+et de sa règle CSS — les deux fichiers sont alors comparés **octet à octet** aux
+sauvegardes prises avant, ce qui prouve que le retour en arrière est exact —,
+lien de pied de page sur huit pages, `sitemap.xml`, listes des vérificateurs, puis
+9 contrôles sur la page écrite : 9/9 au vert), `shot_lot32_rdv.py` lancé par
+`lancer_shot.py` (page en 1440 px et sur 390 px, pied de page à trois liens en
+1280 et 390 px ; document mesuré à 1424 px pour une fenêtre de 1440),
+`check_live_branding32.py` (contrôle du site publié), `check_html.py` (9 pages),
+`check_classes.py` (les deux nouvelles pages : 29 classes, toutes définies) et
+`check_site.py`.
 
 
