@@ -3219,6 +3219,15 @@ body.page-climatisation .fr-hero .container-narrow{
   padding-bottom: 1px;
 }
 .footer-contact a:hover{ border-bottom-color: var(--accent, #b5651d); }
+/* Deux liens cohabitent desormais dans le pied de page (« Confidentialité »
+   puis « Me contacter », LOT 32) : un peu d'air entre les deux, et un retour a
+   la ligne propre sur les ecrans etroits. */
+.footer-contact{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  justify-content: flex-end;
+}
 /* Sur telephone, la mention de copyright reste a gauche et le contact passe a
    droite ; a partir de 860 px, les deux se font face sur la meme ligne. */
 .footer-inner{ align-items: flex-start; }

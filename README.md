@@ -1,6 +1,6 @@
 # arthurdelassus.com (site statique)
 
-Site simple en **7 pages** :
+Site simple en **8 pages** :
 
 - Accueil (`index.html`)
 - Manifeste (`manifeste.html`)
@@ -9,6 +9,7 @@ Site simple en **7 pages** :
 - Ressources, billets masqués (`ressources.html`)
 - Climatisation (`climatisation.html`) : plaidoyer « Pour un droit à la fraîcheur »
 - Contact (`contact.html`)
+- Confidentialité (`confidentialite.html`)
 
 `fraicheur.html` est l'ancienne adresse du plaidoyer : la page redirige vers
 `climatisation.html`.
@@ -414,4 +415,47 @@ Pièges consignés :
 3. Le type pré-rempli par l'adresse (`contact.html?type=conference`) était porté
    par l'ancien bloc de `main.js` : sa suppression l'a fait disparaître, et
    `test_contact31.py` l'a vu aussitôt. Comportement rétabli dans `contact.js`.
+
+
+## Page « Confidentialité » (LOT 32, 28/09/2026)
+
+`confidentialite.html` a été créée pour **deux raisons** : le RGPD — le site
+collecte déjà des données, et les rendez-vous du LOT 32 en collecteront d'autres —
+et la **validation du branding Google**, qui exige une page de règles de
+confidentialité hébergée sur le domaine du site et liée depuis celui-ci. Le champ
+des règles de confidentialité pointait jusqu'ici vers `index.html`, ce que Google
+a refusé (« ne contient pas suffisamment de contenu »).
+
+- La page reprend le gabarit des pages de contenu :
+  `.container.container-narrow.article`, titre `.section-title`, listes `ul.clean`,
+  `.article-foot` en fin de page.
+- Elle est liée depuis le **pied de page des 7 autres pages**, avant
+  « Me contacter ». `.footer-contact` devient une ligne souple (`display:flex`,
+  `gap`) pour que les deux liens s'espacent et passent à la ligne sur téléphone.
+- Elle est déclarée dans `sitemap.xml` (priorité 0.3) et ajoutée aux listes `PAGES`
+  de `check_html.py` et `check_site.py` : elle est contrôlée comme les autres.
+- Elle porte la **fenêtre de contact** et charge `contact.js`, comme les autres
+  pages.
+
+Ce qu'elle déclare, pour mémoire : responsable de traitement ; données collectées
+(contact, rendez-vous, journaux techniques) ; finalités et bases légales ; durées
+de conservation ; sous-traitants (Netlify, Infomaniak, Google) et transferts hors
+Union européenne ; le point sur Google Agenda — **aucun compte Google demandé au
+visiteur**, accès limité à mon seul agenda, avec la clause *Limited Use* exigée par
+Google ; et l'absence totale de cookie, en signalant honnêtement que **Google Fonts**
+reçoit l'adresse IP du visiteur sur chaque page.
+
+> À vérifier de votre côté : les durées de conservation et la liste des
+> prestataires. Si elles ne correspondent pas à votre pratique, dites-le moi et je
+> corrige — c'est le seul endroit de la page où je ne peux pas trancher à votre
+> place.
+
+Contrôles du lot : `_lot32_confidentialite.py` (lien de pied de page sur les
+7 pages, `sitemap.xml`, listes des vérificateurs — idempotent), `shot_lot32.py`
+lancé par `lancer_shot.py` (mesure de la page, capture complète en 1440 px, pied de
+page isolé en 1280 px et sur 390 px), `_diag_entete32.py` (comparaison de l'en-tête
+avec celui de `index.html`), `check_html.py`, `check_site.py`, `test_contact33.py`.
+Résultats : `TOUT EST OK` partout ; page mesurée à 1424 px de large pour une fenêtre
+de 1440, donc aucun débordement horizontal.
+
 
