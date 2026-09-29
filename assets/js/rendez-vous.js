@@ -1,22 +1,87 @@
 /**
  * Fenetre de prise de rendez-vous du site (LOT 32).
  *
- * Elle lit les creneaux libres de l'agenda (creneaux.php), laisse le visiteur
- * choisir le jour puis l'heure au quart d'heure, et reserve (reserver.php). Le
- * rendez-vous s'inscrit dans mon agenda avec un lien Google Meet, et la
- * confirmation part par email, le fichier .ics en piece jointe.
+ * Elle reprend la disposition des outils de reservation : une colonne de
+ * presentation a gauche, un calendrier mensuel au centre, les creneaux libres a
+ * droite. Le visiteur choisit un jour, puis une heure, la pastille « Continuer »
+ * apparait sous le creneau retenu, et un second panneau lui demande ses
+ * coordonnees, le recapitulatif restant sous les yeux, a gauche.
  *
- * Trois etats se suivent dans la meme fenetre : le creneau, les coordonnees, la
- * confirmation. Aucun compte n'est demande au visiteur, et la liste est relue
- * avant chaque choix long : un creneau pris entre temps est donc refus par le
- * serveur, qui le dit, et la liste se rafraichit.
+ * Les creneaux viennent de creneaux.php (les occupations de l'agenda Google,
+ * lues par freeBusy), la reservation part vers reserver.php. Le rendez-vous
+ * s'inscrit dans l'agenda avec un lien Google Meet, et la confirmation arrive
+ * par email, le fichier .ics en piece jointe.
+ *
+ * La fenetre s'ouvre sur un sujet : « Discussion ouverte » par defaut, ou celui
+ * du bouton qui a mene ici (data-ouvrir-rendez-vous, ou ?rdv= dans l'adresse).
  */
 (() => {
   "use strict";
 
   const ADRESSE = "arthur@arthurdelassus.com";
-  const JOURS_AFFICHES = 10;     // jours demandes d'un coup a l'API
+  const JOURS_AFFICHES = 31;     // jours demandes d'un coup a l'API (maximum)
   const PEREMPTION = 120000;     // au-dela, la liste des creneaux est relue
+  const NOTE_MAX = 1000;
+
+  const MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet",
+                "août", "septembre", "octobre", "novembre", "décembre"];
+  const SEMAINE = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
+
+  /**
+   * Le sujet annonce a gauche, selon le bouton clique avant d'arriver ici.
+   * Les textes reprennent les mots des pages du site : le visiteur retrouve ce
+   * qu'il vient de lire.
+   */
+  const SUJETS = {
+    discussion: {
+      titre: "Discussion ouverte",
+      texte: "30 minutes pour voir ce que mes ateliers, mes conférences ou mes notes " +
+        "peuvent apporter à vos équipes, et comment entrer dans la transition sans se " +
+        "raconter d’histoires.",
+    },
+    "atelier-hd": {
+      titre: "Atelier Horizons Décarbonés",
+      texte: "Cocréé en 2022 avec Amaury Lethu, animé pour des milliers de personnes : " +
+        "les leviers et les ordres de grandeur du CO₂ et de l’énergie, expliqués " +
+        "simplement. Voyons ce qu’il devient dans vos équipes.",
+    },
+    "atelier-fdfp": {
+      titre: "La Fresque des frontières planétaires",
+      texte: "Relier les neuf sujets environnementaux importants — pas seulement le " +
+        "climat — et repérer les deux moteurs qui expliquent l’essentiel de nos impacts. " +
+        "Voyons ce que cela donne chez vous.",
+    },
+    atelier: {
+      titre: "Atelier de sensibilisation",
+      texte: "Un atelier pour comprendre les leviers de la transition et repartir avec " +
+        "l’envie d’agir, plutôt qu’avec la sidération.",
+    },
+    conference: {
+      titre: "Conférence",
+      texte: "Un propos clair et documenté sur la transition écologique : keynote, table " +
+        "ronde, événement interne, de 20 à 60 minutes.",
+    },
+    cours: {
+      titre: "Cours et formation",
+      texte: "Des cours qui partent de cas concrets et d’ordres de grandeur, adaptés au " +
+        "niveau des étudiants et à la durée du module.",
+    },
+    note: {
+      titre: "Note ou rapport",
+      texte: "Une note de fond pour éclairer une décision, un débat public ou une " +
+        "stratégie sectorielle.",
+    },
+    visite: {
+      titre: "Visite de la ferme",
+      texte: "La ferme maraîchère en bio, ses panneaux solaires, sa chambre froide et sa " +
+        "recharge de véhicule : le terrain, et ce qu’il enseigne.",
+    },
+    seminaire: {
+      titre: "Séminaire au vert",
+      texte: "Une journée ou une demi-journée à la ferme, entre atelier et visite " +
+        "apprenante, pour une équipe complète.",
+    },
+  };
 
   const modale = document.getElementById("modaleRendezVous");
   if (!modale) return;
@@ -24,22 +89,43 @@
   const racine = modale.querySelector("[data-rdv]");
   const api = (racine.getAttribute("data-api") || "").replace(/\/+$/, "");
   const boite = modale.querySelector(".modale-boite");
-  const statut = racine.querySelector("[data-rdv-statut]");
-  const blocJours = racine.querySelector("[data-rdv-jours]");
-  const blocHeures = racine.querySelector("[data-rdv-heures]");
-  const zoneHeures = racine.querySelector("[data-rdv-heures-zone]");
-  const formulaire = racine.querySelector("[data-rdv-form]");
-  const resume = racine.querySelector("[data-rdv-resume]");
-  const blocConfirme = racine.querySelector("[data-rdv-confirme]");
-  const boutonChanger = racine.querySelector("[data-rdv-changer]");
-  const boutonSecours = racine.querySelector("[data-rdv-secours]");
-  const boutonEnvoi = formulaire.querySelector('button[type="submit"]');
 
-  let groupes = [];          // les jours proposes, tels que rendus par l'API
+  const elSujet = racine.querySelector("[data-rdv-sujet]");
+  const elTexte = racine.querySelector("[data-rdv-texte]");
+  const elDuree = racine.querySelector("[data-rdv-duree]");
+  const elQuand = racine.querySelector("[data-rdv-repere-quand]");
+  const elQuandJour = racine.querySelector("[data-rdv-quand-jour]");
+  const elQuandHeure = racine.querySelector("[data-rdv-quand-heure]");
+  const elFuseau = racine.querySelector("[data-rdv-fuseau]");
+  const elHeureLocale = racine.querySelector("[data-rdv-heure-locale]");
+  const elMois = racine.querySelector("[data-rdv-mois]");
+  const boutonPrecedent = racine.querySelector("[data-rdv-mois-precedent]");
+  const boutonSuivant = racine.querySelector("[data-rdv-mois-suivant]");
+  const elGrille = racine.querySelector("[data-rdv-grille]");
+  const elJourTitre = racine.querySelector("[data-rdv-jour-titre]");
+  const elListe = racine.querySelector("[data-rdv-liste]");
+  const formulaire = racine.querySelector("[data-rdv-form]");
+  const elCompteur = racine.querySelector("[data-rdv-compteur]");
+  const zoneParticipant = racine.querySelector("[data-rdv-participant-zone]");
+  const boutonAjout = racine.querySelector("[data-rdv-ajout]");
+  const boutonRetirer = racine.querySelector("[data-rdv-ajout-retirer]");
+  const boutonEnvoi = formulaire.querySelector('button[type="submit"]');
+  // La ligne d'etat est sous la grille, donc hors de `racine` : on la cherche
+  // dans la fenetre entiere, sinon les messages resteraient invisibles.
+  const statut = modale.querySelector("[data-rdv-statut]");
+  const blocConfirme = racine.querySelector("[data-rdv-confirme]");
+  const boutonRetour = racine.querySelector("[data-rdv-retour]");
+  const boutonSecours = racine.querySelector("[data-rdv-secours]");
+
+  let groupes = [];               // les jours rendus par l'API
+  let ouverts = new Map();        // « 2026-10-07 » -> nombre de creneaux libres
+  let mois = [];                  // les mois a parcourir, du premier au dernier jour
+  let moisAffiche = "";
   let jourChoisi = "";
   let creneauChoisi = null;
-  let lueLe = 0;             // date de la derniere lecture des creneaux
-  let declencheur = null;    // bouton qui a ouvert la fenetre
+  let lueLe = 0;
+  let declencheur = null;
+  let minuteur = 0;
 
   const dire = (message, genre) => {
     if (!statut) return;
@@ -54,67 +140,59 @@
     if (champ) champ.value = String(Math.floor(Date.now() / 1000));
   };
 
-  /** « 2026-10-06 » -> « Mardi 6 octobre », sans decalage de fuseau. */
-  const joliJour = (jour) => {
-    const [annee, mois, numero] = jour.split("-").map(Number);
-    const date = new Date(annee, mois - 1, numero, 12, 0, 0);
-    const texte = date.toLocaleDateString("fr-FR",
-      { weekday: "long", day: "numeric", month: "long" });
+  /** « 2026-10-07 » -> une date locale, sans decalage de fuseau. */
+  const duJour = (jour) => {
+    const [annee, numeroMois, numero] = jour.split("-").map(Number);
+    return new Date(annee, numeroMois - 1, numero, 12, 0, 0);
+  };
+
+  /** « 2026-10-07 » -> « 7 octobre » (titre du panneau des heures). */
+  const joliJour = (jour) => duJour(jour).toLocaleDateString("fr-FR",
+    { day: "numeric", month: "long" });
+
+  /** « 2026-10-07 » -> « Mercredi 7 octobre 2026 » (recapitulatif). */
+  const joliJourLong = (jour) => {
+    const texte = duJour(jour).toLocaleDateString("fr-FR",
+      { weekday: "long", day: "numeric", month: "long", year: "numeric" });
     return texte.charAt(0).toUpperCase() + texte.slice(1);
   };
 
-  const joliCreneau = (jour, creneau) =>
-    joliJour(jour) + ", de " + creneau.heure + " à " + creneau.finHeure;
+  const cleMois = (jour) => jour.slice(0, 7);
 
-  /** Un bouton de jour : le nom du jour, et le nombre de creneaux libres. */
-  const boutonJour = (groupe) => {
-    const bouton = document.createElement("button");
-    bouton.type = "button";
-    bouton.className = "rdv-jour";
-    bouton.setAttribute("aria-pressed", "false");
-    bouton.dataset.jour = groupe.jour;
-
-    const titre = document.createElement("strong");
-    titre.textContent = joliJour(groupe.jour);
-    const compte = document.createElement("small");
-    compte.textContent = groupe.creneaux.length === 1
-      ? "1 créneau libre"
-      : groupe.creneaux.length + " créneaux libres";
-    bouton.append(titre, compte);
-    bouton.addEventListener("click", () => choisirJour(groupe.jour, bouton));
-    return bouton;
+  /** « 2026-10 » -> « Octobre 2026 ». */
+  const joliMois = (cle) => {
+    const numero = Number(cle.split("-")[1]);
+    const nom = MOIS[numero - 1] || "";
+    return nom.charAt(0).toUpperCase() + nom.slice(1) + " " + cle.split("-")[0];
   };
 
-  /** Une pastille d'heure. */
-  const boutonHeure = (creneau) => {
-    const bouton = document.createElement("button");
-    bouton.type = "button";
-    bouton.className = "rdv-heure";
-    bouton.setAttribute("aria-pressed", "false");
-    bouton.textContent = creneau.heure;
-    bouton.title = "Rendez-vous de " + creneau.heure + " à " + creneau.finHeure;
-    bouton.addEventListener("click", () => choisirCreneau(creneau, bouton));
-    return bouton;
-  };
-
-  /** Un seul element actif a la fois, dans une liste de boutons. */
-  const marquer = (conteneur, actif) => {
-    Array.from(conteneur.children).forEach((enfant) => {
-      enfant.setAttribute("aria-pressed", enfant === actif ? "true" : "false");
-    });
+  /** Les 42 cases du mois, du lundi de la premiere semaine au dimanche de la derniere. */
+  const casesDuMois = (cle) => {
+    const [annee, numeroMois] = cle.split("-").map(Number);
+    const premier = new Date(annee, numeroMois - 1, 1, 12, 0, 0);
+    const decalage = (premier.getDay() + 6) % 7;      // lundi = 0
+    const cases = [];
+    for (let i = 0; i < 42; i += 1) {
+      const date = new Date(annee, numeroMois - 1, 1 - decalage + i, 12, 0, 0);
+      const jour = date.getFullYear() + "-" +
+        String(date.getMonth() + 1).padStart(2, "0") + "-" +
+        String(date.getDate()).padStart(2, "0");
+      cases.push({ jour, mois: cleMois(jour), numero: date.getDate() });
+    }
+    return cases;
   };
 
   const vider = (conteneur) => {
     while (conteneur.firstChild) conteneur.removeChild(conteneur.firstChild);
   };
 
-  // --- Le choix du creneau ---------------------------------------------------
+  // --- Les creneaux libres ---------------------------------------------------
 
-  /** Relit les creneaux libres. @param {boolean} forcer ignore la peremption */
+  /** Relit les creneaux libres et reconstruit le calendrier. */
   async function charger(forcer = false) {
     if (!api) {
       dire("La prise de rendez-vous n’est pas reliée sur cette page. Écrivez-moi à " +
-        ADRESSE + " : je vous propose un créneau.", "aide-souci");
+        ADRESSE + ".", "aide-souci");
       return;
     }
     if (!forcer && groupes.length > 0 && Date.now() - lueLe < PEREMPTION) return;
@@ -128,95 +206,267 @@
       }
       groupes = Array.isArray(resultat.jours) ? resultat.jours : [];
       lueLe = Date.now();
-      afficherJours(resultat);
+      preparer(resultat);
     } catch (erreur) {
       window.console.warn("Rendez-vous : créneaux illisibles.", erreur);
-      vider(blocJours);
-      zoneHeures.hidden = true;
-      formulaire.hidden = true;
+      vider(elGrille);
+      vider(elListe);
       dire("Les créneaux ne sont pas lisibles à l’instant. Réessayez dans un moment, " +
         "ou écrivez-moi à " + ADRESSE + ".", "aide-souci");
       montrerSecours(null);
     }
   }
 
-  function afficherJours(resultat) {
-    vider(blocJours);
-    vider(blocHeures);
-    zoneHeures.hidden = true;
-    formulaire.hidden = true;
+  /** Installe les jours libres, les mois a parcourir, la duree et le fuseau. */
+  function preparer(resultat) {
+    ouverts = new Map();
+    groupes.forEach((groupe) => {
+      if (groupe && groupe.jour &&
+          Array.isArray(groupe.creneaux) && groupe.creneaux.length > 0) {
+        ouverts.set(groupe.jour, groupe.creneaux.length);
+      }
+    });
+
+    const duree = resultat.duree || 30;
+    const fuseau = resultat.fuseau || "Europe/Paris";
+    if (elDuree) elDuree.textContent = duree + " min";
+    if (elFuseau) elFuseau.textContent = fuseau;
+    majHeureLocale(fuseau);
+
     jourChoisi = "";
     creneauChoisi = null;
+    vider(elListe);
+    if (elJourTitre) elJourTitre.textContent = "";
+    if (elQuand) elQuand.hidden = true;
+    formulaire.hidden = true;
+    racine.dataset.etape = "creneaux";
 
-    if (groupes.length === 0 || !groupes.some((g) => g.creneaux.length > 0)) {
-      dire("Aucun créneau libre dans les prochains jours : mon agenda est plein. " +
+    const jours = Array.from(ouverts.keys()).sort();
+    if (jours.length === 0) {
+      vider(elGrille);
+      dire("Aucun créneau libre dans les prochaines semaines : mon agenda est plein. " +
         "Écrivez-moi à " + ADRESSE + ", je vous proposerai une date.", "aide-souci");
       montrerSecours(null);
       return;
     }
 
-    const total = groupes.reduce((somme, groupe) => somme + groupe.creneaux.length, 0);
-    dire(total + (total === 1 ? " créneau libre" : " créneaux libres") + " — " +
-      (resultat.duree || 30) + " minutes par rendez-vous" +
-      (resultat.suite ? ", d’autres jours suivent." : "."), "aide-ok");
+    // Les mois a parcourir : du mois du premier jour libre a celui du dernier.
+    const premier = cleMois(jours[0]);
+    const dernier = cleMois(jours[jours.length - 1]);
+    mois = [];
+    let cle = premier;
+    while (cle <= dernier && mois.length < 6) {
+      mois.push(cle);
+      const [annee, numero] = cle.split("-").map(Number);
+      const suivant = new Date(annee, numero, 1, 12, 0, 0);
+      cle = suivant.getFullYear() + "-" + String(suivant.getMonth() + 1).padStart(2, "0");
+    }
+    moisAffiche = mois.indexOf(cleMois(jourChoisi)) >= 0 ? cleMois(jourChoisi) : premier;
+    afficherMois();
 
-    groupes.filter((groupe) => groupe.creneaux.length > 0).forEach((groupe) => {
-      blocJours.append(boutonJour(groupe));
-    });
+    const total = jours.reduce((somme, jour) => somme + ouverts.get(jour), 0);
+    dire(total + (total === 1 ? " créneau libre" : " créneaux libres") + " — " +
+      duree + " minutes par rendez-vous. Choisissez un jour.", "aide-ok");
   }
 
-  function choisirJour(jour, bouton) {
+  /** Le mois affiche : jours libres en pastilles, les autres en clair. */
+  function afficherMois() {
+    if (!elMois || !elGrille) return;
+    elMois.textContent = joliMois(moisAffiche);
+    vider(elGrille);
+
+    casesDuMois(moisAffiche).forEach((caisse) => {
+      const dansLeMois = caisse.mois === moisAffiche;
+      if (!dansLeMois || !ouverts.has(caisse.jour)) {
+        const rien = document.createElement("span");
+        rien.className = "rdv-case-vide";
+        rien.textContent = dansLeMois ? String(caisse.numero) : "";
+        elGrille.append(rien);
+        return;
+      }
+      const bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.className = "rdv-case";
+      bouton.dataset.jour = caisse.jour;
+      bouton.textContent = String(caisse.numero);
+      bouton.setAttribute("aria-pressed", caisse.jour === jourChoisi ? "true" : "false");
+      const combien = ouverts.get(caisse.jour);
+      bouton.title = joliJourLong(caisse.jour) + " : " + combien +
+        (combien === 1 ? " créneau libre" : " créneaux libres");
+      bouton.setAttribute("aria-label", bouton.title);
+      bouton.addEventListener("click", () => choisirJour(caisse.jour));
+      elGrille.append(bouton);
+    });
+
+    const rang = mois.indexOf(moisAffiche);
+    if (boutonPrecedent) boutonPrecedent.disabled = rang <= 0;
+    if (boutonSuivant) boutonSuivant.disabled = rang >= mois.length - 1;
+  }
+
+  /** L'heure qu'il est dans le fuseau de l'agenda, sous le calendrier. */
+  function majHeureLocale(fuseau) {
+    if (!elHeureLocale) return;
+    const heure = new Date().toLocaleTimeString("fr-FR",
+      { timeZone: fuseau, hour: "2-digit", minute: "2-digit" }).replace(":", "h");
+    elHeureLocale.textContent = fuseau + " – " + heure;
+  }
+
+  /** Un jour retenu : ses heures s'affichent dans le panneau de droite. */
+  function choisirJour(jour) {
     jourChoisi = jour;
     creneauChoisi = null;
-    marquer(blocJours, bouton);
-    vider(blocHeures);
-    formulaire.hidden = true;
+    vider(elListe);
+    if (elJourTitre) elJourTitre.textContent = joliJourLong(jour);
+    if (elQuand) elQuand.hidden = true;
 
-    const groupe = groupes.find((g) => g.jour === jour);
-    if (!groupe || groupe.creneaux.length === 0) return;
-    groupe.creneaux.forEach((creneau) => blocHeures.append(boutonHeure(creneau)));
-    zoneHeures.hidden = false;
-    dire("Jour choisi : " + joliJour(jour) + ". Choisissez maintenant l’heure.", "aide-ok");
-    const premier = blocHeures.querySelector("button");
+    const groupe = groupes.find((element) => element.jour === jour);
+    const creneaux = (groupe && groupe.creneaux) || [];
+    creneaux.forEach((creneau) => elListe.append(boutonCreneau(creneau)));
+
+    Array.from(elGrille.children).forEach((caisse) => {
+      caisse.setAttribute("aria-pressed", caisse.dataset.jour === jour ? "true" : "false");
+    });
+
+    const combien = creneaux.length;
+    dire("Jour choisi : " + joliJourLong(jour) + " — " + combien +
+      (combien === 1 ? " créneau libre" : " créneaux libres") +
+      ". Choisissez l’heure.", "aide-ok");
+    const premier = elListe.querySelector("button");
     if (premier) premier.focus();
   }
 
+  const boutonCreneau = (creneau) => {
+    const bouton = document.createElement("button");
+    bouton.type = "button";
+    bouton.className = "rdv-creneau";
+    bouton.textContent = creneau.heure;
+    bouton.setAttribute("aria-pressed", "false");
+    bouton.title = "Rendez-vous de " + creneau.heure + " à " + creneau.finHeure;
+    bouton.addEventListener("click", () => choisirCreneau(creneau, bouton));
+    return bouton;
+  };
+
+  /** Un creneau retenu : la pastille « Continuer » apparait juste sous lui. */
   function choisirCreneau(creneau, bouton) {
     creneauChoisi = creneau;
-    marquer(blocHeures, bouton);
+    const ancien = elListe.querySelector(".rdv-continuer");
+    if (ancien) ancien.remove();
+    Array.from(elListe.querySelectorAll(".rdv-creneau")).forEach((element) => {
+      element.setAttribute("aria-pressed", element === bouton ? "true" : "false");
+    });
+
+    const continuer = document.createElement("button");
+    continuer.type = "button";
+    continuer.className = "btn btn-primary rdv-continuer";
+    continuer.textContent = "Continuer";
+    continuer.addEventListener("click", passerAuxInformations);
+    bouton.after(continuer);
+
+    if (elQuandJour) elQuandJour.textContent = joliJourLong(jourChoisi);
+    if (elQuandHeure) elQuandHeure.textContent = creneau.heure + " - " + creneau.finHeure;
+    if (elQuand) elQuand.hidden = false;
+    dire("Créneau retenu : " + creneau.heure + ". Cliquez sur « Continuer ».", "aide-ok");
+    continuer.focus();
+  }
+
+  // --- Les coordonnees -------------------------------------------------------
+
+  /** Le creneau est retenu : place aux coordonnees, recapitulatif a gauche. */
+  function passerAuxInformations() {
+    if (!creneauChoisi || !jourChoisi) {
+      dire("Choisissez d’abord un jour, puis une heure.", "aide-souci");
+      return;
+    }
+    racine.dataset.etape = "formulaire";
     formulaire.hidden = false;
-    formulaire.elements.debut.value = creneau.debut;
-    resume.textContent = "Créneau choisi : " + joliCreneau(jourChoisi, creneau);
+    vider(blocConfirme);
+    blocConfirme.hidden = true;
+    if (elQuandJour) elQuandJour.textContent = joliJourLong(jourChoisi);
+    if (elQuandHeure) {
+      elQuandHeure.textContent = creneauChoisi.heure + " - " + creneauChoisi.finHeure;
+    }
+    if (elQuand) elQuand.hidden = false;
+    formulaire.elements.debut.value = creneauChoisi.debut;
     majDepart();
+    majCompteur();
     dire("Encore vos coordonnées, et le rendez-vous est pris.", "aide-ok");
-    montrerSecours(creneau);
-    const premier = formulaire.querySelector('input[name="nom"]');
+    const premier = formulaire.querySelector('[name="prenom"]');
     if (premier) premier.focus();
   }
 
-  // --- La reservation ---------------------------------------------------------
+  /** Retour au calendrier, sans perdre le creneau deja retenu. */
+  function revenir() {
+    racine.dataset.etape = "creneaux";
+    formulaire.hidden = true;
+    dire("Choisissez un autre jour, ou une autre heure.", "aide-ok");
+    const choisi = elListe.querySelector('.rdv-creneau[aria-pressed="true"]');
+    if (choisi) choisi.focus();
+  }
 
-  const verifier = (donnees) => {
-    const regles = [
+  /** Le compte des caracteres de la note, comme dans la reference. */
+  function majCompteur() {
+    if (!elCompteur) return;
+    const note = formulaire.querySelector('[name="message"]');
+    elCompteur.textContent = String((note && note.value.length) || 0) + " / " + NOTE_MAX;
+  }
+
+  // --- L'envoi ---------------------------------------------------------------
+
+  const ADRESSE_VALIDE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  const marquer = (champ, bon) => {
+    if (!champ) return;
+    if (bon) champ.removeAttribute("aria-invalid");
+    else champ.setAttribute("aria-invalid", "true");
+  };
+
+  const refuser = (champ, message) => {
+    marquer(champ, false);
+    dire(message, "aide-souci");
+    if (champ && champ.focus) champ.focus();
+    return false;
+  };
+
+  /** Les champs du visiteur, avant l'envoi : les memes regles que le serveur. */
+  function verifier(donnees) {
+    const obligatoires = [
+      ["prenom", (v) => v.trim().length >= 2, "Indiquez votre prénom."],
       ["nom", (v) => v.trim().length >= 2, "Indiquez votre nom."],
-      ["email", (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+      ["email", (v) => ADRESSE_VALIDE.test(v.trim()),
         "Cette adresse email ne semble pas valide."],
     ];
-    for (const [cle, valide, message] of regles) {
+    for (const [cle, valide, message] of obligatoires) {
       const champ = formulaire.elements[cle];
-      const bon = valide(String(donnees[cle] || ""));
-      if (champ) {
-        if (bon) champ.removeAttribute("aria-invalid");
-        else champ.setAttribute("aria-invalid", "true");
-      }
-      if (!bon) {
-        dire(message, "aide-souci");
-        if (champ && champ.focus) champ.focus();
-        return false;
-      }
+      if (!valide(String(donnees[cle] || ""))) return refuser(champ, message);
+      marquer(champ, true);
+    }
+
+    const telephone = formulaire.elements.telephone;
+    if (telephone && telephone.value.trim() &&
+        !/^[0-9+ ().-]{6,32}$/.test(telephone.value.trim())) {
+      return refuser(telephone, "Ce numéro de téléphone ne semble pas valide.");
+    }
+    marquer(telephone, true);
+
+    const participant = formulaire.elements.participant;
+    if (participant && participant.value.trim() &&
+        !ADRESSE_VALIDE.test(participant.value.trim())) {
+      return refuser(participant, "L’adresse de l’autre participant ne semble pas valide.");
+    }
+    marquer(participant, true);
+
+    const note = formulaire.elements.message;
+    if (note && note.value.length > NOTE_MAX) {
+      return refuser(note, "Votre note dépasse " + NOTE_MAX + " caractères.");
+    }
+
+    const accord = formulaire.elements.accord;
+    if (accord && !accord.checked) {
+      return refuser(accord, "Merci de cocher l’accord pour que je puisse enregistrer " +
+        "le rendez-vous.");
     }
     return true;
-  };
+  }
 
   /** Champs fautifs annonces par le serveur (reponse 422). */
   const signalerChamps = (champs) => {
@@ -234,9 +484,21 @@
     const donnees = Object.fromEntries(new FormData(formulaire).entries());
     if (!verifier(donnees)) return;
     if (!donnees.debut) {
-      dire("Choisissez d’abord un créneau dans la liste.", "aide-souci");
+      dire("Choisissez d’abord un créneau dans le calendrier.", "aide-souci");
       return;
     }
+
+    // L'API attend un nom et un email : le prenom et le nom sont reunis ici.
+    const envoi = {
+      debut: donnees.debut,
+      nom: (String(donnees.prenom || "") + " " + String(donnees.nom || "")).trim(),
+      email: String(donnees.email || "").trim(),
+      telephone: String(donnees.telephone || "").trim(),
+      participant: String(donnees.participant || "").trim(),
+      message: String(donnees.message || "").trim(),
+      depart: donnees.depart,
+      site_web: donnees.site_web,
+    };
 
     if (boutonEnvoi) boutonEnvoi.disabled = true;
     dire("Réservation en cours…");
@@ -244,16 +506,16 @@
       const reponse = await fetch(api + "/reserver.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(donnees),
+        body: JSON.stringify(envoi),
       });
       const resultat = await reponse.json().catch(() => ({}));
       if (reponse.ok && resultat.ok === true) {
-        confirmer(resultat["rendez-vous"] || {}, String(donnees.email || "").trim());
+        confirmer(resultat["rendez-vous"] || {}, envoi.email);
         return;
       }
       if (reponse.status === 409) {
-        // Le creneau a ete pris entre l'affichage et la validation : la liste
-        // est relue tout de suite, pour que le visiteur en choisisse un autre.
+        // Le creneau a ete pris entre l'affichage et la validation : la liste est
+        // relue tout de suite, et le visiteur revient au calendrier.
         dire(resultat.erreur || "Ce créneau vient d’être pris. Choisissez-en un autre.",
           "aide-souci");
         await charger(true);
@@ -281,15 +543,17 @@
   /** L'ecran de confirmation : quand, la visio, le .ics, l'annulation. */
   function confirmer(rdv, courriel) {
     vider(blocConfirme);
+    racine.dataset.etape = "confirme";
+    formulaire.hidden = true;
+    blocConfirme.hidden = false;
 
     const titre = document.createElement("h3");
     titre.textContent = "C’est réservé";
 
     const quand = document.createElement("p");
-    const fort = document.createElement("strong");
-    fort.textContent = joliJour(rdv.quand || jourChoisi) + ", de " + rdv.heure +
-      " à " + rdv.finHeure;
-    quand.append("Votre rendez-vous est posé : ", fort, ".");
+    quand.className = "rdv-confirme-quand";
+    quand.textContent = joliJourLong(rdv.quand || jourChoisi) + ", de " +
+      rdv.heure + " à " + rdv.finHeure;
     blocConfirme.append(titre, quand);
 
     if (rdv.visio) {
@@ -305,10 +569,10 @@
     }
 
     if (courriel) {
-      const confirmation = document.createElement("p");
-      confirmation.textContent = "La confirmation part à " + courriel +
+      const suite = document.createElement("p");
+      suite.textContent = "La confirmation part à " + courriel +
         ", avec le fichier .ics pour l’ajouter à votre propre agenda.";
-      blocConfirme.append(confirmation);
+      blocConfirme.append(suite);
     }
 
     if (rdv.annulation) {
@@ -323,89 +587,129 @@
     }
 
     const actions = document.createElement("div");
-    actions.className = "hero-actions";
-    const close = document.createElement("button");
-    close.type = "button";
-    close.className = "btn btn-primary";
-    close.setAttribute("data-modale-fermer", "");
-    close.textContent = "Fermer";
-    actions.append(close);
+    actions.className = "rdv-actions";
+    const fin = document.createElement("button");
+    fin.type = "button";
+    fin.className = "btn btn-primary";
+    fin.setAttribute("data-modale-fermer", "");
+    fin.textContent = "Fermer";
+    actions.append(fin);
     blocConfirme.append(actions);
 
-    // Le choix du creneau laisse la place a la confirmation.
-    const etape = racine.querySelector("[data-rdv-etape]");
-    if (etape) etape.hidden = true;
-    formulaire.hidden = true;
-    zoneHeures.hidden = true;
-    blocConfirme.hidden = false;
     dire("Rendez-vous réservé. À bientôt !", "aide-ok");
-
     // La liste sera relue a la prochaine ouverture : ce creneau n'y est plus.
     groupes = [];
     lueLe = 0;
-    close.focus();
+    fin.focus();
   }
 
   /** Sortie de secours : un email deja rempli, si la reservation echoue. */
   function montrerSecours(creneau) {
     if (!boutonSecours) return;
     const quand = creneau && jourChoisi
-      ? joliCreneau(jourChoisi, creneau)
+      ? joliJourLong(jourChoisi) + ", de " + creneau.heure + " à " + creneau.finHeure
       : "un créneau à convenir";
-    const donnees = formulaire.hidden ? {} : Object.fromEntries(new FormData(formulaire).entries());
+    const donnees = formulaire.hidden
+      ? {}
+      : Object.fromEntries(new FormData(formulaire).entries());
+    const nom = [donnees.prenom, donnees.nom].filter(Boolean).join(" ");
     boutonSecours.href = "mailto:" + ADRESSE
       + "?subject=" + encodeURIComponent("Prendre rendez-vous")
       + "&body=" + encodeURIComponent(
         "Bonjour,\n\nJe souhaite un rendez-vous : " + quand + ".\n\n" +
         (donnees.message ? donnees.message + "\n\n" : "") +
-        "Nom : " + (donnees.nom || "") + "\nEmail : " + (donnees.email || ""));
+        "Nom : " + nom + "\nEmail : " + (donnees.email || "") +
+        (donnees.telephone ? "\nTéléphone : " + donnees.telephone : ""));
     boutonSecours.hidden = false;
   }
 
   // --- La fenetre -------------------------------------------------------------
 
-  /** Revenir au choix du creneau, apres un changement d'avis. */
-  function revenir() {
-    creneauChoisi = null;
-    formulaire.hidden = true;
-    vider(blocHeures);
-    zoneHeures.hidden = true;
-    if (resume) resume.textContent = "";
-    marquer(blocJours, null);
-    dire("Choisissez un autre jour, puis l’heure qui vous convient.", "aide-ok");
-    const premier = blocJours.querySelector("button");
-    if (premier) premier.focus();
+  /** Le sujet affiche a gauche : celui du bouton qui a mene ici. */
+  function appliquerSujet(cle) {
+    const sujet = SUJETS[cle] || SUJETS.discussion;
+    if (elSujet) elSujet.textContent = sujet.titre;
+    if (elTexte) elTexte.textContent = sujet.texte;
   }
 
-  const ouvrir = (source) => {
+  const ouvrir = (source, cle) => {
     declencheur = source || null;
+    appliquerSujet(cle || "");
     modale.hidden = false;
     document.body.classList.add("modale-ouverte");
     if (boite) boite.focus();
-    // La liste arrive apres la reponse de l'API : le focus y glisse ensuite,
-    // seulement si le visiteur n'a pas deja commence a naviguer.
+    // La liste des creneaux arrive apres la reponse de l'API : le focus y glisse
+    // ensuite, seulement si le visiteur n'a pas deja commence a naviguer.
     charger().then(() => {
-      const premier = blocJours.querySelector("button");
+      const premier = elGrille.querySelector("button");
       if (premier && document.activeElement === boite) premier.focus();
     });
+    if (!minuteur) {
+      minuteur = window.setInterval(() => {
+        majHeureLocale(elFuseau && elFuseau.textContent
+          ? elFuseau.textContent : "Europe/Paris");
+      }, 60000);
+    }
   };
 
   const fermer = () => {
     modale.hidden = true;
     document.body.classList.remove("modale-ouverte");
+    if (minuteur) {
+      window.clearInterval(minuteur);
+      minuteur = 0;
+    }
     if (declencheur && declencheur.focus) declencheur.focus();
     declencheur = null;
   };
 
-  if (boutonChanger) boutonChanger.addEventListener("click", revenir);
+  if (boutonPrecedent) {
+    boutonPrecedent.addEventListener("click", () => {
+      const rang = mois.indexOf(moisAffiche);
+      if (rang > 0) {
+        moisAffiche = mois[rang - 1];
+        afficherMois();
+      }
+    });
+  }
+  if (boutonSuivant) {
+    boutonSuivant.addEventListener("click", () => {
+      const rang = mois.indexOf(moisAffiche);
+      if (rang >= 0 && rang < mois.length - 1) {
+        moisAffiche = mois[rang + 1];
+        afficherMois();
+      }
+    });
+  }
+  const champNote = formulaire.querySelector('[name="message"]');
+  if (champNote) champNote.addEventListener("input", majCompteur);
+  if (boutonAjout) {
+    boutonAjout.addEventListener("click", () => {
+      if (!zoneParticipant) return;
+      zoneParticipant.hidden = false;
+      boutonAjout.hidden = true;
+      const champ = formulaire.elements.participant;
+      if (champ && champ.focus) champ.focus();
+    });
+  }
+  if (boutonRetirer) {
+    boutonRetirer.addEventListener("click", () => {
+      if (!zoneParticipant) return;
+      zoneParticipant.hidden = true;
+      if (boutonAjout) boutonAjout.hidden = false;
+      const champ = formulaire.elements.participant;
+      if (champ) champ.value = "";
+    });
+  }
+  if (boutonRetour) boutonRetour.addEventListener("click", revenir);
 
-  // Ouverture : le bouton de cette page (« Choisir un créneau ») et, si le site
-  // en ajoute ailleurs un jour, tout element portant data-ouvrir-rendez-vous.
+  // Ouverture : le bouton de la page, et tout element portant l'attribut. Les
+  // pages d'offres y mettent leur sujet : data-ouvrir-rendez-vous="atelier-hd".
   document.addEventListener("click", (evenement) => {
     const bouton = evenement.target.closest("[data-ouvrir-rendez-vous]");
     if (!bouton) return;
     evenement.preventDefault();
-    ouvrir(bouton);
+    ouvrir(bouton, bouton.getAttribute("data-ouvrir-rendez-vous") || "");
   });
 
   // Fermeture : croix, fond assombri, bouton « Fermer », touche Echap.
@@ -433,5 +737,18 @@
       premier.focus();
     }
   });
+
+  // Arrivee depuis un bouton d'une autre page (prendre-rendez-vous.html?rdv=…) :
+  // la fenetre s'ouvre d'elle-meme, sur le bon sujet.
+  const demande = new URLSearchParams(window.location.search);
+  const cle = demande.get("rdv") || demande.get("type") || "";
+  appliquerSujet(cle);
+  if (cle) window.setTimeout(() => ouvrir(null, cle), 120);
 })();
+
+
+
+
+
+
 

@@ -3289,74 +3289,209 @@ body.modale-ouverte{ overflow: hidden; }
   .modale-boite .hero-actions{ flex-direction: column; align-items: stretch; }
 }
 
-/* --- Fenetre de rendez-vous (LOT 32) : les creneaux libres ----------------
-   Un bouton par jour, une pastille par heure, puis le formulaire. Les
-   couleurs et les rayons sont ceux du site. */
-.rdv{ margin: 0; }
-.rdv-titre{
-  margin: 18px 0 8px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #3B3B3B;
-}
-.rdv-titre:first-child{ margin-top: 4px; }
-.rdv-jours, .rdv-heures{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.rdv-jour{
-  font: inherit;
-  cursor: pointer;
+/* --- Fenetre de rendez-vous (LOT 32) ------------------------------------
+   La disposition des outils de reservation, dans les couleurs du site :
+   presentation a gauche, calendrier mensuel au centre, creneaux libres a
+   droite, puis les coordonnees a droite du recapitulatif. */
+.modale-large{ overflow-y: auto; }
+.modale-large .modale-boite{ max-width: 1060px; }
+.rdv{
+  display: grid;
+  grid-template-columns: 232px minmax(272px, 1fr) minmax(228px, 288px);
+  gap: 24px;
+  align-items: start;
   text-align: left;
-  line-height: 1.25;
-  padding: 9px 12px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: var(--surface);
+}
+.rdv-portrait{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 8px 20px rgba(28,20,14,.14);
+}
+.rdv-nom{ margin: 10px 0 2px; font-size: 1.15rem; }
+.rdv-profil{ min-width: 0; }
+.rdv-profil{ min-width: 0; }
+.rdv [hidden]{ display: none !important; }
+.rdv-role{ margin: 0 0 18px; color: var(--muted); font-size: .95rem; }
+.rdv-sujet{ margin: 0 0 8px; font-size: 1.05rem; }
+.rdv-texte{ margin: 0; color: #3B3B3B; font-size: .95rem; line-height: 1.55; }
+.rdv-reperes{
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 12px;
+  font-size: .9rem;
   color: #3B3B3B;
 }
-.rdv-jour strong{ display: block; font-weight: 600; }
-.rdv-jour small{ display: block; color: var(--muted); font-size: .82rem; }
-.rdv-jour:hover{ border-color: rgba(195,106,61,.45); }
-.rdv-jour[aria-pressed="true"]{
-  background: var(--accent-soft);
-  border-color: rgba(195,106,61,.55);
+.rdv-reperes li{ display: grid; grid-template-columns: 20px 1fr; gap: 10px; }
+.rdv-reperes svg{ width: 18px; height: 18px; margin-top: 2px; color: var(--accent); }
+.rdv-agenda{
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  background: #FFFFFF;
+}
+.rdv-mois{ display: flex; align-items: center; justify-content: space-between; }
+.rdv-mois h3{ margin: 0; font-size: 1rem; }
+.rdv-mois-nav{ display: flex; gap: 4px; }
+.rdv-mois-nav button{
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #FFFFFF;
   color: var(--accent-2);
 }
-.rdv-heure{
+.rdv-mois-nav button:hover:not([disabled]){ border-color: rgba(195,106,61,.45); }
+.rdv-mois-nav button[disabled]{ opacity: .35; cursor: default; }
+.rdv-semaine, .rdv-grille{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.rdv-semaine{
+  margin: 12px 0 6px;
+  color: var(--muted);
+  font-size: .68rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.rdv-case, .rdv-case-vide{
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-size: .9rem;
+}
+.rdv-case{
   font: inherit;
   cursor: pointer;
-  min-width: 74px;
-  padding: 8px 10px;
-  border-radius: 999px;
+  border: 0;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  font-weight: 600;
+}
+.rdv-case:hover{ background: rgba(195,106,61,.22); }
+.rdv-case[aria-pressed="true"]{ background: var(--accent); color: #FFFFFF; }
+.rdv-case-vide{ color: #C4BDB3; }
+.rdv-fuseau{
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: .82rem;
+  color: var(--muted);
+}
+.rdv-fuseau strong{
+  display: block;
+  margin-top: 2px;
+  color: #3B3B3B;
+  font-weight: 600;
+}
+.rdv-panneau-titre{ margin: 0 0 10px; font-size: 1rem; }
+.rdv-liste{
+  display: grid;
+  gap: 8px;
+  max-height: 344px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+.rdv-creneau{
+  font: inherit;
+  cursor: pointer;
+  padding: 10px;
   border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #FFFFFF;
+  color: #3B3B3B;
+  text-align: center;
+}
+.rdv-creneau:hover{ border-color: rgba(195,106,61,.45); }
+.rdv-creneau[aria-pressed="true"]{
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--accent-2);
+  font-weight: 600;
+}
+.rdv-continuer{ width: 100%; }
+.rdv[data-etape="formulaire"] [data-rdv-cote-creneaux],
+.rdv[data-etape="confirme"] [data-rdv-cote-creneaux],
+.rdv[data-etape="formulaire"] .rdv-agenda,
+.rdv[data-etape="confirme"] .rdv-agenda{ display: none; }
+.rdv[data-etape="formulaire"] .rdv-creneaux,
+.rdv[data-etape="confirme"] .rdv-creneaux{ grid-column: 2 / 4; }
+.rdv-formulaire{ display: grid; gap: 14px; }
+.rdv-form-titre{ margin: 0; text-align: center; font-size: 1.2rem; }
+.rdv-champs{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rdv-champs > div, .rdv-note{ display: grid; gap: 6px; }
+.rdv-champs label, .rdv-note label{ font-size: .9rem; color: var(--muted); }
+.rdv-champs input, .rdv-note textarea{
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   background: #FFFFFF;
   color: #3B3B3B;
 }
-.rdv-heure:hover{ border-color: rgba(195,106,61,.45); }
-.rdv-heure[aria-pressed="true"]{
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #FFFFFF;
+.rdv-champs input[aria-invalid="true"], .rdv-note textarea[aria-invalid="true"]{
+  border-color: #B3261E;
 }
-.rdv-resume{
-  margin: 0 0 12px;
-  padding: 10px 12px;
-  border-left: 3px solid var(--accent);
-  border-radius: 0 6px 6px 0;
-  background: rgba(255,249,241,.9);
+.rdv-large{ grid-column: 1 / -1; }
+.rdv-ajout{
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
   font-weight: 600;
+  color: var(--accent-2);
+  cursor: pointer;
+}
+.rdv-ajout:hover{ text-decoration: underline; }
+.rdv-note textarea{ min-height: 96px; }
+.rdv-compteur{ justify-self: end; font-size: .8rem; color: var(--muted); }
+.rdv-accord{
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: .9rem;
   color: #3B3B3B;
 }
-.rdv-resume:empty{ display: none; }
+.rdv-accord input{
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  accent-color: var(--accent);
+}
+.rdv-accord input[aria-invalid="true"]{ outline: 2px solid #B3261E; outline-offset: 2px; }
+.rdv-formulaire .form-piege{ position: absolute; left: -9999px; }
+.rdv-actions{ display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.rdv-mention{ margin: 18px 0 0; }
 .rdv-confirme{
-  padding: 16px;
+  padding: 18px;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(28,124,74,.35);
   background: rgba(28,124,74,.06);
 }
 .rdv-confirme h3{ margin: 0 0 8px; font-size: 1.15rem; }
 .rdv-confirme p{ margin: 0 0 10px; }
-.rdv-confirme p:last-child{ margin-bottom: 0; }
+.rdv-confirme-quand{ font-size: 1.05rem; font-weight: 600; color: #1F1F1F; }
 .rdv-confirme a{ color: var(--accent); font-weight: 600; }
+@media (max-width: 900px){
+  .rdv{ grid-template-columns: 1fr; gap: 18px; }
+  .rdv[data-etape="formulaire"] .rdv-creneaux,
+  .rdv[data-etape="confirme"] .rdv-creneaux{ grid-column: auto; }
+  .rdv-champs{ grid-template-columns: 1fr; }
+  .rdv-liste{ max-height: none; }
+  .rdv-reperes{ margin-top: 14px; }
+}
