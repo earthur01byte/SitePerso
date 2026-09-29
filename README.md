@@ -487,9 +487,9 @@ d'accueil de l'application (le champ pointait jusque-là sur `index.html`).
 - Elle est liée depuis le **pied de page des huit autres pages**, avant « Me
   contacter » (trois liens : Confidentialité, Prendre rendez-vous, Me contacter),
   et déclarée dans `sitemap.xml` (priorité 0.6).
-- Elle porte la **fenêtre de contact**, comme les autres pages : « Demander un
-  rendez-vous » ouvre le formulaire sur place. Ce bouton basculera sur la fenêtre
-  de réservation quand `creneaux.php` et `reserver.php` seront livrés.
+- Le bouton « Choisir un créneau » ouvre la **fenêtre de réservation** (voir la
+  section « Fenêtre de rendez-vous » plus bas) ; le lien vers
+  `contact.html#formulaire` reste posé à côté, pour les visiteurs sans JavaScript.
 
 Reste à faire dans la console Google : *Nom de l'application* = **Arthur de
 Lassus** (le libellé écrit sur cette page, comme `arthurdelassus.com`) et
@@ -507,4 +507,57 @@ lien de pied de page sur huit pages, `sitemap.xml`, listes des vérificateurs, p
 `check_classes.py` (les deux nouvelles pages : 29 classes, toutes définies) et
 `check_site.py`.
 
+## Fenêtre de rendez-vous : la disposition de référence (LOT 32, 29/09/2026)
 
+La fenêtre reprend la disposition des outils de réservation — celle d'un agenda
+en ligne — dans les couleurs du site : terre cuite, crème, Lora.
+
+| Colonne | Contenu |
+| --- | --- |
+| à gauche | le portrait, « Arthur de Lassus », le **sujet du rendez-vous** et son
+  texte de présentation, puis les repères : visio envoyée par email, durée,
+  jour et heure choisis, fuseau horaire |
+| au centre | le **calendrier mensuel** : les jours où un créneau est libre
+  portent une pastille, les autres restent en clair ; deux flèches parcourent
+  les mois proposés, et l'heure du fuseau de l'agenda s'affiche dessous |
+| à droite | les **heures libres du jour retenu**. Un clic sur une heure fait
+  apparaître « Continuer » juste sous elle ; un second clic ouvre le panneau
+  des informations |
+| à droite, ensuite | « **Vos informations** » prend la place du calendrier et
+  des heures (le récapitulatif reste à gauche) : prénom, nom, adresse email,
+  téléphone facultatif, note de 1000 caractères avec son compteur, autre
+  participant éventuel, accord de confidentialité, puis « Réserver maintenant » |
+
+Le **sujet change selon le bouton cliqué avant** : chaque page d'offres envoie
+sur `prendre-rendez-vous.html` avec sa clé (`?rdv=atelier-hd`, `-fdfp`,
+`conference`, `cours`, `note`, `visite`, `seminaire`), la fenêtre s'ouvre
+d'elle-même et annonce le sujet correspondant ; sans clé, c'est « Discussion
+ouverte ». Onze boutons ont été redirigés de la sorte (`index.html` 3,
+`services.html` 5, `agriculture.html` 3) : ils gardent leur libellé, perdent
+`data-ouvrir-contact` — sans quoi la fenêtre de contact prendrait le clic — et
+fonctionnent aussi sans JavaScript, puisque ce sont de vrais liens.
+
+- `assets/js/rendez-vous.js` (753 lignes) lit `creneaux.php` (31 jours d'un
+  coup), dessine le mois, gère les trois états de la fenêtre (`data-etape` =
+  `creneaux`, `formulaire`, `confirme`), les erreurs 409 / 422 / 429 / 503, et
+  la sortie de secours par email prérempli.
+- `assets/css/styles.css` : le bloc `.rdv-…` (fenêtre de 1060 px, trois
+  colonnes, calendrier, créneaux, formulaire) ; à 900 px et moins, tout
+  s'empile dans une colonne.
+- L'invité supplémentaire est un vrai champ : `lib/validation.js` le vérifie,
+  `lib/agenda.js` l'ajoute aux participants de l'événement Google avec le
+  visiteur (doublons retirés), et `lib/emails.js` le rappelle dans la fiche des
+  trois emails de rendez-vous.
+
+Contrôles : `outils/essai_reservation.js` (backend, tout OK, quatre contrôles de
+plus pour l'invité), `shot_fenetre_rdv32.py` — la page servie en local, Chrome
+sans interface, **35 contrôles** du calendrier au formulaire, captures dans
+`_shots_lot32/rdv-fenetre-calendrier.png` et `rdv-fenetre-formulaire.png` — et
+les sept vérifications du site (`check_html`, `check_classes`, `check_site`,
+`diag_largeur_lot10`, `test_lot10_posts`, `test_climatisation`,
+`test_climatisation_mobile`), toutes vertes.
+
+Deux points hors du site : le backend Netlify doit être redéployé pour que le
+champ « autre participant » soit traité en ligne (`netlify deploy --prod` dans
+`Backend_Netlify`), et le mot de passe d'application SMTP Infomaniak reste à
+régénérer — sans lui, aucune confirmation ne part, ni réservation ni contact.
