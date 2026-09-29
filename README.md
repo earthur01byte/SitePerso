@@ -528,19 +528,25 @@ en ligne — dans les couleurs du site : terre cuite, crème, Lora.
   téléphone facultatif, note de 1000 caractères avec son compteur, autre
   participant éventuel, accord de confidentialité, puis « Réserver maintenant » |
 
-Le **sujet change selon le bouton cliqué avant** : chaque page d'offres envoie
-sur `prendre-rendez-vous.html` avec sa clé (`?rdv=atelier-hd`, `-fdfp`,
-`conference`, `cours`, `note`, `visite`, `seminaire`), la fenêtre s'ouvre
-d'elle-même et annonce le sujet correspondant ; sans clé, c'est « Discussion
-ouverte ». Onze boutons ont été redirigés de la sorte (`index.html` 3,
-`services.html` 5, `agriculture.html` 3) : ils gardent leur libellé, perdent
-`data-ouvrir-contact` — sans quoi la fenêtre de contact prendrait le clic — et
-fonctionnent aussi sans JavaScript, puisque ce sont de vrais liens.
+Le **sujet change selon le bouton cliqué avant** : les trois pages d'offres
+portent la fenêtre et l'ouvrent **sur place**, sans quitter la page
+(`data-ouvrir-rendez-vous="atelier-hd"`, `-fdfp`, `conference`, `cours`,
+`note`, `visite`, `seminaire`) ; sans clé, c'est « Discussion ouverte ». Onze
+boutons sont équipés de la sorte (`index.html` 3, `services.html` 5,
+`agriculture.html` 3) : ils gardent leur libellé et leur lien vers
+`prendre-rendez-vous.html?rdv=…`, utile sans JavaScript, et perdent
+`data-ouvrir-contact`, sans quoi la fenêtre de contact prendrait le clic. Le
+lien du pied de page, lui, continue de mener à la page : c'est elle qui décrit
+l'application déclarée à Google.
 
 - `assets/js/rendez-vous.js` (753 lignes) lit `creneaux.php` (31 jours d'un
   coup), dessine le mois, gère les trois états de la fenêtre (`data-etape` =
   `creneaux`, `formulaire`, `confirme`), les erreurs 409 / 422 / 429 / 503, et
   la sortie de secours par email prérempli.
+- La fenêtre est posée dans `prendre-rendez-vous.html` **et** dans les trois
+  pages d'offres (même bloc `#modaleRendezVous`, script chargé après
+  `contact.js`) : le visiteur ne quitte jamais la page qu'il lisait, et le
+  bouton « précédent » de son navigateur reste celui du site.
 - `assets/css/styles.css` : le bloc `.rdv-…` (fenêtre de 1060 px, trois
   colonnes, calendrier, créneaux, formulaire) ; à 900 px et moins, tout
   s'empile dans une colonne.
@@ -557,7 +563,12 @@ les sept vérifications du site (`check_html`, `check_classes`, `check_site`,
 `diag_largeur_lot10`, `test_lot10_posts`, `test_climatisation`,
 `test_climatisation_mobile`), toutes vertes.
 
-Deux points hors du site : le backend Netlify doit être redéployé pour que le
-champ « autre participant » soit traité en ligne (`netlify deploy --prod` dans
-`Backend_Netlify`), et le mot de passe d'application SMTP Infomaniak reste à
-régénérer — sans lui, aucune confirmation ne part, ni réservation ni contact.
+Trois points hors du site, pour le prochain déploiement du backend Netlify (un
+seul suffit : `netlify deploy --prod` dans `Backend_Netlify`) : le champ « autre
+participant », et le pas des rendez-vous porté **toutes les 30 minutes**
+(`RDV_PAS_MINUTES`, 15 auparavant) — les deux sont prêts et vérifiés en local,
+mais l'API en ligne annonce encore `pas: 15` ; et le mot de passe d'application
+SMTP Infomaniak, à reposer : `diagnostic.php` affiche encore « 535 Invalid login
+or password » alors que la variable est présente et que le mode est « envoi
+réel ». Le reste du diagnostic est vert (SPF, DMARC, DKIM, Blobs, Google
+Agenda).
