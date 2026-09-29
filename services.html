@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/contact.js"></script>
+    <script defer src="assets/js/rendez-vous.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -225,7 +226,7 @@
                   <li>Collectivités, associations, enseignement : <a href="contact.html">me contacter</a> pour un tarif
                     adapté.</li>
                 </ul>
-                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=atelier-hd">Organiser cet atelier</a>
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=atelier-hd" data-ouvrir-rendez-vous="atelier-hd">Organiser cet atelier</a>
               </aside>
             </div>
           </div>
@@ -292,7 +293,7 @@
                   <li>Collectivités, associations, enseignement : <a href="contact.html">me contacter</a> pour un tarif
                     adapté.</li>
                 </ul>
-                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=atelier-fdfp">Organiser cet atelier</a>
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=atelier-fdfp" data-ouvrir-rendez-vous="atelier-fdfp">Organiser cet atelier</a>
               </aside>
             </div>
           </div>
@@ -343,7 +344,7 @@
                     <a href="contact.html">me contacter</a>.</li>
                   <li><strong>Formats</strong> : keynote, table ronde, événement interne, échange avec les équipes.</li>
                 </ul>
-                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=conference">Réserver une conférence</a>
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=conference" data-ouvrir-rendez-vous="conference">Réserver une conférence</a>
               </aside>
             </div>
           </div>
@@ -385,7 +386,7 @@
                   <li><strong>Tarif</strong> : selon l'établissement et le volume :
                     <a href="contact.html">me contacter</a>.</li>
                 </ul>
-                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=cours">Demander une formation</a>
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=cours" data-ouvrir-rendez-vous="cours">Demander une formation</a>
               </aside>
             </div>
           </div>
@@ -425,7 +426,7 @@
                   <li><strong>Tarif</strong> : selon la commande et le délai :
                     <a href="contact.html">me contacter</a>.</li>
                 </ul>
-                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=note">Demander une note</a>
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=note" data-ouvrir-rendez-vous="note">Demander une note</a>
               </aside>
             </div>
           </div>
@@ -505,6 +506,147 @@
     <script>
       document.getElementById("year").textContent = String(new Date().getFullYear());
     </script>
+    <!-- Fenetre de rendez-vous (LOT 32). Ouverte par le bouton « Choisir un
+         creneau » de cette page, et par les boutons des pages d'offres, qui
+         arrivent ici avec leur sujet (prendre-rendez-vous.html?rdv=atelier-hd).
+         A gauche la presentation, au centre le calendrier mensuel des creneaux
+         libres, a droite les heures du jour retenu : la pastille « Continuer »
+         apparait sous le creneau choisi, et le panneau « Vos informations »
+         prend alors la place du calendrier et des heures. -->
+    <div class="modale modale-large" id="modaleRendezVous" hidden>
+      <div class="modale-fond" data-modale-fermer></div>
+      <div class="modale-boite" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="modaleRdvTitre" aria-describedby="modaleRdvIntro">
+        <button class="modale-fermer" type="button" data-modale-fermer aria-label="Fermer la fenêtre">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z" /></svg>
+        </button>
+
+        <div class="rdv" data-rdv data-api="https://api.arthurdelassus.com" data-etape="creneaux">
+          <aside class="rdv-profil">
+            <img class="rdv-portrait" src="assets/img/arthur-portrait.png" alt="Arthur de Lassus" width="56" height="56" />
+            <h2 class="rdv-nom" id="modaleRdvTitre">Arthur de Lassus</h2>
+            <p class="rdv-role">Expert énergie-climat et maraîcher bio</p>
+            <h3 class="rdv-sujet" data-rdv-sujet>Discussion ouverte</h3>
+            <p class="rdv-texte" data-rdv-texte id="modaleRdvIntro"></p>
+            <ul class="rdv-reperes">
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 3.5V7l-4 3.5z" /></svg>
+                <span>Le lien de l’appel vidéo sera envoyé par email.</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.7-4-2.3V7z" /></svg>
+                <span data-rdv-duree>30 min</span>
+              </li>
+              <li data-rdv-repere-quand hidden>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm12 8v10H5V10h14z" /></svg>
+                <span>
+                  <span data-rdv-quand-jour></span>
+                  <br />
+                  <span data-rdv-quand-heure></span>
+                </span>
+              </li>
+              <li data-rdv-repere-fuseau>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.6a15 15 0 0 0-1.3-3.4A8 8 0 0 1 18.9 8zM12 4.1c.7 1 1.3 2.3 1.7 3.9h-3.4c.4-1.6 1-2.9 1.7-3.9zM4.3 14a8 8 0 0 1 0-4h3a17 17 0 0 0 0 4h-3zm.8 2h2.6c.3 1.3.8 2.4 1.3 3.4A8 8 0 0 1 5.1 16zm2.6-8H5.1a8 8 0 0 1 3.9-3.4A15 15 0 0 0 7.7 8zM12 19.9c-.7-1-1.3-2.3-1.7-3.9h3.4c-.4 1.6-1 2.9-1.7 3.9zM14.1 14H9.9a15 15 0 0 1 0-4h4.2a15 15 0 0 1 0 4zm1.6 5.4c.5-1 1-2.1 1.3-3.4h2.6a8 8 0 0 1-3.9 3.4zm1.7-5.4a17 17 0 0 0 0-4h3a8 8 0 0 1 0 4h-3z" /></svg>
+                <span>Fuseau horaire de <span data-rdv-fuseau>Europe/Paris</span></span>
+              </li>
+            </ul>
+          </aside>
+
+          <section class="rdv-agenda" data-rdv-agenda aria-label="Calendrier des créneaux libres">
+            <div class="rdv-mois">
+              <h3 data-rdv-mois>Octobre 2026</h3>
+              <div class="rdv-mois-nav">
+                <button type="button" data-rdv-mois-precedent aria-label="Mois précédent">‹</button>
+                <button type="button" data-rdv-mois-suivant aria-label="Mois suivant">›</button>
+              </div>
+            </div>
+            <div class="rdv-semaine" aria-hidden="true">
+              <span>lun</span><span>mar</span><span>mer</span><span>jeu</span><span>ven</span><span>sam</span><span>dim</span>
+            </div>
+            <div class="rdv-grille" data-rdv-grille></div>
+            <p class="rdv-fuseau">
+              Fuseau horaire
+              <strong data-rdv-heure-locale>Europe/Paris – 21h16</strong>
+            </p>
+          </section>
+
+          <section class="rdv-creneaux" data-rdv-creneaux>
+            <div data-rdv-cote-creneaux>
+              <h3 class="rdv-panneau-titre" data-rdv-jour-titre></h3>
+              <div class="rdv-liste" data-rdv-liste></div>
+            </div>
+
+            <form class="rdv-formulaire" data-rdv-form hidden novalidate>
+              <h3 class="rdv-form-titre">Vos informations</h3>
+              <div class="rdv-champs">
+                <div>
+                  <label for="rdvPrenom">Prénom</label>
+                  <input id="rdvPrenom" name="prenom" autocomplete="given-name" required />
+                </div>
+                <div>
+                  <label for="rdvNom">Nom</label>
+                  <input id="rdvNom" name="nom" autocomplete="family-name" required />
+                </div>
+                <div class="rdv-large">
+                  <label for="rdvEmail">Adresse email</label>
+                  <input id="rdvEmail" name="email" type="email" autocomplete="email" required />
+                </div>
+                <div class="rdv-large">
+                  <label for="rdvTelephone">Numéro de téléphone (facultatif)</label>
+                  <input id="rdvTelephone" name="telephone" type="tel" autocomplete="tel" />
+                </div>
+              </div>
+              <button class="rdv-ajout" type="button" data-rdv-ajout>+ Ajouter un autre participant</button>
+              <div class="rdv-champs" data-rdv-participant-zone hidden>
+                <div class="rdv-large">
+                  <label for="rdvParticipant">Adresse email de l’autre participant</label>
+                  <input id="rdvParticipant" name="participant" type="email" />
+                </div>
+                <button class="rdv-ajout" type="button" data-rdv-ajout-retirer>Retirer ce participant</button>
+              </div>
+              <div class="rdv-note">
+                <label for="rdvMessage">Ajouter une note</label>
+                <textarea id="rdvMessage" name="message" maxlength="1000"></textarea>
+                <span class="rdv-compteur" data-rdv-compteur>0 / 1000</span>
+              </div>
+              <label class="rdv-accord">
+                <input type="checkbox" name="accord" data-rdv-accord />
+                <span>Oui, j’accepte que ces informations soient enregistrées pour ce
+                  rendez-vous, dans les conditions des
+                  <a href="confidentialite.html">règles de confidentialité</a>.</span>
+              </label>
+
+              <!-- Champ piege : invisible pour un humain, rempli par les robots. -->
+              <div class="form-piege" aria-hidden="true">
+                <label for="rdvSiteWeb">Site web</label>
+                <input id="rdvSiteWeb" name="site_web" tabindex="-1" autocomplete="off" />
+              </div>
+              <input type="hidden" name="debut" value="" />
+              <input type="hidden" name="depart" value="" />
+
+              <div class="rdv-actions">
+                <button class="btn btn-primary" type="submit">Réserver maintenant</button>
+                <button class="btn btn-ghost" type="button" data-rdv-retour>Revenir au calendrier</button>
+                <a class="btn btn-ghost" data-rdv-secours href="mailto:arthur@arthurdelassus.com" hidden>Écrire plutôt que réserver</a>
+              </div>
+              <p class="help">
+                Aucun compte n’est à créer : vous ne recevez que les emails de ce
+                rendez-vous, avec le fichier .ics pour l’ajouter à votre agenda.
+              </p>
+            </form>
+
+            <div class="rdv-confirme" data-rdv-confirme hidden></div>
+          </section>
+        </div>
+
+        <p class="help rdv-mention" data-rdv-statut role="status" aria-live="polite"></p>
+        <p class="help rdv-mention">
+          Un empêchement après coup ? Le lien d’annulation est dans l’email de
+          confirmation, et il reste valable 90 jours. Pour tout le reste, écrivez à
+          <a href="mailto:arthur@arthurdelassus.com">arthur@arthurdelassus.com</a>.
+        </p>
+      </div>
+    </div>
+
     <!-- Fenetre de contact (LOT 33). Elle est ouverte par les boutons du site
          (« Me contacter », « Demander une note », ...) et par le lien du pied de
          page : le visiteur ne quitte pas la page qu'il lisait. Le formulaire
