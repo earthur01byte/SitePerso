@@ -1,0 +1,5 @@
+# Fichiers temporaires des essais, ecrits dans le dossier du site par
+# test_climatisation.py et test_lot10_posts.py : s'ils survivent a une
+# interruption du script, ils ne doivent jamais partir en ligne (GitHub Pages
+# publierait la page de test).
+_tmp_*.html
