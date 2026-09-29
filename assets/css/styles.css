@@ -3289,3 +3289,74 @@ body.modale-ouverte{ overflow: hidden; }
   .modale-boite .hero-actions{ flex-direction: column; align-items: stretch; }
 }
 
+/* --- Fenetre de rendez-vous (LOT 32) : les creneaux libres ----------------
+   Un bouton par jour, une pastille par heure, puis le formulaire. Les
+   couleurs et les rayons sont ceux du site. */
+.rdv{ margin: 0; }
+.rdv-titre{
+  margin: 18px 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3B3B3B;
+}
+.rdv-titre:first-child{ margin-top: 4px; }
+.rdv-jours, .rdv-heures{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rdv-jour{
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.25;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: #3B3B3B;
+}
+.rdv-jour strong{ display: block; font-weight: 600; }
+.rdv-jour small{ display: block; color: var(--muted); font-size: .82rem; }
+.rdv-jour:hover{ border-color: rgba(195,106,61,.45); }
+.rdv-jour[aria-pressed="true"]{
+  background: var(--accent-soft);
+  border-color: rgba(195,106,61,.55);
+  color: var(--accent-2);
+}
+.rdv-heure{
+  font: inherit;
+  cursor: pointer;
+  min-width: 74px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: #3B3B3B;
+}
+.rdv-heure:hover{ border-color: rgba(195,106,61,.45); }
+.rdv-heure[aria-pressed="true"]{
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+.rdv-resume{
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: rgba(255,249,241,.9);
+  font-weight: 600;
+  color: #3B3B3B;
+}
+.rdv-resume:empty{ display: none; }
+.rdv-confirme{
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(28,124,74,.35);
+  background: rgba(28,124,74,.06);
+}
+.rdv-confirme h3{ margin: 0 0 8px; font-size: 1.15rem; }
+.rdv-confirme p{ margin: 0 0 10px; }
+.rdv-confirme p:last-child{ margin-bottom: 0; }
+.rdv-confirme a{ color: var(--accent); font-weight: 600; }

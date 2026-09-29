@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/contact.js"></script>
+    <script defer src="assets/js/rendez-vous.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -88,20 +89,21 @@
         <h2>Comment ça se passe</h2>
         <ol class="clean">
           <li>
-            <strong>Vous demandez un rendez-vous</strong> : le bouton en bas de cette page ouvre le formulaire, qui
-            tient en trois champs — votre nom, votre email, ce dont vous avez besoin. Indiquez-y vos disponibilités.
+            <strong>Vous choisissez un créneau</strong> : le bouton en bas de cette page ouvre les moments libres
+            de mon agenda, jour par jour et au quart d’heure. Vous désignez celui qui vous convient.
           </li>
           <li>
-            <strong>Nous fixons le créneau</strong> : je choisis l’heure qui vous convient parmi les moments libres
-            de mon agenda, et je vous la confirme.
+            <strong>Vous laissez votre nom et votre email</strong>, avec deux mots sur votre demande. C’est tout :
+            ni compte à créer, ni téléphone obligatoire.
           </li>
           <li>
-            <strong>Le rendez-vous s’inscrit dans mon Google Agenda</strong>, avec votre nom, votre email et le motif
-            indiqué. Si vous avez demandé une visioconférence, un lien de réunion y est joint.
+            <strong>Le rendez-vous s’inscrit aussitôt dans mon Google Agenda</strong>, avec votre nom, votre email
+            et le motif indiqué, accompagné d’un lien de visioconférence Google Meet.
           </li>
           <li>
-            <strong>Vous recevez la confirmation par email</strong>, avec de quoi l’ajouter à votre propre agenda —
-            et, s’il faut annuler, une simple réponse à cet email suffit.
+            <strong>Vous recevez la confirmation par email</strong>, avec le fichier <strong>.ics</strong> pour
+            l’ajouter à votre agenda et le lien de visioconférence. S’il faut annuler, un lien dans cet email s’en
+            charge, et le créneau redevient libre.
           </li>
         </ol>
 
@@ -124,7 +126,7 @@
         </p>
 
         <div class="article-foot">
-          <a class="btn btn-primary" href="contact.html#formulaire" data-ouvrir-contact>Demander un rendez-vous</a>
+          <a class="btn btn-primary" href="contact.html#formulaire" data-ouvrir-rendez-vous>Choisir un créneau</a>
           <a class="btn btn-ghost" href="confidentialite.html">Règles de confidentialité</a>
         </div>
       </div>
@@ -140,6 +142,88 @@
         </div>
       </div>
     </footer>
+
+    <!-- Fenetre de rendez-vous (LOT 32). Elle est ouverte par le bouton
+         « Choisir un creneau » de cette page : les creneaux libres de l'agenda
+         sont lus a l'ouverture, le visiteur choisit son jour puis son heure au
+         quart d'heure, et laisse ses coordonnees. Le rendez-vous s'inscrit dans
+         l'agenda avec un lien Google Meet, et la confirmation part par email,
+         le fichier .ics en piece jointe. -->
+    <div class="modale" id="modaleRendezVous" hidden>
+      <div class="modale-fond" data-modale-fermer></div>
+      <div class="modale-boite" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="modaleRdvTitre" aria-describedby="modaleRdvIntro">
+        <button class="modale-fermer" type="button" data-modale-fermer aria-label="Fermer la fenêtre">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z" /></svg>
+        </button>
+        <h2 id="modaleRdvTitre">Choisir un créneau</h2>
+        <p class="lede" id="modaleRdvIntro">
+          Voici les moments libres de mon agenda, par tranches de 30 minutes, à partir du quart d’heure.
+          Choisissez le jour, puis l’heure : le rendez-vous s’inscrit aussitôt dans mon agenda, et vous recevez la
+          confirmation par email, avec le lien de visioconférence.
+        </p>
+
+        <div class="rdv" data-rdv data-api="https://api.arthurdelassus.com">
+          <p class="help" data-rdv-statut role="status" aria-live="polite"></p>
+
+          <div data-rdv-etape>
+            <h3 class="rdv-titre">1. Le jour</h3>
+            <div class="rdv-jours" data-rdv-jours></div>
+            <div data-rdv-heures-zone hidden>
+              <h3 class="rdv-titre">2. L’heure</h3>
+              <div class="rdv-heures" data-rdv-heures></div>
+            </div>
+          </div>
+
+          <form class="form" data-rdv-form hidden novalidate>
+            <h3 class="rdv-titre">3. Vos coordonnées</h3>
+            <p class="rdv-resume" data-rdv-resume></p>
+            <input type="hidden" name="debut" value="" />
+            <div>
+              <label for="rdvNom">Nom</label>
+              <input id="rdvNom" name="nom" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="rdvEmail">Email</label>
+              <input id="rdvEmail" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="rdvTelephone">Téléphone (facultatif)</label>
+              <input id="rdvTelephone" name="telephone" type="tel" autocomplete="tel" />
+            </div>
+            <div>
+              <label for="rdvMessage">Ce dont vous avez besoin (facultatif)</label>
+              <textarea id="rdvMessage" name="message"></textarea>
+              <p class="help">Quelques mots sur votre demande : j’arrive au rendez-vous déjà au courant.</p>
+            </div>
+
+            <!-- Champ piege : invisible pour un humain, rempli par les robots. -->
+            <div class="form-piege" aria-hidden="true">
+              <label for="rdvSiteWeb">Site web</label>
+              <input id="rdvSiteWeb" name="site_web" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="depart" value="" />
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="submit">Réserver ce créneau</button>
+              <button class="btn btn-ghost" type="button" data-rdv-changer>Changer de créneau</button>
+              <a class="btn btn-ghost" data-rdv-secours href="mailto:arthur@arthurdelassus.com" hidden>Écrire plutôt que réserver</a>
+            </div>
+            <p class="help">
+              Le créneau disparaît de la liste dès la réservation : il n’est donc plus proposé à d’autres
+              visiteurs. Aucun compte n’est à créer de votre côté.
+            </p>
+          </form>
+
+          <div class="rdv-confirme" data-rdv-confirme hidden></div>
+        </div>
+
+        <p class="help">
+          Un empêchement après coup ? Le lien d’annulation est dans l’email de confirmation, et il reste valable
+          90 jours. Pour tout le reste, écrivez à
+          <a href="mailto:arthur@arthurdelassus.com">arthur@arthurdelassus.com</a>.
+        </p>
+      </div>
+    </div>
 
     <!-- Fenetre de contact (LOT 33). Elle est ouverte par les boutons du site
          (« Me contacter », « Demander un rendez-vous », ...) et par les liens du
