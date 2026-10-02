@@ -370,11 +370,51 @@
                 Les cours partent de cas concrets et d'ordres de grandeur, et s'adaptent au niveau des étudiants comme
                 à la durée du module.
               </p>
+              <!-- LOT 34 : bande de logos a deux rangees defilantes.
+                   Rangee 1 : les etablissements ou j'enseigne (et ceux ou j'ai enseigne).
+                   Rangee 2 : les organisations qui m'ont fait confiance.
+                   Chaque rangee ne contient sa liste qu'UNE fois : main.js en ajoute
+                   une copie (masquee aux lecteurs d'ecran) pour que le defilement
+                   boucle sans trou. Sans JavaScript, une rangee fixe reste lisible. -->
               <p class="offer-logos-cap">Où j'enseigne</p>
-              <div class="offer-logos">
-                <img src="Images/EMN_logo.png" alt="EMN" loading="lazy" />
-                <img src="Images/Campus_de_la_transition_logo_transparent.png" alt="Campus de la Transition" loading="lazy" />
-                <img src="Images/Logo_ICP_transparent.png" alt="ICP" loading="lazy" />
+              <div class="defilement-logos">
+                <div class="defilement-rangee" data-defilement>
+                  <div class="defilement-groupe">
+                    <img src="Images/ESSEC_logo_transparent.png" alt="ESSEC Business School" loading="lazy" />
+                    <img src="Images/Centrale_Supelec_logo_transparent.png" alt="Centrale Supélec" loading="lazy" />
+                    <img src="Images/Mines_Paris_logo_transparent.png" alt="Mines Paris – PSL" loading="lazy" />
+                    <img src="Images/Ponts_ParisTech_logo_transparent.png" alt="École des Ponts ParisTech" loading="lazy" />
+                    <img src="Images/IFP_Logo.png" alt="IFP School" loading="lazy" />
+                    <img src="Images/HEC_logo_transparent.png" alt="HEC Paris" loading="lazy" />
+                    <img src="Images/UniLaSalle_logo_transparent.png" alt="UniLaSalle" loading="lazy" />
+                    <img src="Images/EMN_logo.png" alt="EM Normandie Business School" loading="lazy" />
+                    <img src="Images/Campus_de_la_transition_logo_transparent.png" alt="Campus de la Transition" loading="lazy" />
+                    <img src="Images/Logo_ICP_transparent.png" alt="Institut Catholique de Paris" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+              <p class="offer-logos-cap">Ils m'ont fait confiance</p>
+              <div class="defilement-logos">
+                <div class="defilement-rangee defilement-rangee-inverse" data-defilement>
+                  <div class="defilement-groupe">
+                    <img src="Images/TotalEnergies_logo_transparent.png" alt="TotalEnergies" loading="lazy" />
+                    <img src="Images/Michelin_logo_transparent.png" alt="Michelin" loading="lazy" />
+                    <img src="Images/EDF_logo_transparent.png" alt="EDF" loading="lazy" />
+                    <img src="Images/Omexom_logo_transparent.png" alt="Omexom" loading="lazy" />
+                    <img src="Images/SchneiderElectric_logo_transparent.png" alt="Schneider Electric" loading="lazy" />
+                    <img src="Images/Logo_Vinci_Energies.webp" alt="Vinci Energies" loading="lazy" />
+                    <img src="Images/Decathlon_logo_mini.jpg" alt="Decathlon" loading="lazy" />
+                    <img src="Images/ADEME_logo_transparent.png" alt="ADEME" loading="lazy" />
+                    <img src="Images/IFRI_logo_transparent.png" alt="IFRI" loading="lazy" />
+                    <img src="Images/CREDOC_logo_transparent.png" alt="CREDOC" loading="lazy" />
+                    <img src="Images/Quantis_logo_transparent.png" alt="Quantis" loading="lazy" />
+                    <img src="Images/Carbone4_logo_transparent.png" alt="Carbone 4" loading="lazy" />
+                    <img src="Images/CNFPT_logo_transparent.png" alt="CNFPT" loading="lazy" />
+                    <img src="Images/ValenceAgglo_logo_transparent.png" alt="Valence Romans Agglomération" loading="lazy" />
+                    <img src="Images/Département_49_logo_transparent.png" alt="Département de Maine-et-Loire" loading="lazy" />
+                    <img src="Images/Saint_Herblain_logo_transparent.png" alt="Saint-Herblain" loading="lazy" />
+                  </div>
+                </div>
               </div>
             </div>
             <div class="offer-side">

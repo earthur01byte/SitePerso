@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/contact.js"></script>
+    <script defer src="assets/js/inscription.js"></script>
     <script defer src="assets/js/rendez-vous.js"></script>
     <script type="application/ld+json">
     {
@@ -129,13 +130,11 @@
                 <div class="hero-trust-stat"><strong>2 000+</strong><span>personnes sensibilisées</span></div>
                 <div class="hero-trust-stat"><strong>2</strong><span>ateliers créés, utilisés dans le monde entier</span></div>
               </div>
-              <p class="hero-trust-title">Ils m’ont fait confiance</p>
-              <div class="hero-trust-logos">
-                <img src="Images/HEC_logo_transparent.png" alt="HEC Paris" loading="lazy" />
-                <img src="Images/SchneiderElectric_logo_transparent.png" alt="Schneider Electric" loading="lazy" />
-                <img src="Images/Carbone4_logo_transparent.png" alt="Carbone 4" loading="lazy" />
-                <img src="Images/CNFPT_logo_transparent.png" alt="CNFPT" loading="lazy" />
-              </div>
+              <!-- LOT 34 : le titre « Ils m’ont fait confiance » et ses quatre logos
+                   sont retires du hero. Le bandeau de logos qui suit la section
+                   (.home-trust, plus bas) porte deja cette reassurance, avec
+                   davantage de references : le hero reste centre sur le propos
+                   et les trois chiffres cles. -->
             </div>
           </div>
 
@@ -226,7 +225,7 @@
                 chiffres en main, aux idées fausses qui encombrent le débat écologique.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-ochre" href="mailto:arthur@arthurdelassus.com?subject=Me%20pr%C3%A9venir%20%C3%A0%20la%20sortie%20du%20livre%20L%27%C3%A9cologie%20sans%20les%20mythes">Me prévenir à la sortie</a>
+                <a class="btn btn-ochre" href="contact.html" data-ouvrir-inscription="livre">Me prévenir à la sortie</a>
                 <a class="btn btn-outline" href="ressources.html#livres">Voir tous mes livres</a>
               </div>
             </div>
@@ -285,7 +284,10 @@
                 </div>
               </div>
               <p>Horizons Décarbonés et Fresque des frontières planétaires, pour entrer dans la transition par l’expérience.</p>
-              <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=atelier" data-ouvrir-rendez-vous="atelier">Organiser un atelier</a>
+              <div class="hero-actions">
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=atelier" data-ouvrir-rendez-vous="atelier">Organiser un atelier</a>
+                <a class="btn btn-outline" href="services.html#horizons-decarbones">En savoir plus</a>
+              </div>
               <div class="home-offer-logos home-offer-logos-foot">
                 <img src="Images/ValenceAgglo_logo_transparent.png" alt="Valence Romans Agglomération" loading="lazy" />
                 <img src="Images/Carbone4_logo_transparent.png" alt="Carbone 4" loading="lazy" />
@@ -295,7 +297,10 @@
             <div class="home-offer">
               <h3>Conférences</h3>
               <p>45 à 60 minutes, chiffrées et accessibles : keynote, table ronde ou événement interne.</p>
-              <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=conference" data-ouvrir-rendez-vous="conference">Réserver une conférence</a>
+              <div class="hero-actions">
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=conference" data-ouvrir-rendez-vous="conference">Réserver une conférence</a>
+                <a class="btn btn-outline" href="services.html#conferences">En savoir plus</a>
+              </div>
               <div class="home-offer-logos home-offer-logos-foot">
                 <img src="Images/Decathlon_logo_mini.jpg" alt="Decathlon" loading="lazy" />
                 <img src="Images/Département_49_logo_transparent.png" alt="Département de Maine-et-Loire" loading="lazy" />
@@ -305,7 +310,10 @@
             <div class="home-offer">
               <h3>Cours &amp; notes d’expertise</h3>
               <p>Séquences pédagogiques et notes de décodage, pour les grandes écoles et la formation continue.</p>
-              <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=cours" data-ouvrir-rendez-vous="cours">Demander une intervention</a>
+              <div class="hero-actions">
+                <a class="btn btn-ochre" href="prendre-rendez-vous.html?rdv=cours" data-ouvrir-rendez-vous="cours">Demander une intervention</a>
+                <a class="btn btn-outline" href="services.html#cours">En savoir plus</a>
+              </div>
               <div class="home-offer-logos home-offer-logos-foot">
                 <img src="Images/SchneiderElectric_logo_transparent.png" alt="Schneider Electric" loading="lazy" />
                 <img src="Images/EMN_logo.png" alt="EM Normandie Business School" loading="lazy" />
@@ -554,6 +562,57 @@
             <a href="mailto:arthur@arthurdelassus.com">arthur@arthurdelassus.com</a>.
           </p>
         </form>
+      </div>
+    </div>
+    <!-- Fenetre d'inscription (LOT 34). Elle sert au livre a paraitre
+         (« Me prevenir a la sortie ») et au telechargement de la note IFRI :
+         le visiteur laisse un prenom et un email, l'API enregistre
+         l'inscription dans une liste consultable, puis le fichier s'ouvre
+         quand il y en a un. Meme habillage que la fenetre de contact, avec
+         des identifiants propres pour ne jamais entrer en conflit. -->
+    <div class="modale" id="modaleInscription" data-api="https://api.arthurdelassus.com" hidden>
+      <div class="modale-fond" data-inscription-fermer></div>
+      <div class="modale-boite" role="dialog" aria-modal="true" aria-labelledby="inscriptionTitre" aria-describedby="inscriptionIntro">
+        <button class="modale-fermer" type="button" data-inscription-fermer aria-label="Fermer la fenêtre">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z" /></svg>
+        </button>
+        <h2 id="inscriptionTitre">Me prévenir à la sortie</h2>
+        <p class="lede" id="inscriptionIntro">
+          Laissez votre prénom et votre email : je vous écris le jour de la sortie du livre.
+        </p>
+
+        <form class="form" id="inscriptionForm" data-api-inscription="https://api.arthurdelassus.com" novalidate>
+          <div>
+            <label for="inscriptionNom">Prénom et nom</label>
+            <input id="inscriptionNom" name="nom" autocomplete="name" required />
+          </div>
+          <div>
+            <label for="inscriptionEmail">Email</label>
+            <input id="inscriptionEmail" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <!-- Champ piege : invisible pour un humain, rempli par les robots. -->
+          <div class="form-piege" aria-hidden="true">
+            <label for="inscriptionSite">Site web</label>
+            <input id="inscriptionSite" name="site_web" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="origine" value="livre" />
+          <input type="hidden" name="depart" value="" />
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="submit">Prévenez-moi</button>
+          </div>
+          <p class="help" data-statut role="status" aria-live="polite"></p>
+          <p class="help">
+            Votre email sert uniquement à vous répondre. Il n'est ni vendu ni transmis à un tiers :
+            <a href="confidentialite.html">politique de confidentialité</a>.
+          </p>
+        </form>
+
+        <div class="inscription-suite" data-inscription-suite hidden>
+          <p data-inscription-suite-texte></p>
+          <a class="btn btn-ochre" data-inscription-fichier href="#" hidden>Télécharger la note (PDF)</a>
+        </div>
       </div>
     </div>
   </body>

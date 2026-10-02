@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/contact.js"></script>
+    <script defer src="assets/js/inscription.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -149,7 +150,9 @@
                 11 ans plus tard, nous continuons d'approfondir ce sillon.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-ochre" href="mailto:arthur@arthurdelassus.com?subject=O%C3%B9%20trouver%20le%20livre%202020">
+                <a class="btn btn-ochre"
+                  href="https://premierepartie.com/boutique/blandine-et-arthur-de-lassus-et-lentement-tout-bascule/"
+                  target="_blank" rel="noopener">
                   Où le trouver
                 </a>
               </div>
@@ -171,7 +174,8 @@
               <div class="hero-actions">
                 <a
                   class="btn btn-blue"
-                  href="mailto:arthur@arthurdelassus.com?subject=Me%20pr%C3%A9venir%20%C3%A0%20la%20sortie%20du%20livre%20L%27%C3%A9cologie%20sans%20les%20mythes"
+                  href="contact.html"
+                  data-ouvrir-inscription="livre"
                 >
                   Me prévenir à la sortie
                 </a>
@@ -201,7 +205,7 @@
                     discuter des chemins possibles de décarbonation.
                   </p>
                   <div class="hero-actions">
-                    <a class="btn btn-ochre" href="services.html">En savoir plus</a>
+                    <a class="btn btn-ochre" href="services.html#horizons-decarbones">En savoir plus</a>
                   </div>
                 </div>
                 <div class="prod-card-logo">
@@ -219,7 +223,7 @@
                     stratégies compatibles avec un monde habitable.
                   </p>
                   <div class="hero-actions">
-                    <a class="btn btn-ochre" href="services.html">En savoir plus</a>
+                    <a class="btn btn-ochre" href="services.html#frontieres-planetaires">En savoir plus</a>
                   </div>
                 </div>
                 <div class="prod-card-logo">
@@ -254,7 +258,13 @@
                     politiques.
                   </p>
                   <div class="hero-actions">
-                    <a class="btn btn-blue" href="mailto:arthur@arthurdelassus.com?subject=Demande%20de%20la%20note%20Philibert">Demander la note</a>
+                    <!-- LOT 34 : la note est servie apres un prenom et un email, dans la
+                         fenetre d'inscription (assets/js/inscription.js). Le lien direct
+                         vers le fichier reste le repli quand JavaScript est desactive. -->
+                    <a class="btn btn-blue"
+                      href="Notes/ifri_lassus_philibert_flexibilite_electrique_europe_ifri_2025.pdf"
+                      data-ouvrir-inscription="note-ifri"
+                      data-fichier="Notes/ifri_lassus_philibert_flexibilite_electrique_europe_ifri_2025.pdf">Demander la note</a>
                   </div>
                 </div>
                 <div class="prod-report-logo">
@@ -274,7 +284,7 @@
                   </p>
                   <p class="prod-status">Accès sur demande.</p>
                   <div class="hero-actions">
-                    <a class="btn btn-ochre" href="contact.html" data-ouvrir-contact="">Me contacter</a>
+                    <a class="btn btn-ochre" href="contact.html" data-ouvrir-contact="note">Me contacter</a>
                   </div>
                 </div>
                 <div class="prod-report-logo">
@@ -2163,7 +2173,7 @@ Wébinaire demain à 12h !</p>
         <div class="container container-narrow text-center">
           <h2 class="section-title">Et maintenant ?</h2>
           <div class="ferme-transition-links">
-            <a class="btn btn-anthracite" href="contact.html" data-ouvrir-contact="">Me contacter pour collaborer</a>
+            <a class="btn btn-anthracite" href="contact.html" data-ouvrir-contact="autre">Me contacter pour collaborer</a>
           </div>
         </div>
       </section>
@@ -2247,6 +2257,57 @@ Wébinaire demain à 12h !</p>
             <a href="mailto:arthur@arthurdelassus.com">arthur@arthurdelassus.com</a>.
           </p>
         </form>
+      </div>
+    </div>
+    <!-- Fenetre d'inscription (LOT 34). Elle sert au livre a paraitre
+         (« Me prevenir a la sortie ») et au telechargement de la note IFRI :
+         le visiteur laisse un prenom et un email, l'API enregistre
+         l'inscription dans une liste consultable, puis le fichier s'ouvre
+         quand il y en a un. Meme habillage que la fenetre de contact, avec
+         des identifiants propres pour ne jamais entrer en conflit. -->
+    <div class="modale" id="modaleInscription" data-api="https://api.arthurdelassus.com" hidden>
+      <div class="modale-fond" data-inscription-fermer></div>
+      <div class="modale-boite" role="dialog" aria-modal="true" aria-labelledby="inscriptionTitre" aria-describedby="inscriptionIntro">
+        <button class="modale-fermer" type="button" data-inscription-fermer aria-label="Fermer la fenêtre">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z" /></svg>
+        </button>
+        <h2 id="inscriptionTitre">Me prévenir à la sortie</h2>
+        <p class="lede" id="inscriptionIntro">
+          Laissez votre prénom et votre email : je vous écris le jour de la sortie du livre.
+        </p>
+
+        <form class="form" id="inscriptionForm" data-api-inscription="https://api.arthurdelassus.com" novalidate>
+          <div>
+            <label for="inscriptionNom">Prénom et nom</label>
+            <input id="inscriptionNom" name="nom" autocomplete="name" required />
+          </div>
+          <div>
+            <label for="inscriptionEmail">Email</label>
+            <input id="inscriptionEmail" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <!-- Champ piege : invisible pour un humain, rempli par les robots. -->
+          <div class="form-piege" aria-hidden="true">
+            <label for="inscriptionSite">Site web</label>
+            <input id="inscriptionSite" name="site_web" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="origine" value="livre" />
+          <input type="hidden" name="depart" value="" />
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="submit">Prévenez-moi</button>
+          </div>
+          <p class="help" data-statut role="status" aria-live="polite"></p>
+          <p class="help">
+            Votre email sert uniquement à vous répondre. Il n'est ni vendu ni transmis à un tiers :
+            <a href="confidentialite.html">politique de confidentialité</a>.
+          </p>
+        </form>
+
+        <div class="inscription-suite" data-inscription-suite hidden>
+          <p data-inscription-suite-texte></p>
+          <a class="btn btn-ochre" data-inscription-fichier href="#" hidden>Télécharger la note (PDF)</a>
+        </div>
       </div>
     </div>
   </body>

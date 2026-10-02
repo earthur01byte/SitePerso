@@ -236,4 +236,22 @@
     appliquer();
   }
 
+  // --- LOT 34 : bandes de logos defilantes (services.html) ---
+  // Chaque rangee ne contient qu'une seule copie de sa liste dans le HTML.
+  // On la duplique pour que le defilement boucle sans trou : la copie prend
+  // le relais pendant que la rangee revient en place. La copie est masquee
+  // aux lecteurs d'ecran (elle ne fait que repeter les memes logos) et
+  // l'animation ne demarre qu'une fois la duplication faite, pour ne jamais
+  // montrer de vide.
+  document.querySelectorAll("[data-defilement]").forEach((rangee) => {
+    const groupe = rangee.querySelector(".defilement-groupe");
+    if (!groupe) return;
+    const copie = groupe.cloneNode(true);
+    copie.classList.add("defilement-copie");
+    copie.setAttribute("aria-hidden", "true");
+    copie.querySelectorAll("img").forEach((image) => image.setAttribute("alt", ""));
+    rangee.appendChild(copie);
+    rangee.classList.add("defilement-rangee-prete");
+  });
+
 })();

@@ -3529,3 +3529,105 @@ body.modale-ouverte{ overflow: hidden; }
   .rdv-liste{ max-height: none; }
   .rdv-reperes{ margin-top: 14px; }
 }
+
+/* ===================================================
+   LOT 34 — Refinements du front du site
+   (ajouts uniquement : aucune regle existante modifiee)
+   =================================================== */
+
+/* --- 1. Defilement des ancres, generalise ---
+   La barre de navigation est fixe : sans marge de defilement, une ancre
+   place le titre de la section sous l'en-tete. La regle ne visait que les
+   ancres de la page Ressources. Elle s'applique desormais a toute cible
+   d'ancre : #cours, #conferences, #horizons-decarbones, #frontieres-planetaires. */
+[id]{ scroll-margin-top: 96px; }
+
+/* --- 2. « Deux ateliers crees » : logos centres sous le chiffre --- */
+.home-stat-logos{ justify-content: center; }
+
+/* --- 3. Bande de logos a deux rangees defilantes (services.html) ---
+   Sans JavaScript, chaque rangee est une simple liste de logos qui passe a
+   la ligne : rien ne bouge et rien n'est coupe. Des que main.js a ajoute la
+   copie de la liste, la rangee defile en continu ; la translation de -50 %
+   vaut exactement la largeur d'une liste, la boucle est donc invisible. */
+.defilement-logos{
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 1.2rem;
+  padding: .9rem 0;
+  background: rgba(255,249,241,.9);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  /* Les bords s'estompent : les logos entrent et sortent sans coupure nette. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+.defilement-rangee{ display: flex; }
+.defilement-groupe{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  /* La marge interieure de chaque cote vaut exactement l'espace entre deux
+     logos : la jonction entre la liste et sa copie reste reguliere. */
+  gap: 1.4rem 2.6rem;
+  padding: 0 1.3rem;
+}
+.defilement-groupe img{
+  max-height: 52px;
+  max-width: 240px;
+  width: auto;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+/* Rangee prete : la copie est en place, le defilement peut commencer. */
+.defilement-rangee-prete{
+  width: max-content;
+  animation: defilement-logos 70s linear infinite;
+}
+.defilement-rangee-prete .defilement-groupe{
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+/* La seconde rangee part dans l'autre sens, plus lentement : les deux
+   mouvements ne se synchronisent pas et l'oeil ne percoit pas la boucle. */
+.defilement-rangee-inverse.defilement-rangee-prete{
+  animation-direction: reverse;
+  animation-duration: 88s;
+}
+@keyframes defilement-logos{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+@media (max-width: 640px){
+  .defilement-groupe{ gap: 1rem 1.8rem; padding: 0 .9rem; }
+  .defilement-groupe img{ max-height: 34px; max-width: 150px; }
+}
+/* Mouvement reduit a la demande du systeme : les listes reviennent a la
+   ligne, sans copie, donc sans doublon a l'ecran. */
+@media (prefers-reduced-motion: reduce){
+  .defilement-rangee-prete{ animation: none; width: auto; }
+  .defilement-rangee-prete .defilement-groupe{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .defilement-copie{ display: none; }
+}
+
+/* --- 4. Fenetre d'inscription (livre a paraitre, note IFRI) ---
+   Meme habillage que la fenetre de contact (.modale) ; seuls le bloc de
+   succes et le bouton de telechargement qui l'accompagne sont nouveaux. */
+.inscription-suite{
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(28,124,74,.35);
+  border-radius: var(--radius-sm);
+  background: rgba(28,124,74,.07);
+}
+.inscription-suite[hidden]{ display: none; }
+.inscription-suite p{ margin: 0 0 10px; }
+.inscription-suite .btn{ width: 100%; }
+/* Un bouton masque doit le rester : .btn impose un display qui l'emporterait
+   sur le display:none du navigateur pour l'attribut hidden. */
+.inscription-suite .btn[hidden]{ display: none !important; }
+
