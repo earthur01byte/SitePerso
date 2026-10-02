@@ -134,6 +134,39 @@
     if (genre) statut.classList.add(genre);
   };
 
+  /**
+   * L'attente, montree dans la grille elle-meme : lire les creneaux demande un
+   * aller-retour vers Google Agenda, et un calendrier vide laisse croire que rien
+   * ne se passe. Le bloc est retire des que la reponse arrive (ou en cas d'erreur).
+   */
+  const patiente = (message) => {
+    racine.setAttribute("aria-busy", "true");
+    if (boutonPrecedent) boutonPrecedent.disabled = true;
+    if (boutonSuivant) boutonSuivant.disabled = true;
+    if (elGrille) {
+      vider(elGrille);
+      const bloc = document.createElement("div");
+      bloc.className = "rdv-attente";
+      const molette = document.createElement("span");
+      molette.className = "rdv-attente-molette";
+      molette.setAttribute("aria-hidden", "true");
+      const mot = document.createElement("span");
+      mot.className = "rdv-attente-mot";
+      mot.textContent = message;
+      bloc.append(molette, mot);
+      elGrille.append(bloc);
+    }
+    if (elListe) {
+      vider(elListe);
+      const vide = document.createElement("p");
+      vide.className = "rdv-liste-vide";
+      vide.textContent = "Les heures apparaîtront dès que les créneaux seront connus.";
+      elListe.append(vide);
+    }
+  };
+
+  const finPatiente = () => racine.removeAttribute("aria-busy");
+
   /** Horodatage en secondes, comme le controle anti-robot du serveur. */
   const majDepart = () => {
     const champ = formulaire.querySelector('[name="depart"]');
@@ -198,6 +231,7 @@
     if (!forcer && groupes.length > 0 && Date.now() - lueLe < PEREMPTION) return;
 
     dire("Lecture des créneaux libres…");
+    patiente("Recherche des créneaux disponibles…");
     try {
       const reponse = await fetch(api + "/creneaux.php?jours=" + JOURS_AFFICHES);
       const resultat = await reponse.json().catch(() => ({}));
@@ -207,8 +241,10 @@
       groupes = Array.isArray(resultat.jours) ? resultat.jours : [];
       lueLe = Date.now();
       preparer(resultat);
+      finPatiente();
     } catch (erreur) {
       window.console.warn("Rendez-vous : créneaux illisibles.", erreur);
+      finPatiente();
       vider(elGrille);
       vider(elListe);
       dire("Les créneaux ne sont pas lisibles à l’instant. Réessayez dans un moment, " +
@@ -500,7 +536,13 @@
       site_web: donnees.site_web,
     };
 
-    if (boutonEnvoi) boutonEnvoi.disabled = true;
+    if (boutonEnvoi) {
+      boutonEnvoi.disabled = true;
+      // Le libellé du bouton porte l'attente : l'enregistrement passe par Google
+      // Agenda puis par le SMTP, ce qui prend quelques secondes.
+      boutonEnvoi.dataset.libelle = boutonEnvoi.dataset.libelle || boutonEnvoi.textContent;
+      boutonEnvoi.textContent = "Enregistrement…";
+    }
     dire("Réservation en cours…");
     try {
       const reponse = await fetch(api + "/reserver.php", {
@@ -536,7 +578,10 @@
         " : le créneau est dans le message déjà préparé.", "aide-souci");
       montrerSecours(creneauChoisi);
     } finally {
-      if (boutonEnvoi) boutonEnvoi.disabled = false;
+      if (boutonEnvoi) {
+        boutonEnvoi.disabled = false;
+        if (boutonEnvoi.dataset.libelle) boutonEnvoi.textContent = boutonEnvoi.dataset.libelle;
+      }
     }
   });
 

@@ -3353,6 +3353,40 @@ body.modale-ouverte{ overflow: hidden; }
 }
 .rdv-mois-nav button:hover:not([disabled]){ border-color: rgba(195,106,61,.45); }
 .rdv-mois-nav button[disabled]{ opacity: .35; cursor: default; }
+/* L'attente pendant la lecture des creneaux : le bloc occupe la grille du
+   calendrier, pour que le visiteur voie que quelque chose se passe. */
+.rdv-attente{
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 126px;
+  padding: 18px 12px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .86rem;
+  text-align: center;
+}
+.rdv-attente-molette{
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: fr-molette 1.9s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce){
+  .rdv-attente-molette{ animation: none; }
+}
+.rdv-liste-vide{
+  margin: 0;
+  padding: 10px 4px;
+  color: var(--muted);
+  font-size: .84rem;
+}
 .rdv-semaine, .rdv-grille{
   display: grid;
   grid-template-columns: repeat(7, 1fr);
