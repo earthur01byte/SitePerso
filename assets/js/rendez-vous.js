@@ -47,8 +47,8 @@
     },
     "atelier-fdfp": {
       titre: "La Fresque des frontières planétaires",
-      texte: "Relier les neuf sujets environnementaux importants — pas seulement le " +
-        "climat — et repérer les deux moteurs qui expliquent l’essentiel de nos impacts. " +
+      texte: "Relier les neuf sujets environnementaux importants (pas seulement le " +
+        "climat) et repérer les deux moteurs qui expliquent l’essentiel de nos impacts. " +
         "Voyons ce que cela donne chez vous.",
     },
     atelier: {
@@ -301,7 +301,7 @@
     afficherMois();
 
     const total = jours.reduce((somme, jour) => somme + ouverts.get(jour), 0);
-    dire(total + (total === 1 ? " créneau libre" : " créneaux libres") + " — " +
+    dire(total + (total === 1 ? " créneau libre" : " créneaux libres") + " : " +
       duree + " minutes par rendez-vous. Choisissez un jour.", "aide-ok");
   }
 
@@ -344,7 +344,7 @@
     if (!elHeureLocale) return;
     const heure = new Date().toLocaleTimeString("fr-FR",
       { timeZone: fuseau, hour: "2-digit", minute: "2-digit" }).replace(":", "h");
-    elHeureLocale.textContent = fuseau + " – " + heure;
+    elHeureLocale.textContent = fuseau + " : " + heure;
   }
 
   /** Un jour retenu : ses heures s'affichent dans le panneau de droite. */
@@ -364,7 +364,7 @@
     });
 
     const combien = creneaux.length;
-    dire("Jour choisi : " + joliJourLong(jour) + " — " + combien +
+    dire("Jour choisi : " + joliJourLong(jour) + ", " + combien +
       (combien === 1 ? " créneau libre" : " créneaux libres") +
       ". Choisissez l’heure.", "aide-ok");
     const premier = elListe.querySelector("button");

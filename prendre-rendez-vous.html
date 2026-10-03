@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Prendre rendez-vous avec Arthur de Lassus depuis ce site : les créneaux libres de son agenda, la confirmation par email, et ce que Google en reçoit — sans compte à créer." />
+    <meta name="description" content="Prendre rendez-vous avec Arthur de Lassus depuis ce site : les créneaux libres de son agenda, la confirmation par email, et ce que Google en reçoit, sans compte à créer." />
     <link rel="canonical" href="https://arthurdelassus.com/prendre-rendez-vous.html" />
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -69,6 +69,12 @@
     <main id="contenu">
       <div class="container container-narrow article">
         <h1 class="section-title">📅 Prendre rendez-vous</h1>
+        <!-- LOT 36 : le bouton monte en tete de page, avant l'explication : on
+             doit pouvoir ouvrir l'agenda sans lire la page entiere. Il garde le
+             meme habillage, seule sa place change. -->
+        <div class="article-actions">
+          <a class="btn btn-primary" href="contact.html#formulaire" data-ouvrir-rendez-vous>Choisir un créneau</a>
+        </div>
         <p class="article-meta">
           Cette page présente l’agenda en ligne de ce site : ce qu’il vous permet de faire, comment le rendez-vous
           se retrouve dans mon agenda, et ce que Google en reçoit. Mise à jour : septembre 2026.
@@ -76,7 +82,7 @@
 
         <h2>À quoi sert cette application</h2>
         <p>
-          Ce site — <strong>arthurdelassus.com</strong>, dont le nom est <strong>Arthur de Lassus</strong> — présente
+          Ce site, <strong>arthurdelassus.com</strong>, dont le nom est <strong>Arthur de Lassus</strong>, présente
           mes ateliers, mes conférences, mes cours et mes notes. Il porte sa propre application de prise de
           rendez-vous : elle lit les créneaux libres de mon Google Agenda, vous laissez choisir l’heure qui vous
           convient, le rendez-vous s’inscrit dans mon agenda, et vous recevez la confirmation par email avec de quoi
@@ -89,7 +95,7 @@
         <h2>Comment ça se passe</h2>
         <ol class="clean">
           <li>
-            <strong>Vous choisissez un créneau</strong> : le bouton en bas de cette page ouvre les moments libres
+            <strong>Vous choisissez un créneau</strong> : le bouton en haut de cette page ouvre les moments libres
             de mon agenda, jour par jour et au quart d’heure. Vous désignez celui qui vous convient.
           </li>
           <li>
@@ -110,7 +116,7 @@
         <h2>Aucun compte à créer, et rien de votre côté</h2>
         <p>
           Aucun compte n’est à créer, et vous n’avez jamais à connecter votre propre compte Google : c’est moi qui
-          autorise cette application à écrire dans le mien. Elle n’accède qu’à mes rendez-vous — ni à vos emails, ni
+          autorise cette application à écrire dans le mien. Elle n’accède qu’à mes rendez-vous : ni à vos emails, ni
           à vos fichiers, ni à vos contacts.
         </p>
         <p>
@@ -120,13 +126,12 @@
 
         <h2>Ce qui est enregistré</h2>
         <p>
-          Votre nom, votre adresse email, le motif que vous indiquez et le créneau retenu — rien d’autre. Le détail
+          Votre nom, votre adresse email, le motif que vous indiquez et le créneau retenu : rien d’autre. Le détail
           des durées de conservation, des prestataires et de l’usage de Google Agenda est dans les
           <a href="confidentialite.html">règles de confidentialité</a>.
         </p>
 
         <div class="article-foot">
-          <a class="btn btn-primary" href="contact.html#formulaire" data-ouvrir-rendez-vous>Choisir un créneau</a>
           <a class="btn btn-ghost" href="confidentialite.html">Règles de confidentialité</a>
         </div>
       </div>
@@ -202,7 +207,7 @@
             <div class="rdv-grille" data-rdv-grille></div>
             <p class="rdv-fuseau">
               Fuseau horaire
-              <strong data-rdv-heure-locale>Europe/Paris – 21h16</strong>
+              <strong data-rdv-heure-locale>Europe/Paris : 21h16</strong>
             </p>
           </section>
 

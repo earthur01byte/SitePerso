@@ -3655,4 +3655,14 @@ body.modale-ouverte{ overflow: hidden; }
   margin: 0;
 }
 
+/* --- 6. Prendre rendez-vous : le bouton en tete de page (LOT 36) ---
+   Le bouton garde l'habillage .btn ; seule sa place change. Il ouvre l'agenda
+   avant l'explication, et la marge du bas le separe de la phrase qui suit. */
+.article-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
 
