@@ -47,8 +47,8 @@
     "note-ifri": {
       titre: "Recevoir la note",
       intro:
-        "Laissez votre prénom et votre email : le téléchargement de la note s’ouvre aussitôt, " +
-        "et je vous tiens au courant des suites qu’elle reçoit.",
+        "Laissez votre prénom et votre email : le téléchargement de la note s’ouvre aussitôt. " +
+        "Aucun email ne vous sera envoyé : votre adresse me dit simplement qui s’y intéresse.",
       action: "Recevoir la note",
       merci: "Merci ! La note est prête à être téléchargée ci-dessous.",
     },

@@ -3631,3 +3631,28 @@ body.modale-ouverte{ overflow: hidden; }
    sur le display:none du navigateur pour l'attribut hidden. */
 .inscription-suite .btn[hidden]{ display: none !important; }
 
+/* --- 5. Accueil : les logos defilants remplacent la liste fixe (LOT 35) ---
+   « Ils m'ont fait confiance » disparait, et les deux rangees defilantes
+   prennent sa place avec tous les logos du site. Le bandeau (.home-trust) a
+   deja son fond clair et ses bordures : la bande y perd sa boite interieure,
+   qui dessinerait un cadre dans un cadre. Sans JavaScript, les deux listes
+   restent lisibles, l'une sous l'autre.
+
+   A noter : .home-trust-title et .home-trust-logos, plus haut dans ce
+   fichier, ne servent plus a rien — aucun HTML ne porte ces classes. Ils sont
+   laisses tels quels, comme le reste du fichier (ajouts uniquement), et
+   peuvent etre retires sans risque le jour ou la feuille sera nettoyee. */
+.home-logos-defilants{
+  display: grid;
+  gap: .5rem;
+  margin-bottom: 34px;
+}
+.home-logos-defilants .defilement-logos{
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: .3rem 0;
+  margin: 0;
+}
+
+
