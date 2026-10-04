@@ -3491,6 +3491,48 @@ body.modale-ouverte{ overflow: hidden; }
   cursor: pointer;
 }
 .rdv-ajout:hover{ text-decoration: underline; }
+/* LOT 37 : les reglages du rendez-vous. Des boutons radio habilles en
+   pastilles : un seul clic, toutes les reponses visibles, et le clavier comme
+   les lecteurs d'ecran s'y retrouvent, puisque ce sont de vrais boutons radio.
+   Les blocs propres au type de rendez-vous se cachent avec l'attribut hidden,
+   qu'il faut donc reprendre ici, sinon l'affichage en grille l'emporterait. */
+.rdv-reglages{
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+.rdv-reglages-titre{ padding: 0 6px; font-size: 1rem; font-weight: 600; }
+.rdv-reglages-aide{ margin: 0; font-size: .88rem; color: var(--muted); }
+.rdv-reglages-type{ display: grid; gap: 14px; }
+.rdv-reglages-type[hidden]{ display: none; }
+.rdv-puces{ display: flex; flex-wrap: wrap; gap: 8px; }
+.rdv-puces-titre{ flex: 0 0 100%; margin: 0 0 2px; font-size: .9rem; color: var(--muted); }
+.rdv-puce{ position: relative; }
+.rdv-puce input{ position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; }
+.rdv-puce span{
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 15px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #FFFFFF;
+  font-size: .92rem;
+  color: var(--text);
+  cursor: pointer;
+}
+.rdv-puce:hover span{ border-color: var(--accent); }
+.rdv-puce input:checked + span{
+  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #FFFFFF;
+  font-weight: 600;
+}
+.rdv-puce input:focus-visible + span{ outline: 2px solid var(--accent-2); outline-offset: 2px; }
 .rdv-note textarea{ min-height: 96px; }
 .rdv-compteur{ justify-self: end; font-size: .8rem; color: var(--muted); }
 .rdv-accord{

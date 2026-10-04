@@ -81,7 +81,38 @@
       texte: "Une journée ou une demi-journée à la ferme, entre atelier et visite " +
         "apprenante, pour une équipe complète.",
     },
+    clim: {
+      titre: "Climatisation et adaptation",
+      texte: "Conférence, atelier ou intervention sur la climatisation et " +
+        "l’adaptation : on reprend vos questions de vive voix, avec les ordres de " +
+        "grandeur et le cas de votre bâtiment.",
+    },
   };
+
+  /**
+   * Le bloc de reglages montre selon le sujet du bouton : les trois ateliers
+   * partagent les memes questions, et une demande « autre » n'en pose aucune.
+   */
+  const REGLAGES = {
+    "atelier-hd": "atelier",
+    "atelier-fdfp": "atelier",
+    atelier: "atelier",
+    conference: "conference",
+    cours: "cours",
+    note: "note",
+    visite: "visite",
+    seminaire: "seminaire",
+    discussion: "discussion",
+    clim: "clim",
+  };
+
+  /**
+   * Les reglages facultatifs envoyes avec la demande. Meme liste que la liste
+   * blanche du serveur : ce qui n'y est pas n'est ni lu ni enregistre.
+   */
+  const CHAMPS_REGLAGES = ["organisme", "nombre", "format", "budget", "public", "duree",
+    "niveau", "echeance", "formatNote", "age", "transport", "sejours", "ateliers",
+    "urgence", "cas", "attente"];
 
   const modale = document.getElementById("modaleRendezVous");
   if (!modale) return;
@@ -116,6 +147,9 @@
   const blocConfirme = racine.querySelector("[data-rdv-confirme]");
   const boutonRetour = racine.querySelector("[data-rdv-retour]");
   const boutonSecours = racine.querySelector("[data-rdv-secours]");
+  const zoneReglages = racine.querySelector("[data-rdv-reglages]");
+  const blocsReglages = Array.from(racine.querySelectorAll("[data-rdv-type]"));
+  const elNoteTitre = racine.querySelector("[data-rdv-note-titre]");
 
   let groupes = [];               // les jours rendus par l'API
   let ouverts = new Map();        // « 2026-10-07 » -> nombre de creneaux libres
@@ -506,7 +540,11 @@
 
   /** Champs fautifs annonces par le serveur (reponse 422). */
   const signalerChamps = (champs) => {
-    const libelles = { nom: "nom", email: "email", telephone: "téléphone" };
+    const libelles = {
+      nom: "nom", email: "email", telephone: "téléphone",
+      organisme: "structure ou organisation", nombre: "nombre de personnes",
+      format: "format", budget: "budget", echeance: "pour quand",
+    };
     const noms = Object.keys(champs || {});
     noms.forEach((cle) => {
       const champ = formulaire.elements[cle];
@@ -532,9 +570,16 @@
       telephone: String(donnees.telephone || "").trim(),
       participant: String(donnees.participant || "").trim(),
       message: String(donnees.message || "").trim(),
+      type: String(donnees.type || "").trim(),
       depart: donnees.depart,
       site_web: donnees.site_web,
     };
+    // Les reglages facultatifs partent tels quels : le serveur garde ceux qu'il
+    // connait, et les questions cachees sont desactivees, donc absentes ici.
+    CHAMPS_REGLAGES.forEach((cle) => {
+      const valeur = String(donnees[cle] || "").trim();
+      if (valeur) envoi[cle] = valeur;
+    });
 
     if (boutonEnvoi) {
       boutonEnvoi.disabled = true;
@@ -658,23 +703,78 @@
       ? {}
       : Object.fromEntries(new FormData(formulaire).entries());
     const nom = [donnees.prenom, donnees.nom].filter(Boolean).join(" ");
+    // La demande et ses reperes partent aussi : c'est ce que je lis avant de
+    // rappeler le visiteur qui a prefere ecrire plutot que reserver.
+    const reglages = [
+      ["Organisation", donnees.organisme],
+      ["Nombre", donnees.nombre],
+      ["Format", donnees.format],
+      ["Budget", donnees.budget],
+      ["Public", donnees.public],
+      ["Durée", donnees.duree],
+      ["Niveau", donnees.niveau],
+      ["Pour quand", donnees.echeance],
+      ["Format attendu", donnees.formatNote],
+      ["Groupe", donnees.age],
+      ["Transport", donnees.transport],
+      ["Durée du séjour", donnees.sejours],
+      ["Ateliers", donnees.ateliers],
+      ["Urgence", donnees.urgence],
+      ["Cas", donnees.cas],
+      ["Attentes", donnees.attente],
+    ].filter((ligne) => ligne[1])
+      .map((ligne) => ligne[0] + " : " + ligne[1]).join("\n");
     boutonSecours.href = "mailto:" + ADRESSE
       + "?subject=" + encodeURIComponent("Prendre rendez-vous")
       + "&body=" + encodeURIComponent(
         "Bonjour,\n\nJe souhaite un rendez-vous : " + quand + ".\n\n" +
-        (donnees.message ? donnees.message + "\n\n" : "") +
-        "Nom : " + nom + "\nEmail : " + (donnees.email || "") +
+        (donnees.type && SUJETS[donnees.type] ? "Motif : " + SUJETS[donnees.type].titre + "\n" : "") +
+        (reglages ? reglages + "\n" : "") +
+        (donnees.message ? "\n" + donnees.message + "\n" : "") +
+        "\nNom : " + nom + "\nEmail : " + (donnees.email || "") +
         (donnees.telephone ? "\nTéléphone : " + donnees.telephone : ""));
     boutonSecours.hidden = false;
   }
 
   // --- La fenetre -------------------------------------------------------------
 
-  /** Le sujet affiche a gauche : celui du bouton qui a mene ici. */
+  /**
+   * Les reglages montres : ceux du sujet du bouton, et seulement eux.
+   *
+   * Un bloc cache est aussi desactive, et les navigateurs n'envoient pas les
+   * champs desactives : aucune reponse a une question invisible ne part, meme si
+   * le visiteur avait clique avant de changer de sujet.
+   */
+  function montrerReglages(cle) {
+    const voulu = REGLAGES[cle] || "";
+    blocsReglages.forEach((bloc) => {
+      const montre = bloc.dataset.rdvType === voulu;
+      bloc.hidden = !montre;
+      bloc.querySelectorAll("input").forEach((champ) => { champ.disabled = !montre; });
+    });
+  }
+
+  /** L'intitule de la note libre : on ne demande pas la meme chose partout. */
+  function majNote(cle) {
+    if (!elNoteTitre) return;
+    elNoteTitre.textContent = cle === "note"
+      ? "La question posée, en une phrase"
+      : "Ce que je dois savoir pour arriver préparé";
+  }
+
+  /**
+   * Le sujet affiche a gauche : celui du bouton qui a mene ici. Le meme sujet
+   * part avec la demande, dans le champ cache « type » : c'est ce qui manquait
+   * pour savoir ce que le visiteur vient chercher.
+   */
   function appliquerSujet(cle) {
-    const sujet = SUJETS[cle] || SUJETS.discussion;
+    const connu = Object.hasOwn(SUJETS, cle) ? cle : "discussion";
+    const sujet = SUJETS[connu];
     if (elSujet) elSujet.textContent = sujet.titre;
     if (elTexte) elTexte.textContent = sujet.texte;
+    if (formulaire.elements.type) formulaire.elements.type.value = connu;
+    montrerReglages(connu);
+    majNote(connu);
   }
 
   const ouvrir = (source, cle) => {
