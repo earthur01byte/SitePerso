@@ -949,68 +949,77 @@
                 </div>
                 <button class="rdv-ajout" type="button" data-rdv-ajout-retirer>Retirer ce participant</button>
               </div>
-                <!-- LOT 37 : ce que je dois savoir pour arriver prepare. Tout est
-                     facultatif, et chaque question propose une reponse deja cochee :
-                     un visiteur presse laisse quand meme quatre reperes. Les blocs
-                     propres au type de rendez-vous sont montres par le script, selon le
-                     bouton qui a ouvert la fenetre ; ceux qui restent caches ont leurs
-                     champs desactives, donc rien de faux n'est envoye. -->
+                <!-- LOT 37 : ce que je dois savoir en plus pour preparer le rendez-vous.
+                     Tout est facultatif, et chaque question propose une reponse deja
+                     cochee : un visiteur presse laisse quand meme ses reperes. Chaque
+                     sujet a son bloc complet, montre par le script selon le bouton qui a
+                     ouvert la fenetre ; ceux qui restent caches ont leurs champs
+                     desactives, donc rien de faux n'est envoye. -->
                 <fieldset class="rdv-reglages" data-rdv-reglages>
-                  <legend class="rdv-reglages-titre">Pour arriver préparé</legend>
+                  <legend class="rdv-reglages-titre">Pour que j’arrive préparé</legend>
                   <p class="rdv-reglages-aide">
                     Facultatif, et fait pour aller vite : quelques clics suffisent, et
                     je prépare le rendez-vous avec vos éléments.
                   </p>
-                  <div class="rdv-champs">
-                    <div class="rdv-large">
-                      <label for="rdvOrganisme">Structure ou organisation</label>
-                      <input id="rdvOrganisme" name="organisme" autocomplete="organization" maxlength="120" placeholder="mairie, entreprise, lycée, association…" />
-                    </div>
-                  </div>
-                <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre">
-                  <p class="rdv-puces-titre" id="rdv-nombre-titre">Combien de personnes&nbsp;?</p>
-                  <label class="rdv-puce"><input type="radio" name="nombre" value="1 à 5" /><span>1 à 5</span></label>
-                  <label class="rdv-puce"><input type="radio" name="nombre" value="6 à 15" /><span>6 à 15</span></label>
-                  <label class="rdv-puce"><input type="radio" name="nombre" value="15 à 50" /><span>15 à 50</span></label>
-                  <label class="rdv-puce"><input type="radio" name="nombre" value="50 à 200" /><span>50 à 200</span></label>
-                  <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 200" /><span>plus de 200</span></label>
-                  <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
-                </div>
-                <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre">
-                  <p class="rdv-puces-titre" id="rdv-format-titre">Comment&nbsp;?</p>
-                  <label class="rdv-puce"><input type="radio" name="format" value="visioconférence" /><span>visioconférence</span></label>
-                  <label class="rdv-puce"><input type="radio" name="format" value="sur place chez vous" /><span>sur place chez vous</span></label>
-                  <label class="rdv-puce"><input type="radio" name="format" value="à la ferme" /><span>à la ferme</span></label>
-                  <label class="rdv-puce"><input type="radio" name="format" value="à définir" checked /><span>à définir</span></label>
-                </div>
-                <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre">
-                  <p class="rdv-puces-titre" id="rdv-budget-titre">Budget</p>
-                  <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
-                  <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
-                  <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
-                  <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
-                  <label class="rdv-puce"><input type="radio" name="budget" value="pris en charge par mon organisation" /><span>pris en charge par mon organisation</span></label>
-                  <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
-                </div>
                   <div class="rdv-reglages-type" data-rdv-type="note" hidden>
                     <div class="rdv-champs">
                       <div class="rdv-large">
-                        <label for="rdvEcheance">Pour quand&nbsp;?</label>
-                        <input id="rdvEcheance" name="echeance" type="date" />
+                        <label for="rdvOrganisme-note">Structure ou organisation</label>
+                        <input id="rdvOrganisme-note" name="organisme" autocomplete="organization" maxlength="120" placeholder="entreprise, association…" />
                       </div>
                     </div>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-note-titre">
-                      <p class="rdv-puces-titre" id="rdv-note-titre">Format attendu</p>
-                      <label class="rdv-puce"><input type="radio" name="note" value="note de 2 pages" /><span>note de 2 pages</span></label>
-                      <label class="rdv-puce"><input type="radio" name="note" value="note de 4 à 6 pages" /><span>note de 4 à 6 pages</span></label>
-                      <label class="rdv-puce"><input type="radio" name="note" value="rapport" /><span>rapport</span></label>
-                      <label class="rdv-puce"><input type="radio" name="note" value="article" /><span>article</span></label>
-                      <label class="rdv-puce"><input type="radio" name="note" value="présentation orale" /><span>présentation orale</span></label>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-note">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-note">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvEcheance-note">Pour quand&nbsp;?</label>
+                        <input id="rdvEcheance-note" name="echeance" type="date" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-formatNote-titre-note">
+                      <p class="rdv-puces-titre" id="rdv-formatNote-titre-note">Format attendu</p>
+                      <label class="rdv-puce"><input type="radio" name="formatNote" value="note de 2 pages" /><span>note de 2 pages</span></label>
+                      <label class="rdv-puce"><input type="radio" name="formatNote" value="note de 4 à 6 pages" /><span>note de 4 à 6 pages</span></label>
+                      <label class="rdv-puce"><input type="radio" name="formatNote" value="rapport" /><span>rapport</span></label>
+                      <label class="rdv-puce"><input type="radio" name="formatNote" value="article" /><span>article</span></label>
+                      <label class="rdv-puce"><input type="radio" name="formatNote" value="présentation orale" /><span>présentation orale</span></label>
                     </div>
                   </div>
                   <div class="rdv-reglages-type" data-rdv-type="atelier" hidden>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-public-titre">
-                      <p class="rdv-puces-titre" id="rdv-public-titre">Public</p>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvOrganisme-atelier">Structure ou organisation</label>
+                        <input id="rdvOrganisme-atelier" name="organisme" autocomplete="organization" maxlength="120" placeholder="collectivité, entreprise, association…" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre-atelier">
+                      <p class="rdv-puces-titre" id="rdv-nombre-titre-atelier">Combien de personnes&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="moins de 14" /><span>moins de 14</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 14" /><span>plus de 14</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre-atelier">
+                      <p class="rdv-puces-titre" id="rdv-format-titre-atelier">Comment&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="format" value="présentiel" /><span>présentiel</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="distanciel" /><span>distanciel</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-atelier">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-atelier">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-public-titre-atelier">
+                      <p class="rdv-puces-titre" id="rdv-public-titre-atelier">Public</p>
                       <label class="rdv-puce"><input type="radio" name="public" value="salariés" /><span>salariés</span></label>
                       <label class="rdv-puce"><input type="radio" name="public" value="dirigeants" /><span>dirigeants</span></label>
                       <label class="rdv-puce"><input type="radio" name="public" value="élus" /><span>élus</span></label>
@@ -1018,8 +1027,8 @@
                       <label class="rdv-puce"><input type="radio" name="public" value="grand public" /><span>grand public</span></label>
                       <label class="rdv-puce"><input type="radio" name="public" value="mixte" /><span>mixte</span></label>
                     </div>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-duree-titre">
-                      <p class="rdv-puces-titre" id="rdv-duree-titre">Durée</p>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-duree-titre-atelier">
+                      <p class="rdv-puces-titre" id="rdv-duree-titre-atelier">Durée</p>
                       <label class="rdv-puce"><input type="radio" name="duree" value="2 h" /><span>2 h</span></label>
                       <label class="rdv-puce"><input type="radio" name="duree" value="3 h" /><span>3 h</span></label>
                       <label class="rdv-puce"><input type="radio" name="duree" value="4 h" /><span>4 h</span></label>
@@ -1027,8 +1036,35 @@
                     </div>
                   </div>
                   <div class="rdv-reglages-type" data-rdv-type="conference" hidden>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-public-titre">
-                      <p class="rdv-puces-titre" id="rdv-public-titre">Public attendu</p>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvOrganisme-conference">Structure ou organisation</label>
+                        <input id="rdvOrganisme-conference" name="organisme" autocomplete="organization" maxlength="120" placeholder="collectivité, entreprise, association…" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre-conference">
+                      <p class="rdv-puces-titre" id="rdv-nombre-titre-conference">Combien de personnes&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="moins de 20" /><span>moins de 20</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="entre 20 et 100" /><span>entre 20 et 100</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 100 personnes" /><span>plus de 100 personnes</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre-conference">
+                      <p class="rdv-puces-titre" id="rdv-format-titre-conference">Comment&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="format" value="présentiel" /><span>présentiel</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="distanciel" /><span>distanciel</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-conference">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-conference">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-public-titre-conference">
+                      <p class="rdv-puces-titre" id="rdv-public-titre-conference">Public attendu</p>
                       <label class="rdv-puce"><input type="radio" name="public" value="salariés" /><span>salariés</span></label>
                       <label class="rdv-puce"><input type="radio" name="public" value="dirigeants" /><span>dirigeants</span></label>
                       <label class="rdv-puce"><input type="radio" name="public" value="élus" /><span>élus</span></label>
@@ -1036,8 +1072,8 @@
                       <label class="rdv-puce"><input type="radio" name="public" value="grand public" /><span>grand public</span></label>
                       <label class="rdv-puce"><input type="radio" name="public" value="mixte" /><span>mixte</span></label>
                     </div>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-duree-titre">
-                      <p class="rdv-puces-titre" id="rdv-duree-titre">Durée</p>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-duree-titre-conference">
+                      <p class="rdv-puces-titre" id="rdv-duree-titre-conference">Durée</p>
                       <label class="rdv-puce"><input type="radio" name="duree" value="20 minutes" /><span>20 minutes</span></label>
                       <label class="rdv-puce"><input type="radio" name="duree" value="30 minutes" /><span>30 minutes</span></label>
                       <label class="rdv-puce"><input type="radio" name="duree" value="45 minutes" /><span>45 minutes</span></label>
@@ -1045,33 +1081,93 @@
                     </div>
                   </div>
                   <div class="rdv-reglages-type" data-rdv-type="cours" hidden>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-niveau-titre">
-                      <p class="rdv-puces-titre" id="rdv-niveau-titre">Niveau</p>
-                      <label class="rdv-puce"><input type="radio" name="niveau" value="lycée" /><span>lycée</span></label>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvOrganisme-cours">Structure ou organisation</label>
+                        <input id="rdvOrganisme-cours" name="organisme" autocomplete="organization" maxlength="120" placeholder="Grande école, université, entreprise…" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre-cours">
+                      <p class="rdv-puces-titre" id="rdv-nombre-titre-cours">Combien de personnes&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="1 à 5" /><span>1 à 5</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="6 à 15" /><span>6 à 15</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="15 à 50" /><span>15 à 50</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="50 à 200" /><span>50 à 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 200" /><span>plus de 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre-cours">
+                      <p class="rdv-puces-titre" id="rdv-format-titre-cours">Comment&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="format" value="visioconférence" /><span>visioconférence</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="sur place chez vous" /><span>sur place chez vous</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à la ferme" /><span>à la ferme</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à définir" checked /><span>à définir</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-cours">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-cours">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-niveau-titre-cours">
+                      <p class="rdv-puces-titre" id="rdv-niveau-titre-cours">Niveau</p>
                       <label class="rdv-puce"><input type="radio" name="niveau" value="prépa" /><span>prépa</span></label>
                       <label class="rdv-puce"><input type="radio" name="niveau" value="licence" /><span>licence</span></label>
                       <label class="rdv-puce"><input type="radio" name="niveau" value="master" /><span>master</span></label>
                       <label class="rdv-puce"><input type="radio" name="niveau" value="école d’ingénieurs" /><span>école d’ingénieurs</span></label>
                       <label class="rdv-puce"><input type="radio" name="niveau" value="professionnels" /><span>professionnels</span></label>
                     </div>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-duree-titre">
-                      <p class="rdv-puces-titre" id="rdv-duree-titre">Durée</p>
-                      <label class="rdv-puce"><input type="radio" name="duree" value="2 h" /><span>2 h</span></label>
-                      <label class="rdv-puce"><input type="radio" name="duree" value="un module de 6 h" /><span>un module de 6 h</span></label>
-                      <label class="rdv-puce"><input type="radio" name="duree" value="12 h" /><span>12 h</span></label>
-                      <label class="rdv-puce"><input type="radio" name="duree" value="tout un semestre" /><span>tout un semestre</span></label>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-duree-titre-cours">
+                      <p class="rdv-puces-titre" id="rdv-duree-titre-cours">Durée</p>
+                      <label class="rdv-puce"><input type="radio" name="duree" value="1h" /><span>1h</span></label>
+                      <label class="rdv-puce"><input type="radio" name="duree" value="demi-journée" /><span>demi-journée</span></label>
+                      <label class="rdv-puce"><input type="radio" name="duree" value="journée complète" /><span>journée complète</span></label>
+                      <label class="rdv-puce"><input type="radio" name="duree" value="module entier" /><span>module entier</span></label>
+                      <label class="rdv-puce"><input type="radio" name="duree" value="à préciser" /><span>à préciser</span></label>
                     </div>
                   </div>
                   <div class="rdv-reglages-type" data-rdv-type="visite" hidden>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-age-titre">
-                      <p class="rdv-puces-titre" id="rdv-age-titre">Le groupe</p>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvOrganisme-visite">Structure ou organisation</label>
+                        <input id="rdvOrganisme-visite" name="organisme" autocomplete="organization" maxlength="120" placeholder="collectivité, entreprise, association…" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre-visite">
+                      <p class="rdv-puces-titre" id="rdv-nombre-titre-visite">Combien de personnes&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="1 à 5" /><span>1 à 5</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="6 à 15" /><span>6 à 15</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="15 à 50" /><span>15 à 50</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="50 à 200" /><span>50 à 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 200" /><span>plus de 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre-visite">
+                      <p class="rdv-puces-titre" id="rdv-format-titre-visite">Comment&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="format" value="visioconférence" /><span>visioconférence</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="sur place chez vous" /><span>sur place chez vous</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à la ferme" /><span>à la ferme</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à définir" checked /><span>à définir</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-visite">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-visite">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-age-titre-visite">
+                      <p class="rdv-puces-titre" id="rdv-age-titre-visite">Le groupe</p>
                       <label class="rdv-puce"><input type="radio" name="age" value="scolaires" /><span>scolaires</span></label>
                       <label class="rdv-puce"><input type="radio" name="age" value="étudiants" /><span>étudiants</span></label>
                       <label class="rdv-puce"><input type="radio" name="age" value="adultes" /><span>adultes</span></label>
                       <label class="rdv-puce"><input type="radio" name="age" value="familles" /><span>familles</span></label>
                     </div>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-transport-titre">
-                      <p class="rdv-puces-titre" id="rdv-transport-titre">Transport</p>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-transport-titre-visite">
+                      <p class="rdv-puces-titre" id="rdv-transport-titre-visite">Transport</p>
                       <label class="rdv-puce"><input type="radio" name="transport" value="bus" /><span>bus</span></label>
                       <label class="rdv-puce"><input type="radio" name="transport" value="voitures" /><span>voitures</span></label>
                       <label class="rdv-puce"><input type="radio" name="transport" value="vélo" /><span>vélo</span></label>
@@ -1079,14 +1175,44 @@
                     </div>
                   </div>
                   <div class="rdv-reglages-type" data-rdv-type="seminaire" hidden>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-sejours-titre">
-                      <p class="rdv-puces-titre" id="rdv-sejours-titre">Durée</p>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvOrganisme-seminaire">Structure ou organisation</label>
+                        <input id="rdvOrganisme-seminaire" name="organisme" autocomplete="organization" maxlength="120" placeholder="collectivité, entreprise, association…" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre-seminaire">
+                      <p class="rdv-puces-titre" id="rdv-nombre-titre-seminaire">Combien de personnes&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="1 à 5" /><span>1 à 5</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="6 à 15" /><span>6 à 15</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="15 à 50" /><span>15 à 50</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="50 à 200" /><span>50 à 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 200" /><span>plus de 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre-seminaire">
+                      <p class="rdv-puces-titre" id="rdv-format-titre-seminaire">Comment&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="format" value="visioconférence" /><span>visioconférence</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="sur place chez vous" /><span>sur place chez vous</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à la ferme" /><span>à la ferme</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à définir" checked /><span>à définir</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-seminaire">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-seminaire">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-sejours-titre-seminaire">
+                      <p class="rdv-puces-titre" id="rdv-sejours-titre-seminaire">Durée</p>
                       <label class="rdv-puce"><input type="radio" name="sejours" value="1 jour" /><span>1 jour</span></label>
                       <label class="rdv-puce"><input type="radio" name="sejours" value="2 jours" /><span>2 jours</span></label>
                       <label class="rdv-puce"><input type="radio" name="sejours" value="plus de 2 jours" /><span>plus de 2 jours</span></label>
                     </div>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-ateliers-titre">
-                      <p class="rdv-puces-titre" id="rdv-ateliers-titre">Ateliers souhaités</p>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-ateliers-titre-seminaire">
+                      <p class="rdv-puces-titre" id="rdv-ateliers-titre-seminaire">Ateliers souhaités</p>
                       <label class="rdv-puce"><input type="radio" name="ateliers" value="fresque" /><span>fresque</span></label>
                       <label class="rdv-puce"><input type="radio" name="ateliers" value="visite de la ferme" /><span>visite de la ferme</span></label>
                       <label class="rdv-puce"><input type="radio" name="ateliers" value="Horizons Décarbonés" /><span>Horizons Décarbonés</span></label>
@@ -1096,24 +1222,84 @@
                     </div>
                   </div>
                   <div class="rdv-reglages-type" data-rdv-type="discussion" hidden>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-urgence-titre">
-                      <p class="rdv-puces-titre" id="rdv-urgence-titre">C’est pour quand&nbsp;?</p>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvOrganisme-discussion">Structure ou organisation</label>
+                        <input id="rdvOrganisme-discussion" name="organisme" autocomplete="organization" maxlength="120" placeholder="collectivité, entreprise, association…" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre-discussion">
+                      <p class="rdv-puces-titre" id="rdv-nombre-titre-discussion">Combien de personnes&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="1 à 5" /><span>1 à 5</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="6 à 15" /><span>6 à 15</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="15 à 50" /><span>15 à 50</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="50 à 200" /><span>50 à 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 200" /><span>plus de 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre-discussion">
+                      <p class="rdv-puces-titre" id="rdv-format-titre-discussion">Comment&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="format" value="visioconférence" /><span>visioconférence</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="sur place chez vous" /><span>sur place chez vous</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à la ferme" /><span>à la ferme</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à définir" checked /><span>à définir</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-discussion">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-discussion">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-urgence-titre-discussion">
+                      <p class="rdv-puces-titre" id="rdv-urgence-titre-discussion">C’est pour quand&nbsp;?</p>
                       <label class="rdv-puce"><input type="radio" name="urgence" value="cette semaine" /><span>cette semaine</span></label>
                       <label class="rdv-puce"><input type="radio" name="urgence" value="ce mois" /><span>ce mois</span></label>
                       <label class="rdv-puce"><input type="radio" name="urgence" value="plus tard" /><span>plus tard</span></label>
                     </div>
                   </div>
                   <div class="rdv-reglages-type" data-rdv-type="clim" hidden>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-cas-titre">
-                      <p class="rdv-puces-titre" id="rdv-cas-titre">Votre cas</p>
+                    <div class="rdv-champs">
+                      <div class="rdv-large">
+                        <label for="rdvOrganisme-clim">Structure ou organisation</label>
+                        <input id="rdvOrganisme-clim" name="organisme" autocomplete="organization" maxlength="120" placeholder="collectivité, entreprise, association…" />
+                      </div>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-nombre-titre-clim">
+                      <p class="rdv-puces-titre" id="rdv-nombre-titre-clim">Combien de personnes&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="1 à 5" /><span>1 à 5</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="6 à 15" /><span>6 à 15</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="15 à 50" /><span>15 à 50</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="50 à 200" /><span>50 à 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="plus de 200" /><span>plus de 200</span></label>
+                      <label class="rdv-puce"><input type="radio" name="nombre" value="à préciser" checked /><span>à préciser</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-format-titre-clim">
+                      <p class="rdv-puces-titre" id="rdv-format-titre-clim">Comment&nbsp;?</p>
+                      <label class="rdv-puce"><input type="radio" name="format" value="visioconférence" /><span>visioconférence</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="sur place chez vous" /><span>sur place chez vous</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à la ferme" /><span>à la ferme</span></label>
+                      <label class="rdv-puce"><input type="radio" name="format" value="à définir" checked /><span>à définir</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-budget-titre-clim">
+                      <p class="rdv-puces-titre" id="rdv-budget-titre-clim">Budget</p>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="moins de 500 €" /><span>moins de 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="500 à 1 500 €" /><span>500 à 1 500 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="1 500 à 3 000 €" /><span>1 500 à 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="plus de 3 000 €" /><span>plus de 3 000 €</span></label>
+                      <label class="rdv-puce"><input type="radio" name="budget" value="à définir ensemble" checked /><span>à définir ensemble</span></label>
+                    </div>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-cas-titre-clim">
+                      <p class="rdv-puces-titre" id="rdv-cas-titre-clim">Votre cas</p>
                       <label class="rdv-puce"><input type="radio" name="cas" value="logement" /><span>logement</span></label>
                       <label class="rdv-puce"><input type="radio" name="cas" value="bâtiment public" /><span>bâtiment public</span></label>
                       <label class="rdv-puce"><input type="radio" name="cas" value="entreprise" /><span>entreprise</span></label>
                       <label class="rdv-puce"><input type="radio" name="cas" value="collectivité" /><span>collectivité</span></label>
                       <label class="rdv-puce"><input type="radio" name="cas" value="enseignement" /><span>enseignement</span></label>
                     </div>
-                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-attente-titre">
-                      <p class="rdv-puces-titre" id="rdv-attente-titre">Ce que vous cherchez</p>
+                    <div class="rdv-puces" role="radiogroup" aria-labelledby="rdv-attente-titre-clim">
+                      <p class="rdv-puces-titre" id="rdv-attente-titre-clim">Ce que vous cherchez</p>
                       <label class="rdv-puce"><input type="radio" name="attente" value="comprendre" /><span>comprendre</span></label>
                       <label class="rdv-puce"><input type="radio" name="attente" value="décider" /><span>décider</span></label>
                       <label class="rdv-puce"><input type="radio" name="attente" value="former" /><span>former</span></label>

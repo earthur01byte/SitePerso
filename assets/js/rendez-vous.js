@@ -43,7 +43,7 @@
       titre: "Atelier Horizons Décarbonés",
       texte: "Cocréé en 2022 avec Amaury Lethu, animé pour des milliers de personnes : " +
         "les leviers et les ordres de grandeur du CO₂ et de l’énergie, expliqués " +
-        "simplement. Voyons ce qu’il devient dans vos équipes.",
+        "simplement.",
     },
     "atelier-fdfp": {
       titre: "La Fresque des frontières planétaires",
@@ -547,8 +547,11 @@
     };
     const noms = Object.keys(champs || {});
     noms.forEach((cle) => {
-      const champ = formulaire.elements[cle];
-      if (champ) champ.setAttribute("aria-invalid", "true");
+      // Un meme nom peut exister dans plusieurs sujets (structure, nombre de
+      // personnes...) : on marque tous les champs de ce nom, pas le premier.
+      formulaire.querySelectorAll('[name="' + cle + '"]').forEach((champ) => {
+        champ.setAttribute("aria-invalid", "true");
+      });
     });
     return noms.map((cle) => libelles[cle] || cle);
   };
@@ -759,7 +762,7 @@
     if (!elNoteTitre) return;
     elNoteTitre.textContent = cle === "note"
       ? "La question posée, en une phrase"
-      : "Ce que je dois savoir pour arriver préparé";
+      : "Ce que je dois savoir en plus pour préparer au mieux le rendez-vous";
   }
 
   /**
