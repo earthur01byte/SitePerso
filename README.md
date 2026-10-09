@@ -576,18 +576,21 @@ Agenda).
 ## Troisieme bandeau de logos et passages media (LOT 38, 9 octobre 2026)
 
 L'accueil gagne une **troisieme rangee de logos**, sous les etablissements puis les
-organisations : les medias ou j'ai pris la parole. Elle porte l'intitule
-« Ils m'ont invité à parler » et glisse vers la gauche, plus lentement que la
-premiere (`defilement-rangee-lente`, 82 s), pour que les trois mouvements restent
-distincts. Dix logos : LCI, BFM TV, France Inter, Le Monde, The New York Times,
+organisations : les medias ou j'ai pris la parole. Elle glisse vers la gauche
+(`defilement-rangee-lente`) ; l'intitule « Ils m'ont invité à parler » qui la
+surmontait a ete retire au LOT 39, et sa vitesse a ete divisee par deux (82 s ->
+41 s), comme celle des deux autres rangees. Dix logos : LCI, BFM TV, France Inter, Le Monde, The New York Times,
 RMC, LCP – Assemblée nationale, L'Express, Révolution Énergétique et
 « Et si l'économie sauvait l'écologie ? ».
 
 La page Ressources gagne une section **« Mes passages média »** (`#passages-media`,
 cinquieme bouton du sommaire), placee **avant** le repere `<!-- LP:START -->` : la
 generation des posts LinkedIn ne peut donc pas l'effacer. Elle se compose d'une
-frise de logos qui defile, puis d'une carte par passage, de la plus recente (LCI,
-6 septembre 2026) a la plus ancienne (Révolution Énergétique, 3 juillet 2025) :
+frise de logos qui defile, puis d'une carte par passage ; le LOT 39 en a change
+l'ordre, le nombre et la mise en page (voir la section « Deux fois plus vite,
+deux colonnes… » plus bas), mais les dates et les liens restent ceux du LOT 38, de
+la plus recente (LCI, 6 septembre 2026) a la plus ancienne (Révolution Énergétique,
+3 juillet 2025) :
 media, support, date, titre, citation verifiee ou resume, et le lien vers l'extrait,
 la page du media ou l'article. Le debat de France Inter porte deux liens : la page
 Radio France et la video de la grande matinale.
@@ -606,5 +609,65 @@ controle sur damier est `_controle_logos_medias.png`.
 Controles : `verif_lot38.py` (76 controles : logos, bandeau, sommaire, cartes,
 liens, feuille de style, equilibre des balises) et `shot_lot38.py` (captures dans
 `_shots_lot38`, accueil et section, 1440 et 390 px). Les sept controles du site
+
+## Deux fois plus vite, deux colonnes, et le logo du Monde redresse (LOT 39, 9 octobre 2026)
+
+**Les trois bandeaux du site vont deux fois plus vite.** Les durees sont coupees
+en deux dans `assets/css/styles.css` : 70 s -> 35 s pour la premiere rangee, 88 s
+-> 44 s pour la seconde (celle qui remonte), 82 s -> 41 s pour celle des medias.
+Elles restent distinctes, donc la boucle reste invisible, mais les logos
+traversent l'ecran deux fois plus vite.
+
+**L'accueil perd l'intitule « Ils m'ont invité à parler »** : la troisieme rangee
+se passe de commentaire. La regle `.home-medias-titre` qui l'habillait est
+supprimee en meme temps, pour ne pas laisser de classe orpheline.
+
+**Ressources : les passages media passent sur deux files verticales.** L'ancienne
+mise en page (`.prod-two-col`, une grille ou chaque rangee alignait deux cartes)
+laissait un blanc sous la carte la plus courte de chaque rangee. Les cartes sont
+desormais reparties une sur deux entre deux piles (`.media-colonnes`,
+`.media-colonne`) : l'ecart vertical entre deux cartes d'une meme file vaut donc
+exactement le gap de 22 px, et une carte haute n'impose plus rien a sa voisine.
+La repartition est faite par `main.js`, qui rebascule sur une seule file sous
+861 px - le seuil de l'ancienne grille. Sans JavaScript, tout reste dans une seule
+file, dans l'ordre du document, et les douze cartes restent lisibles.
+
+**Quatre passages mis en avant, les autres derriere un bouton.** La section ouvre
+sur la tribune du Monde (8 juillet 2026), le debat de France Inter (23 juin 2026),
+l'emission « Et si l'economie sauvait l'ecologie ? » et L'Express (14 aout 2025) ;
+les huit autres suivent par date decroissante, d'abord masques, et le bouton
+« Voir plus de passages média » les revele (le bouton de retour « Voir moins » les
+referme), sur le modele exact des posts LinkedIn : meme habillage, meme zone
+masquee dans le HTML et revelee par le script, donc invisible sans JavaScript.
+
+**Douze passages, deux changements de lien.** L'article du Monde du 20 juin 2026
+(« La climatisation est-elle devenue une solution incontournable pour faire face
+aux vagues de chaleur ? », rubrique Planete) rejoint la liste, et le lien de
+l'emission pointe desormais sur la video du passage
+(`youtube.com/watch?v=IgNLLxH1hM4`) et non plus sur la chaine.
+
+**Le logo du Monde etait etire verticalement, il est redresse.** La faute etait
+dans `lot38_logos.py` : `taille_svg()` ne lisait les dimensions qu'entre
+guillemets doubles, alors que `LeMonde.svg` est ecrit avec des guillemets simples.
+Sans dimension reconnue, le rendu retombait sur sa valeur de repli (800 x 400) et
+ecrasait le mot-symbole, qui fait 317 x 73. Le controle lit maintenant les deux
+ecritures : le logo passe de 423 x 200 (rapport 2,1) a 760 x 165 (rapport 4,6),
+celui du vectoriel. Les neuf autres logos sont verifies du meme coup : leur rendu
+conserve le rapport de leur source.
+
+**Les Décodeurs : rien a ajouter.** L'article des Décodeurs evoque au LOT 38 n'a
+pas pu etre confirme (aucune trace d'un tel article) et l'interesse n'y croit pas :
+il n'a donc pas ete ajoute.
+
+Controles : `verif_lot39.py` (61 verifications statiques : vitesses, intitule
+retire, douze cartes, ordre, liens, feuille de style, script) et `shot_lot39.py`,
+qui fait tourner le vrai JavaScript dans Chrome headless - 27 controles mesures :
+deux files et quatre passages visibles a 1440 px, ecart vertical de 22 px dans une
+file, douze passages apres un clic sur « Voir plus », une seule file sous 861 px
+(une fenetre demandee a 390 px est ramenee a 500 px par Chrome, ce qui reste sous
+le seuil). Captures dans `_shots_lot39` : `60-passages-deux-colonnes-1440.png`,
+`61-passages-ouvert-1440.png`, `62-passages-860.png`, `62-passages-390.png`. Les
+sept controles du site restent verts.
+
 restent verts.
 

@@ -236,6 +236,74 @@
     appliquer();
   }
 
+  // --- LOT 39 : les passages media en deux files, et « Voir plus » ---
+  // ressources.html : les cartes restent dans l'ordre du document (les quatre
+  // passages mis en avant, puis les autres par date decroissante). Au large,
+  // elles sont reparties une sur deux entre deux files verticales : une carte
+  // haute ne creuse donc aucun vide sous sa voisine, contrairement a une grille
+  // ou les cartes d'une rangee s'alignent. Sous 861 px, tout revient dans une
+  // seule file, dans l'ordre du document. Les passages au-dela du quatrieme
+  // sont masques (.media-planque) et le bouton les revele.
+  const mediaGrille = document.querySelector("[data-media-colonnes]");
+  if (mediaGrille) {
+    const PASSAGES_BASE = 4;
+    const cartes = Array.prototype.slice.call(
+      mediaGrille.querySelectorAll(".media-carte")
+    );
+    const zonePlus = document.querySelector("[data-media-plus-zone]");
+    const boutonPlus = document.querySelector("[data-media-plus]");
+    const boutonMoins = document.querySelector("[data-media-plus-moins]");
+    const deuxColonnes = window.matchMedia("(min-width: 861px)");
+    const files = [document.createElement("div"), document.createElement("div")];
+    let affiches = PASSAGES_BASE;
+    files[0].className = "media-colonne";
+    files[1].className = "media-colonne";
+
+    const appliquer = () => {
+      if (deuxColonnes.matches) {
+        mediaGrille.classList.add("media-deux-colonnes");
+        files.forEach((file) => {
+          if (!file.isConnected) mediaGrille.appendChild(file);
+        });
+        cartes.forEach((carte, i) => files[i % 2].appendChild(carte));
+      } else {
+        mediaGrille.classList.remove("media-deux-colonnes");
+        cartes.forEach((carte) => mediaGrille.appendChild(carte));
+        files.forEach((file) => file.remove());
+      }
+      cartes.forEach((carte, i) => {
+        carte.classList.toggle("media-planque", i >= affiches);
+      });
+      if (zonePlus) zonePlus.hidden = cartes.length <= PASSAGES_BASE;
+      if (boutonPlus) {
+        const reste = cartes.length - affiches;
+        boutonPlus.hidden = reste <= 0;
+        boutonPlus.setAttribute("aria-expanded", reste <= 0 ? "true" : "false");
+      }
+      if (boutonMoins) boutonMoins.hidden = affiches <= PASSAGES_BASE;
+      // Reperes exposes pour les controles automatises.
+      document.documentElement.setAttribute("data-media-total", String(cartes.length));
+      document.documentElement.setAttribute("data-media-visibles", String(Math.min(affiches, cartes.length)));
+      document.documentElement.setAttribute("data-media-files", deuxColonnes.matches ? "2" : "1");
+    };
+
+    if (boutonPlus) {
+      boutonPlus.addEventListener("click", () => {
+        affiches = cartes.length;
+        appliquer();
+      });
+    }
+    if (boutonMoins) {
+      boutonMoins.addEventListener("click", () => {
+        affiches = PASSAGES_BASE;
+        appliquer();
+        if (zonePlus) zonePlus.scrollIntoView({ block: "center" });
+      });
+    }
+    window.addEventListener("resize", appliquer);
+    appliquer();
+  }
+
   // --- LOT 34 : bandes de logos defilantes (services.html) ---
   // Chaque rangee ne contient qu'une seule copie de sa liste dans le HTML.
   // On la duplique pour que le defilement boucle sans trou : la copie prend

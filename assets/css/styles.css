@@ -3625,7 +3625,8 @@ body.modale-ouverte{ overflow: hidden; }
 /* Rangee prete : la copie est en place, le defilement peut commencer. */
 .defilement-rangee-prete{
   width: max-content;
-  animation: defilement-logos 70s linear infinite;
+  /* LOT 39 : 70 s -> 35 s, soit deux fois plus vite. */
+  animation: defilement-logos 35s linear infinite;
 }
 .defilement-rangee-prete .defilement-groupe{
   flex-wrap: nowrap;
@@ -3635,7 +3636,8 @@ body.modale-ouverte{ overflow: hidden; }
    mouvements ne se synchronisent pas et l'oeil ne percoit pas la boucle. */
 .defilement-rangee-inverse.defilement-rangee-prete{
   animation-direction: reverse;
-  animation-duration: 88s;
+  /* LOT 39 : 88 s -> 44 s, soit deux fois plus vite. */
+  animation-duration: 44s;
 }
 @keyframes defilement-logos{
   from{ transform: translateX(0); }
@@ -3698,27 +3700,25 @@ body.modale-ouverte{ overflow: hidden; }
 }
 
 /* ===================================================
-   LOT 38 — Troisieme bandeau de logos (les medias) et
-   section « Mes passages media » (ressources.html)
-   (ajouts uniquement : aucune regle existante modifiee)
+   LOT 38 / LOT 39 — Troisieme bandeau de logos (les medias)
+   et section « Mes passages media » (ressources.html)
+   LOT 39 : les trois bandeaux du site vont deux fois plus vite
+   (70 -> 35 s, 88 -> 44 s, 82 -> 41 s), l'intitule de la troisieme
+   rangee disparait, et les passages media passent sur deux files.
    =================================================== */
 
 /* --- 1. Accueil : la troisieme rangee, celle des medias ---
    Meme mecanique que les deux precedentes (main.js duplique la liste pour que
    le defilement boucle sans trou). Elle glisse vers la gauche, comme la
    premiere, mais plus lentement : les trois mouvements restent distincts. */
-.defilement-rangee-lente.defilement-rangee-prete{ animation-duration: 82s; }
+/* LOT 39 : 82 s -> 41 s. La troisieme rangee glisse encore moins vite que la
+   premiere (35 s) et que la seconde (44 s) : les trois mouvements restent
+   distincts, mais tous vont deux fois plus vite qu'au LOT 38. */
+.defilement-rangee-lente.defilement-rangee-prete{ animation-duration: 41s; }
 
-/* Un intitule discret, qui dit ce qu'on regarde : sans lui, la troisieme
-   rangee aurait l'air d'appartenir aux deux precedentes. */
-.home-medias-titre{
-  margin: 0 0 .35rem;
-  text-align: center;
-  font-size: .82rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+/* LOT 39 : l'intitule « Ils m'ont invité à parler » est retire de l'accueil, a
+   la demande du proprietaire. La regle .home-medias-titre qui l'habillait part
+   avec lui, pour ne pas laisser de classe orpheline dans la feuille. */
 
 /* --- 2. Ressources : la frise des medias, puis une carte par passage --- */
 .media-frise{ margin: 0 0 1.8rem; }
@@ -3740,6 +3740,45 @@ body.modale-ouverte{ overflow: hidden; }
   border-left: 2px solid var(--border);
   font-style: italic;
 }
+
+/* --- 3. LOT 39 : les passages media sur deux files verticales ---
+   Deux colonnes de cartes empilees, et non une grille. Dans une grille, la
+   carte courte d'une rangee laisse un blanc sous elle jusqu'a la hauteur de sa
+   voisine ; ici chaque file est une pile, l'ecart vertical est exactement le
+   gap, et une carte haute n'impose rien a la carte d'a cote. La repartition
+   (une carte sur deux) est faite par main.js, qui bascule sur une seule file
+   sous 861 px - le seuil de .prod-two-col. Sans JavaScript, tout reste dans une
+   file, dans l'ordre du document, et les douze cartes restent lisibles. */
+.media-colonnes{
+  display: grid;
+  gap: 22px;
+  align-items: start;
+}
+.media-colonnes.media-deux-colonnes{
+  grid-template-columns: repeat(2, minmax(0,1fr));
+}
+.media-colonne{
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+/* Carte masquee par la limite de passages affiches (« Voir plus de passages
+   media ») : meme regle que .lp-card.lp-planque cote posts LinkedIn. */
+.media-carte.media-planque{ display: none !important; }
+
+/* La barre de boutons, sous les deux files : le bouton principal ouvre les
+   passages suivants, le bouton de retour les referme. Elle est masquee dans le
+   HTML et revelee par main.js, donc invisible sans JavaScript. */
+.media-plus-zone{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 30px 0 0;
+}
+.media-plus-zone[hidden]{ display: none !important; }
+.media-plus-zone .btn{ font-family: inherit; font-size: .9rem; padding: 12px 22px; }
+.media-plus-zone .btn[hidden]{ display: none !important; }
 
 
 /* --- 6. Prendre rendez-vous : le bouton en tete de page (LOT 36) ---

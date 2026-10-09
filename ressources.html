@@ -446,12 +446,16 @@
       -->
       <!-- FIN SECTION MASQUEE -->
 
-      <!-- ============================================================
-           MES PASSAGES MEDIA - LOT 38
-           Une frise de logos qui defile, puis une carte par passage, de la
-           plus recente a la plus ancienne. Les liens mènent à l'extrait, à
-           la page du média ou a l'article ; les logos sont dans Images/,
-           en PNG transparent (lot38_logos.py les fabrique).
+            <!-- ============================================================
+           MES PASSAGES MEDIA - LOT 38, remanie au LOT 39
+           Une frise de logos qui defile, puis une carte par passage. Les
+           quatre passages mis en avant viennent en tete, les autres suivent
+           par date decroissante, d'abord masques derriere « Voir plus de
+           passages media » (main.js). Les cartes sont reparties en deux files
+           verticales : pas de rangee, donc aucun vide sous une carte courte.
+           Les liens mènent à l'extrait, à la page du média ou a l'article ;
+           les logos sont dans Images/, en PNG transparent (lot38_logos.py les
+           fabrique).
            ============================================================ -->
       <section class="section" id="passages-media" aria-label="Mes passages média">
         <div class="container">
@@ -459,7 +463,7 @@
           <p class="text-lead" style="margin-bottom:2rem;">
             Radio, télévision, presse, web : quand on me demande d'expliquer, je viens.
             Voici les passages où j'ai défendu le droit à la fraîcheur, l'adaptation au
-            changement climatique et une transition écologique qui ne renonce pas au confort.
+            changement climatique et une transition écologique rapide et ambitieuse sans renoncer au confort.
           </p>
           <div class="media-frise">
             <div class="defilement-logos">
@@ -479,77 +483,18 @@
               </div>
             </div>
           </div>
-          <div class="prod-two-col">
-            <!-- 1. 6 septembre 2026 -->
-            <article class="prod-report">
-              <div class="prod-report-row">
-                <div class="prod-report-main">
-                  <span class="prod-badge">LCI · Télévision · 6 septembre 2026</span>
-                  <h3>Le plan de soutien gouvernemental à l'agriculture est-il à la hauteur&nbsp;?</h3>
-                  <p>
-                    Le plateau complet : le plan de soutien à l'agriculture et l'adaptation
-                    du monde agricole au changement climatique.
-                  </p>
-                  <div class="hero-actions">
-                    <a class="btn btn-outline" href="https://youtu.be/rJSouSpJDZo" target="_blank" rel="noopener">Voir l'extrait</a>
-                  </div>
-                </div>
-                <div class="prod-report-logo media-logo">
-                  <img src="Images/LCI_logo_transparent.png" alt="LCI" loading="lazy" />
-                </div>
-              </div>
-            </article>
+          
 
-            <!-- 2. 14 août 2026 -->
-            <article class="prod-report">
-              <div class="prod-report-row">
-                <div class="prod-report-main">
-                  <span class="prod-badge">LCI · Télévision · 14 août 2026</span>
-                  <h3>Est-ce que les méga-bassines sont une solution à la sécheresse&nbsp;?</h3>
-                  <p>
-                    Le plateau complet sur la sécheresse, mon métier de maraîcher et les
-                    méga-bassines.
-                  </p>
-                  <div class="hero-actions">
-                    <a class="btn btn-outline" href="https://youtu.be/u7olrIXefqQ" target="_blank" rel="noopener">Voir l'extrait</a>
-                  </div>
-                </div>
-                <div class="prod-report-logo media-logo">
-                  <img src="Images/LCI_logo_transparent.png" alt="LCI" loading="lazy" />
-                </div>
-              </div>
-            </article>
-
-            <!-- 3. 29 juillet 2026 -->
-            <article class="prod-report">
-              <div class="prod-report-row">
-                <div class="prod-report-main">
-                  <span class="prod-badge">The New York Times · Presse · 29 juillet 2026</span>
-                  <h3>France's wildfires, heat and air conditioning</h3>
-                  <p>
-                    Une tribune publiée dans l'édition américaine, au cœur de l'été.
-                  </p>
-                  <div class="hero-actions">
-                    <a class="btn btn-outline"
-                      href="https://www.nytimes.com/2026/07/29/opinion/france-wildfires-heat-air-conditioning.html"
-                      target="_blank" rel="noopener">Lire l'article</a>
-                  </div>
-                </div>
-                <div class="prod-report-logo media-logo">
-                  <img src="Images/NewYorkTimes_logo_transparent.png" alt="The New York Times" loading="lazy" />
-                </div>
-              </div>
-            </article>
-
-            <!-- 4. 8 juillet 2026 -->
-            <article class="prod-report">
+          <div class="media-colonnes" id="passages-grille" data-media-colonnes>
+            <!-- 1. 8 juillet 2026 : la tribune, mise en avant -->
+            <article class="prod-report media-carte">
               <div class="prod-report-row">
                 <div class="prod-report-main">
                   <span class="prod-badge">Le Monde · Presse · 8 juillet 2026</span>
                   <h3>«&nbsp;Promouvoir la climatisation en remplacement d'une chaudière au gaz ou au fioul, c'est gagner sur tous les tableaux&nbsp;»</h3>
                   <p>
                     Tribune pour un droit à la fraîcheur&nbsp;: «&nbsp;la climatisation n'est pas
-                    l'ennemie du climat&nbsp;».
+                    l'ennemie du climat, bien au contraire&nbsp;».
                   </p>
                   <div class="hero-actions">
                     <a class="btn btn-outline"
@@ -563,29 +508,8 @@
               </div>
             </article>
 
-            <!-- 5. 25 juin 2026 -->
-            <article class="prod-report">
-              <div class="prod-report-row">
-                <div class="prod-report-main">
-                  <span class="prod-badge">RMC · Radio · 25 juin 2026</span>
-                  <h3>Canicule : faut-il généraliser la climatisation&nbsp;?</h3>
-                  <p class="media-quote">
-                    «&nbsp;L'État doit subventionner la pose de climatisation dans les logements.&nbsp;»
-                  </p>
-                  <div class="hero-actions">
-                    <a class="btn btn-outline"
-                      href="https://rmc.bfmtv.com/actualites/societe/video-canicule-faut-il-generaliser-la-climatisation_VN-202606250318.html"
-                      target="_blank" rel="noopener">Voir la vidéo</a>
-                  </div>
-                </div>
-                <div class="prod-report-logo media-logo">
-                  <img src="Images/RMC_logo_transparent.png" alt="RMC" loading="lazy" />
-                </div>
-              </div>
-            </article>
-
-            <!-- 6. 23 juin 2026 : la page du débat, et la vidéo de la matinale -->
-            <article class="prod-report">
+            <!-- 2. 23 juin 2026 : le debat, mis en avant -->
+            <article class="prod-report media-carte">
               <div class="prod-report-row">
                 <div class="prod-report-main">
                   <span class="prod-badge">France Inter · Radio · 23 juin 2026</span>
@@ -608,49 +532,31 @@
               </div>
             </article>
 
-            <!-- 7. 23 juin 2026 -->
-            <article class="prod-report">
+            <!-- 3. l'emission, mise en avant -->
+            <article class="prod-report media-carte">
               <div class="prod-report-row">
                 <div class="prod-report-main">
-                  <span class="prod-badge">BFM TV · Télévision · 23 juin 2026</span>
-                  <h3>La climatisation est nécessaire et une opportunité pour baisser la pollution&nbsp;!</h3>
+                  <span class="prod-badge">Et si l'économie sauvait l'écologie&nbsp;? · YouTube</span>
+                  <h3>L'émission de François de Rugy et Laurent Lesage</h3>
                   <p>
-                    Le plateau entier sur la climatisation, à BFM TV.
+                    Le rendez-vous mensuel où l'écologie se discute par les chiffres et
+                    l'économie&nbsp;: mon passage est à retrouver sur leur chaîne où j'ai eu le temps de déployer mes arguments.
                   </p>
                   <div class="hero-actions">
-                    <a class="btn btn-outline" href="https://youtu.be/GTZI3gATWv0" target="_blank" rel="noopener">Voir l'extrait</a>
+                    <a class="btn btn-outline"
+                      href="https://www.youtube.com/watch?v=IgNLLxH1hM4"
+                      target="_blank" rel="noopener">Voir l'émission</a>
                   </div>
                 </div>
                 <div class="prod-report-logo media-logo">
-                  <img src="Images/BFMTV_logo_transparent.png" alt="BFM TV" loading="lazy" />
+                  <img src="Images/EconomieSauvaitEcologie_logo_transparent.png"
+                    alt="Et si l'économie sauvait l'écologie ?" loading="lazy" />
                 </div>
               </div>
             </article>
 
-            <!-- 8. 28 mai 2026 -->
-            <article class="prod-report">
-              <div class="prod-report-row">
-                <div class="prod-report-main">
-                  <span class="prod-badge">LCP – Assemblée nationale · Télévision · 28 mai 2026</span>
-                  <h3>La climatisation est une opportunité pour le climat&nbsp;!</h3>
-                  <p class="media-quote">
-                    «&nbsp;Les data centers ont besoin de capacité sur le réseau pour se
-                    connecter. Cette capacité peut être libérée quand on remplace un
-                    radiateur électrique par une climatisation réversible&nbsp;: elle
-                    consomme trois fois moins d'électricité l'hiver.&nbsp;»
-                  </p>
-                  <div class="hero-actions">
-                    <a class="btn btn-outline" href="https://youtu.be/E_hBBIrSNv4" target="_blank" rel="noopener">Voir l'extrait</a>
-                  </div>
-                </div>
-                <div class="prod-report-logo media-logo">
-                  <img src="Images/LCP_logo_transparent.png" alt="LCP – Assemblée nationale" loading="lazy" />
-                </div>
-              </div>
-            </article>
-
-            <!-- 9. 14 août 2025 -->
-            <article class="prod-report">
+            <!-- 4. 14 aout 2025, mise en avant -->
+            <article class="prod-report media-carte">
               <div class="prod-report-row">
                 <div class="prod-report-main">
                   <span class="prod-badge">L'Express · Presse · 14 août 2025</span>
@@ -672,8 +578,153 @@
               </div>
             </article>
 
-            <!-- 10. 3 juillet 2025 -->
-            <article class="prod-report">
+            <!-- 5. 6 septembre 2026 -->
+            <article class="prod-report media-carte">
+              <div class="prod-report-row">
+                <div class="prod-report-main">
+                  <span class="prod-badge">LCI · Télévision · 6 septembre 2026</span>
+                  <h3>Le plan de soutien gouvernemental à l'agriculture est-il à la hauteur&nbsp;?</h3>
+                  <p>
+                    Le plateau complet : le plan de soutien à l'agriculture et l'adaptation
+                    du monde agricole au changement climatique.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-outline" href="https://youtu.be/rJSouSpJDZo" target="_blank" rel="noopener">Voir le plateau</a>
+                  </div>
+                </div>
+                <div class="prod-report-logo media-logo">
+                  <img src="Images/LCI_logo_transparent.png" alt="LCI" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- 6. 14 aout 2026 -->
+            <article class="prod-report media-carte">
+              <div class="prod-report-row">
+                <div class="prod-report-main">
+                  <span class="prod-badge">LCI · Télévision · 14 août 2026</span>
+                  <h3>Est-ce que les méga-bassines sont une solution à la sécheresse&nbsp;?</h3>
+                  <p>
+                    Le plateau complet sur la sécheresse, mon métier de maraîcher et les
+                    méga-bassines.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-outline" href="https://youtu.be/u7olrIXefqQ" target="_blank" rel="noopener">Voir le plateau</a>
+                  </div>
+                </div>
+                <div class="prod-report-logo media-logo">
+                  <img src="Images/LCI_logo_transparent.png" alt="LCI" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- 7. 29 juillet 2026 -->
+            <article class="prod-report media-carte">
+              <div class="prod-report-row">
+                <div class="prod-report-main">
+                  <span class="prod-badge">The New York Times · Presse · 29 juillet 2026</span>
+                  <h3>France's wildfires, heat and air conditioning</h3>
+                  <p>
+                    Un du célèbre journal américain qui m'a interviewé.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-outline"
+                      href="https://www.nytimes.com/2026/07/29/opinion/france-wildfires-heat-air-conditioning.html"
+                      target="_blank" rel="noopener">Lire l'article</a>
+                  </div>
+                </div>
+                <div class="prod-report-logo media-logo">
+                  <img src="Images/NewYorkTimes_logo_transparent.png" alt="The New York Times" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- 8. 25 juin 2026 -->
+            <article class="prod-report media-carte">
+              <div class="prod-report-row">
+                <div class="prod-report-main">
+                  <span class="prod-badge">RMC · Radio · 25 juin 2026</span>
+                  <h3>Canicule : faut-il généraliser la climatisation&nbsp;?</h3>
+                  <p class="media-quote">
+                    «&nbsp;L'État doit subventionner la pose de climatisation dans les logements.&nbsp;»
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-outline"
+                      href="https://rmc.bfmtv.com/actualites/societe/video-canicule-faut-il-generaliser-la-climatisation_VN-202606250318.html"
+                      target="_blank" rel="noopener">Voir la vidéo</a>
+                  </div>
+                </div>
+                <div class="prod-report-logo media-logo">
+                  <img src="Images/RMC_logo_transparent.png" alt="RMC" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- 9. 23 juin 2026 -->
+            <article class="prod-report media-carte">
+              <div class="prod-report-row">
+                <div class="prod-report-main">
+                  <span class="prod-badge">BFM TV · Télévision · 23 juin 2026</span>
+                  <h3>La climatisation est nécessaire et une opportunité pour baisser la pollution&nbsp;!</h3>
+                  <p>
+                    Le plateau entier sur la climatisation, à BFM TV, face à Louis Boyard, député LFI.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-outline" href="https://youtu.be/GTZI3gATWv0" target="_blank" rel="noopener">Voir l'extrait</a>
+                  </div>
+                </div>
+                <div class="prod-report-logo media-logo">
+                  <img src="Images/BFMTV_logo_transparent.png" alt="BFM TV" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- 10. 20 juin 2026 -->
+            <article class="prod-report media-carte">
+              <div class="prod-report-row">
+                <div class="prod-report-main">
+                  <span class="prod-badge">Le Monde · Presse · 20 juin 2026</span>
+                  <h3>La climatisation est-elle devenue une solution incontournable pour faire face aux vagues de chaleur&nbsp;?</h3>
+                  <p>
+                    L'enquête de la rubrique Planète sur la place de la climatisation
+                    dans l'adaptation aux canicules, où je suis cité.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-outline"
+                      href="https://www.lemonde.fr/planete/article/2026/06/20/la-climatisation-est-elle-devenue-une-solution-incontournable-pour-faire-face-aux-vagues-de-chaleur_6705260_3244.html"
+                      target="_blank" rel="noopener">Lire l'article</a>
+                  </div>
+                </div>
+                <div class="prod-report-logo media-logo">
+                  <img src="Images/LeMonde_logo_transparent.png" alt="Le Monde" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- 11. 28 mai 2026 -->
+            <article class="prod-report media-carte">
+              <div class="prod-report-row">
+                <div class="prod-report-main">
+                  <span class="prod-badge">LCP – Assemblée nationale · Télévision · 28 mai 2026</span>
+                  <h3>La climatisation est une opportunité pour le climat&nbsp;!</h3>
+                  <p class="media-quote">
+                    «&nbsp;Les data centers ont besoin de capacité sur le réseau pour se
+                    connecter. Cette capacité peut être libérée quand on remplace un
+                    radiateur électrique par une climatisation réversible&nbsp;: elle
+                    consomme trois fois moins d'électricité l'hiver.&nbsp;»
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-outline" href="https://youtu.be/E_hBBIrSNv4" target="_blank" rel="noopener">Voir l'extrait</a>
+                  </div>
+                </div>
+                <div class="prod-report-logo media-logo">
+                  <img src="Images/LCP_logo_transparent.png" alt="LCP – Assemblée nationale" loading="lazy" />
+                </div>
+              </div>
+            </article>
+
+            <!-- 12. 3 juillet 2025 -->
+            <article class="prod-report media-carte">
               <div class="prod-report-row">
                 <div class="prod-report-main">
                   <span class="prod-badge">Révolution Énergétique · Web · 3 juillet 2025</span>
@@ -693,32 +744,19 @@
                 </div>
               </div>
             </article>
+          </div>
 
-            <!-- 11. L'émission de François de Rugy et Laurent Lesage -->
-            <article class="prod-report">
-              <div class="prod-report-row">
-                <div class="prod-report-main">
-                  <span class="prod-badge">Et si l'économie sauvait l'écologie&nbsp;? · YouTube</span>
-                  <h3>L'émission de François de Rugy et Laurent Lesage</h3>
-                  <p>
-                    Le rendez-vous mensuel où l'écologie se discute par les chiffres et
-                    l'économie&nbsp;: mon passage est à retrouver sur leur chaîne.
-                  </p>
-                  <div class="hero-actions">
-                    <a class="btn btn-outline"
-                      href="https://www.youtube.com/@Etsil%C3%A9conomiesauvaitl%C3%A9cologie"
-                      target="_blank" rel="noopener">Voir la chaîne</a>
-                  </div>
-                </div>
-                <div class="prod-report-logo media-logo">
-                  <img src="Images/EconomieSauvaitEcologie_logo_transparent.png"
-                    alt="Et si l'économie sauvait l'écologie ?" loading="lazy" />
-                </div>
-              </div>
-            </article>
+          <!-- LOT 39 : les douze passages sont dans la page ; les huit derniers
+               sont masques au chargement et reveles par main.js. Sans
+               JavaScript, la barre reste masquee et les douze cartes restent
+               lisibles, l'une sous l'autre. -->
+          <div class="media-plus-zone" data-media-plus-zone hidden>
+            <button class="btn btn-ochre" type="button" data-media-plus aria-expanded="false" aria-controls="passages-grille">Voir plus de passages média</button>
+            <button class="btn btn-outline" type="button" data-media-plus-moins hidden>Voir moins de passages média</button>
           </div>
         </div>
       </section>
+
 
       <!-- ============================================================
            POSTS LINKEDIN - LOT 10
