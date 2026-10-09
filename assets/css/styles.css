@@ -3697,6 +3697,51 @@ body.modale-ouverte{ overflow: hidden; }
   margin: 0;
 }
 
+/* ===================================================
+   LOT 38 — Troisieme bandeau de logos (les medias) et
+   section « Mes passages media » (ressources.html)
+   (ajouts uniquement : aucune regle existante modifiee)
+   =================================================== */
+
+/* --- 1. Accueil : la troisieme rangee, celle des medias ---
+   Meme mecanique que les deux precedentes (main.js duplique la liste pour que
+   le defilement boucle sans trou). Elle glisse vers la gauche, comme la
+   premiere, mais plus lentement : les trois mouvements restent distincts. */
+.defilement-rangee-lente.defilement-rangee-prete{ animation-duration: 82s; }
+
+/* Un intitule discret, qui dit ce qu'on regarde : sans lui, la troisieme
+   rangee aurait l'air d'appartenir aux deux precedentes. */
+.home-medias-titre{
+  margin: 0 0 .35rem;
+  text-align: center;
+  font-size: .82rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* --- 2. Ressources : la frise des medias, puis une carte par passage --- */
+.media-frise{ margin: 0 0 1.8rem; }
+.media-frise .defilement-logos{ margin-bottom: 0; }
+
+/* Le logo de la chaine, a droite de la carte. Les proportions varient
+   beaucoup (BFM TV est carre, L'Express est un bandeau) : la boite les
+   contient, et object-fit les y inscrit sans les deformer. */
+.media-logo img{
+  max-height: 92px;
+  max-width: 168px;
+}
+
+/* La citation courte qui resume le passage : un filet creme la separe du
+   titre, et l'italique rappelle qu'il s'agit de propos tenus. */
+.media-quote{
+  margin: 0 0 12px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+  font-style: italic;
+}
+
+
 /* --- 6. Prendre rendez-vous : le bouton en tete de page (LOT 36) ---
    Le bouton garde l'habillage .btn ; seule sa place change. Il ouvre l'agenda
    avant l'explication, et la marge du bas le separe de la phrase qui suit. */

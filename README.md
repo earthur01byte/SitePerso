@@ -572,3 +572,39 @@ SMTP Infomaniak, à reposer : `diagnostic.php` affiche encore « 535 Invalid log
 or password » alors que la variable est présente et que le mode est « envoi
 réel ». Le reste du diagnostic est vert (SPF, DMARC, DKIM, Blobs, Google
 Agenda).
+
+## Troisieme bandeau de logos et passages media (LOT 38, 9 octobre 2026)
+
+L'accueil gagne une **troisieme rangee de logos**, sous les etablissements puis les
+organisations : les medias ou j'ai pris la parole. Elle porte l'intitule
+« Ils m'ont invité à parler » et glisse vers la gauche, plus lentement que la
+premiere (`defilement-rangee-lente`, 82 s), pour que les trois mouvements restent
+distincts. Dix logos : LCI, BFM TV, France Inter, Le Monde, The New York Times,
+RMC, LCP – Assemblée nationale, L'Express, Révolution Énergétique et
+« Et si l'économie sauvait l'écologie ? ».
+
+La page Ressources gagne une section **« Mes passages média »** (`#passages-media`,
+cinquieme bouton du sommaire), placee **avant** le repere `<!-- LP:START -->` : la
+generation des posts LinkedIn ne peut donc pas l'effacer. Elle se compose d'une
+frise de logos qui defile, puis d'une carte par passage, de la plus recente (LCI,
+6 septembre 2026) a la plus ancienne (Révolution Énergétique, 3 juillet 2025) :
+media, support, date, titre, citation verifiee ou resume, et le lien vers l'extrait,
+la page du media ou l'article. Le debat de France Inter porte deux liens : la page
+Radio France et la video de la grande matinale.
+
+Les dix logos sont dans `Images/`, sous la forme `<Nom>_logo_transparent.png`
+(200 px de haut au plus, 6 a 23 Ko chacun, 140 Ko au total). `lot38_logos.py` les
+fabrique depuis `_cache/lot38` : les vectoriels (France Inter, Le Monde, The New
+York Times, BFM TV, RMC, L'Express, Révolution Énergétique, LCP) sont rendus en PNG
+transparent par Chrome headless, les autres (LCI, LCP, l'avatar de l'emission) sont
+detoures. Deux retouches sont documentees : le carre de BFM TV garde un liseré blanc
+opaque apres rendu, il est donc detoure a son tour ; et le logo de Révolution
+Énergétique est concu pour un fond sombre, ses gris passent donc en encre claire du
+site pour rester lisibles sur le fond creme, glyphe colore intact. La planche de
+controle sur damier est `_controle_logos_medias.png`.
+
+Controles : `verif_lot38.py` (76 controles : logos, bandeau, sommaire, cartes,
+liens, feuille de style, equilibre des balises) et `shot_lot38.py` (captures dans
+`_shots_lot38`, accueil et section, 1440 et 390 px). Les sept controles du site
+restent verts.
+
