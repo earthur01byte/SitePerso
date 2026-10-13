@@ -3,3 +3,15 @@
 # interruption du script, ils ne doivent jamais partir en ligne (GitHub Pages
 # publierait la page de test).
 _tmp_*.html
+
+# Fichiers de travail (LOT 41) : le depot GitHub est public et GitHub Pages
+# publie tout ce qui y est versionne, donc ces fichiers etaient lisibles sur
+# arthurdelassus.com. Ils restent dans le dossier, mais ne partent plus en ligne.
+/README.md
+/PostsLinkedin/
+/gitcheck.py
+/gitout.txt
+/images_list.txt
+/list_names.py
+/names.txt
+/patch_agri.py
