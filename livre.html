@@ -35,10 +35,9 @@
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/contact.js"></script>
     <script defer src="assets/js/inscription.js"></script>
-    <!-- Donnees structurees du livre (LOT 41). L'editeur n'y figure pas :
-         la couverture porte le logo « Editions Terre a Terres » alors que le reste
-         du site cite les Editions de l'Aube. A ajouter ici (« publisher ») une
-         fois l'editeur confirme. -->
+    <!-- Donnees structurees du livre. Terre a Terres est un label des Editions
+         de l'Aube : l'Aube est l'editeur (« publisher »), Terre a Terres la
+         collection d'edition (« publisherImprint »). -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -57,6 +56,14 @@
           "url": "https://arthurdelassus.com/"
         }
       ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Éditions de l'Aube"
+      },
+      "publisherImprint": {
+        "@type": "Organization",
+        "name": "Éditions Terre à Terres"
+      },
       "inLanguage": "fr",
       "description": "Un ouvrage pour répondre, chiffres en main, aux idées fausses sur la transition énergétique : voiture électrique, climatisation, coût de la transition, pompes à chaleur, frontières planétaires."
     }
@@ -105,7 +112,10 @@
               <span class="prod-badge">À paraître · novembre 2026</span>
               <h1>L’écologie sans les mythes</h1>
               <p class="livre-subtitle">Pour sortir des faux débats sur la transition énergétique.</p>
-              <p class="livre-authors">Par <strong>Alain Grandjean</strong> et <strong>Arthur de Lassus</strong></p>
+              <p class="livre-authors">
+                Par <strong>Alain Grandjean</strong> et <strong>Arthur de Lassus</strong><br />
+                Éditions de l’Aube / Éditions Terre à Terres
+              </p>
               <p class="text-lead">
                 Voiture électrique, climatisation, pompes à chaleur, coût de la transition : nous répondons, chiffres en
                 main, aux idées fausses qui encombrent le débat écologique.
