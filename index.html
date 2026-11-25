@@ -34,7 +34,6 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script defer src="assets/js/main.js"></script>
     <script defer src="assets/js/contact.js"></script>
-    <script defer src="assets/js/inscription.js"></script>
     <script defer src="assets/js/rendez-vous.js"></script>
     <script type="application/ld+json">
     {
@@ -162,6 +161,7 @@
                   <img src="Images/Ponts_ParisTech_logo_transparent.png" width="917" height="1200" alt="École des Ponts ParisTech" loading="lazy" />
                   <img src="Images/IFP_Logo.png" width="468" height="299" alt="IFP School" loading="lazy" />
                   <img src="Images/HEC_logo_transparent.png" width="250" height="131" alt="HEC Paris" loading="lazy" />
+                  <img src="Images/Pantheon_Sorbonne_logo_transparent.png" width="600" height="232" alt="Université Paris 1 Panthéon-Sorbonne" loading="lazy" />
                   <img src="Images/UniLaSalle_logo_transparent.png" width="246" height="118" alt="UniLaSalle" loading="lazy" />
                   <img src="Images/EMN_logo.png" width="225" height="225" alt="EM Normandie Business School" loading="lazy" />
                   <img src="Images/Campus_de_la_transition_logo_transparent.png" width="246" height="90" alt="Campus de la Transition" loading="lazy" />
@@ -258,14 +258,14 @@
         </section>
 
 
-        <!-- LE LIVRE À PARAÎTRE -->
-        <section class="home-book" aria-label="Livre à paraître">
+        <!-- LE LIVRE -->
+        <section class="home-book" aria-label="Le livre">
           <div class="home-book-inner">
             <div class="home-book-cover">
               <img src="Images/Couverture_livre_Ecologie_sans_les_mythes.png" width="430" height="654" alt="Couverture du livre « L’écologie sans les mythes »" loading="lazy" />
             </div>
             <div class="home-book-text">
-              <span class="home-book-badge">À paraître · novembre 2026</span>
+              <span class="home-book-badge">Paru · novembre 2026</span>
               <h2>L’écologie sans les mythes</h2>
               <p class="home-book-subtitle">Pour sortir des faux débats sur la transition énergétique.</p>
               <p class="home-book-authors">
@@ -276,7 +276,7 @@
                 chiffres en main, aux idées fausses qui encombrent le débat écologique.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-ochre" href="contact.html" data-ouvrir-inscription="livre">Me prévenir à la sortie</a>
+                <a class="btn btn-ochre" href="https://www.fnac.com/a23325354/Alain-Grandjean-Ecologie-sans-les-mythes-Sortir-des-faux-debats-sur-la-tr" target="_blank" rel="noopener">Commander sur la Fnac</a>
                 <a class="btn btn-outline" href="livre.html">Découvrir le livre</a>
               </div>
             </div>
@@ -367,7 +367,7 @@
               </div>
               <div class="home-offer-logos home-offer-logos-foot">
                 <img src="Images/SchneiderElectric_logo_transparent.png" width="357" height="141" alt="Schneider Electric" loading="lazy" />
-                <img src="Images/EMN_logo.png" width="225" height="225" alt="EM Normandie Business School" loading="lazy" />
+                <img src="Images/HEC_logo_transparent.png" width="250" height="131" alt="HEC Paris" loading="lazy" />
                 <img src="Images/IFRI_logo_transparent.png" width="366" height="138" alt="IFRI" loading="lazy" />
               </div>
             </div>
@@ -972,57 +972,6 @@
             <a href="mailto:arthur@arthurdelassus.com">arthur@arthurdelassus.com</a>.
           </p>
         </form>
-      </div>
-    </div>
-    <!-- Fenetre d'inscription (LOT 34). Elle sert au livre a paraitre
-         (« Me prevenir a la sortie ») et au telechargement de la note IFRI :
-         le visiteur laisse un prenom et un email, l'API enregistre
-         l'inscription dans une liste consultable, puis le fichier s'ouvre
-         quand il y en a un. Meme habillage que la fenetre de contact, avec
-         des identifiants propres pour ne jamais entrer en conflit. -->
-    <div class="modale" id="modaleInscription" data-api="https://api.arthurdelassus.com" hidden>
-      <div class="modale-fond" data-inscription-fermer></div>
-      <div class="modale-boite" role="dialog" aria-modal="true" aria-labelledby="inscriptionTitre" aria-describedby="inscriptionIntro">
-        <button class="modale-fermer" type="button" data-inscription-fermer aria-label="Fermer la fenêtre">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z" /></svg>
-        </button>
-        <h2 id="inscriptionTitre">Me prévenir à la sortie</h2>
-        <p class="lede" id="inscriptionIntro">
-          Laissez votre prénom et votre email : je vous écris le jour de la sortie du livre.
-        </p>
-
-        <form class="form" id="inscriptionForm" data-api-inscription="https://api.arthurdelassus.com" novalidate>
-          <div>
-            <label for="inscriptionNom">Prénom et nom</label>
-            <input id="inscriptionNom" name="nom" autocomplete="name" required />
-          </div>
-          <div>
-            <label for="inscriptionEmail">Email</label>
-            <input id="inscriptionEmail" name="email" type="email" autocomplete="email" required />
-          </div>
-
-          <!-- Champ piege : invisible pour un humain, rempli par les robots. -->
-          <div class="form-piege" aria-hidden="true">
-            <label for="inscriptionSite">Site web</label>
-            <input id="inscriptionSite" name="site_web" tabindex="-1" autocomplete="off" />
-          </div>
-          <input type="hidden" name="origine" value="livre" />
-          <input type="hidden" name="depart" value="" />
-
-          <div class="hero-actions">
-            <button class="btn btn-primary" type="submit">Prévenez-moi</button>
-          </div>
-          <p class="help" data-statut role="status" aria-live="polite"></p>
-          <p class="help">
-            Votre email sert uniquement à vous répondre. Il n'est ni vendu ni transmis à un tiers :
-            <a href="confidentialite.html">politique de confidentialité</a>.
-          </p>
-        </form>
-
-        <div class="inscription-suite" data-inscription-suite hidden>
-          <p data-inscription-suite-texte></p>
-          <a class="btn btn-ochre" data-inscription-fichier href="#" hidden>Télécharger la note (PDF)</a>
-        </div>
       </div>
     </div>
   </body>

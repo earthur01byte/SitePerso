@@ -160,7 +160,7 @@
               </div>
             </article>
             <article class="prod-book">
-              <span class="prod-badge prod-badge-outline">À paraître · Éditions de l’Aube</span>
+              <span class="prod-badge">Livre · novembre 2026</span>
               <div class="prod-book-cover2">
                 <img src="Images/Couverture_livre_Ecologie_sans_les_mythes.png" width="430" height="654" alt="Couverture du livre « L’écologie sans les mythes »" loading="lazy" />
               </div>
@@ -172,14 +172,15 @@
                 Alain Grandjean est cofondateur-associé de Carbone 4, premier cabinet de conseil indépendant sur la décarbonation en France. Nous avons écrit ce livre ensemble pour répondre à un certain nombre de fake news qui circulent sur la transition énergétique.
                 Un chapitre sur la voiture électrique, un autre sur la climatisation et d'autres sur le coût de la transition, les pompes à chaleur, les frontières planétaires etc.
               </p>
-              <p class="prod-status">À paraître en novembre 2026.</p>
+              <p class="prod-status">Paru en novembre 2026 aux Éditions de l’Aube / Éditions Terre à Terres.</p>
               <div class="hero-actions">
                 <a
-                  class="btn btn-blue"
-                  href="contact.html"
-                  data-ouvrir-inscription="livre"
+                  class="btn btn-ochre"
+                  href="https://www.fnac.com/a23325354/Alain-Grandjean-Ecologie-sans-les-mythes-Sortir-des-faux-debats-sur-la-tr"
+                  target="_blank"
+                  rel="noopener"
                 >
-                  Me prévenir à la sortie
+                  Commander sur la Fnac
                 </a>
                 <a class="btn btn-outline" href="livre.html">Voir la page du livre</a>
               </div>
@@ -315,8 +316,9 @@
             Je ne suis affilié à aucune école de pensée, aucune industrie me finance.
           </p>
           <p class="text-lead" style="margin-bottom:2rem;">
-            Ces questions, je les traite en profondeur dans <strong>« L'écologie sans les mythes »</strong>,
-            à paraître en novembre 2026 aux Éditions de l'Aube / Éditions Terre à Terres, coécrit avec Alain Grandjean.
+            Ces questions, je les traite en profondeur dans
+            <a href="https://www.fnac.com/a23325354/Alain-Grandjean-Ecologie-sans-les-mythes-Sortir-des-faux-debats-sur-la-tr" target="_blank" rel="noopener"><strong>« L'écologie sans les mythes »</strong></a>,
+            paru en novembre 2026 aux Éditions de l'Aube / Éditions Terre à Terres, coécrit avec Alain Grandjean.
           </p>
 
           <div class="prod-articles-grid">
@@ -2574,9 +2576,8 @@ Wébinaire demain à 12h !</p>
         </form>
       </div>
     </div>
-    <!-- Fenetre d'inscription (LOT 34). Elle sert au livre a paraitre
-         (« Me prevenir a la sortie ») et au telechargement de la note IFRI :
-         le visiteur laisse un prenom et un email, l'API enregistre
+    <!-- Fenetre d'inscription (LOT 34). Elle sert au telechargement de la
+         note IFRI : le visiteur laisse un prenom et un email, l'API enregistre
          l'inscription dans une liste consultable, puis le fichier s'ouvre
          quand il y en a un. Meme habillage que la fenetre de contact, avec
          des identifiants propres pour ne jamais entrer en conflit. -->
@@ -2586,9 +2587,9 @@ Wébinaire demain à 12h !</p>
         <button class="modale-fermer" type="button" data-inscription-fermer aria-label="Fermer la fenêtre">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z" /></svg>
         </button>
-        <h2 id="inscriptionTitre">Me prévenir à la sortie</h2>
+        <h2 id="inscriptionTitre">Recevoir la note</h2>
         <p class="lede" id="inscriptionIntro">
-          Laissez votre prénom et votre email : je vous écris le jour de la sortie du livre.
+          Laissez votre prénom et votre email : le téléchargement de la note s’ouvre aussitôt.
         </p>
 
         <form class="form" id="inscriptionForm" data-api-inscription="https://api.arthurdelassus.com" novalidate>
@@ -2606,11 +2607,11 @@ Wébinaire demain à 12h !</p>
             <label for="inscriptionSite">Site web</label>
             <input id="inscriptionSite" name="site_web" tabindex="-1" autocomplete="off" />
           </div>
-          <input type="hidden" name="origine" value="livre" />
+          <input type="hidden" name="origine" value="note-ifri" />
           <input type="hidden" name="depart" value="" />
 
           <div class="hero-actions">
-            <button class="btn btn-primary" type="submit">Prévenez-moi</button>
+            <button class="btn btn-primary" type="submit">Recevoir la note</button>
           </div>
           <p class="help" data-statut role="status" aria-live="polite"></p>
           <p class="help">

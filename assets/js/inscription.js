@@ -54,7 +54,7 @@
     },
   };
 
-  const DEFAUT = "livre";
+  const DEFAUT = "note-ifri";
   const texteDe = (origine) => TEXTES[origine] || TEXTES[DEFAUT];
 
   let declencheur = null;
